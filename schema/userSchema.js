@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
-var Schema = mongoose.Schema;
-var user= new Schema({
+const  Schema = mongoose.Schema;
+let user= new Schema({
     _id:{type:String,required:true,unique:true},
     name :{ fname:{type:String,require:true},lname:{type:String,require:true} },
     email:{type:String,required:true,unique:true },
