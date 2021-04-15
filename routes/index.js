@@ -7,7 +7,16 @@ const utility=require("../utility/DB");
 
 router.get('/', async function(req, res, next) {
  
-  
+ utility.insertUser({
+  _id:1,
+  name:"test",
+  email:"123@gmail.com",
+  phone:1234567890,
+  password:"123456",
+  age:22,
+  gender:"M",
+  projects:[ {_id:"WP",name:"WP",description:"this is WP",state:0,Owner:"user1" }]
+ });  
   res.render('index', { title: 'Express' });
 });
 

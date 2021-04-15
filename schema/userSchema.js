@@ -8,7 +8,7 @@ let user= new Schema({
     password:{type:String,required:true},
     age:Number,
     gender:String,
-    projects:[{name:{type:String,required:true},description:{name:String,required:true},state:{type:Number,required:true,default:0},Owner:{type:String,required:true} }]
+    projects:[ {_id:{type:String,required:true,unique:true} ,name:{type:String,required:true},description:{type:String,required:true},state:{type:Number,required:true,default:0},Owner:{type:String,required:true} }]
 
   });
 
