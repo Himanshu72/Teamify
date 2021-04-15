@@ -2,47 +2,46 @@ const mongoose = require("mongoose");
 const  Schema = mongoose.Schema;
 let project= new Schema({
     _id:{type:String,required:true,unique:true},
-    projectID:{type:String,required:true,unique:true},
     meets:[
            {
-            meetingID:{type:String,required:true,unique:true},
-            meetingName:{type:String,required:true}
+            _id:{type:String,unique:true},
+            meetingName:{type:String}
            }
           ],
     group:[
             {
-              groupID:{type:String,required:true,unique:true},
-              groupName:{type:String,required:true},
+              _id:{type:String,required:true,unique:true},
+              groupName:{type:String},
               leader:[
                 {type:String,required:true}
               ],
               member:[
-                {type:String,required:true}
-                
+                {type:String,required:true} 
               ],
               card:[
                 {
-                  cardName:{type:String,required:true},
+                  cardName:{type:String},
                   task:[
                     {
-                      taskID:{type:String,required:true,unique:true},
-                      taskName:{type:String,required:true},
-                      taskStatus:{type:Number,required:true},
+                      _id:{type:String,unique:true},
+                      taskName:{type:String},
+                      taskStatus:{type:Number},
                       workerID:[
-                       {type:String,required:true}
+                       {type:String}
                         
                       ],
                       viewerID:[
-                        {type:String,required:true}
+                        {type:String}
                       ],
                       subTask:[
                         {
-                          subtaskName:{type:String,required:true},
-                          subtaskStatus:{type:Number,required:true}
+                          _id:{type:String},
+                          subtaskName:{type:String},
+                          subtaskStatus:{type:Number}
                         }
                       ],
-                      description:[  
-                          {type:String,required:true}
+                      taskIDs:[  
+                          {type:String} // taskID  
                       ]
                     }
                   ]

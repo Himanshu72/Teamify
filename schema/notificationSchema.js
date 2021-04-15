@@ -3,14 +3,14 @@ const  Schema = mongoose.Schema;
 let notification= new Schema({
     _id:{type:String,required:true,unique:true},
 
-    senderUsername:{type:String,required:true,unique:true},
-	receiverUsername:[ {type:String,required:true,unique:true} ],
-	title:{type:String,required:true,unique:true},
-	message:{type:String,required:true,unique:true},
-	type:{type:String,required:true,unique:true},
-	link:{type:String,required:true,unique:true},
-	task:{type:String,required:true,unique:true}
+    senderUsername:{type:String,required:true},
+	receiverUsername:[ {type:String,required:true} ],
+	title:{type:String,required:true},
+	message:{type:String,required:true},
+	type:{type:Number,required:true},
+	link:{type:String},
+	task:{type:String}
 
   });
-
+// 0 message  , 1 meet link , 2 request task acess  
   module.exports=notification;

@@ -23,8 +23,8 @@ mongoose.connect(env.dbserver, {
   // save entry
 
   const meetModel = mongoose.model("meets",meet);
-  const notificationModel = mongose.model("notifications",notification);
-  const projectModel = mongose.model("projects",project);
+  const notificationModel = mongoose.model("notifications",notification);
+  const projectModel = mongoose.model("projects",project);
 
 module.exports={
 
@@ -49,7 +49,7 @@ module.exports={
        
     },
     insertMeet:(obj)=>{
-      const meetData = new meetmodel(obj);
+      const meetData = new meetModel(obj);
       meetData.save((err,res)=>{
         if(err)
           console.log(err);
