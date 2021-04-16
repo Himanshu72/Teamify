@@ -1,11 +1,7 @@
 
-
 body {
     font-family: "Lato", sans-serif;
 }
-
-
-
 .main-head{
     height: 150px;
     background: #FFF;
@@ -21,7 +17,14 @@ body {
     padding-top: 20px;
 }
 
-
+/* .row{
+    height: 100%;
+    width: 100%;      
+} */
 .main {
     padding: 0px 10px;
 }
+/* .formcls{
+    height: 100%;
+    width: 100%;
+} */
