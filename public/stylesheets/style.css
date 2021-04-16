@@ -30,8 +30,27 @@ body{
     width: 100%;
     height: 70%;
 }
-#prebtn,#btn{
-    background-color:#5f424b ;
-    color: #fcf6f1;
+#prebtn {
+  background-color: #5f424b;
+  color: #fcf6f1;
+  border: 1px;
+  transition: all 0.3 ease-in;
+}
 
+#btn {
+  background-color: transparent;
+  color: #5f424b;
+  border: 1px solid;
+  transition: all 0.3 ease-in;
+}
+#btn:hover {
+  background: #5f424b;
+  color: #fcf6f1;
+  transform: scale(1.2);
+}
+#prebtn:hover {
+  background: transparent;
+  color: #5f424b;
+  border: 1px solid;
+  transform: scale(1.2);
 }

@@ -64,21 +64,75 @@
 <div class="row" style="height: 100vh; overflow: hidden; text-align: center;">
     <div class="col-md-4" id="textid">
         <div class="row">
-            <h2 id="maintext">Teamify blah blah blah</h2>
-            <div style=" display: flex; justify-content: space-between;">
-                <a href="/" ><button class="btn " id="prebtn"> Log In</button> </a> 
-                <a href="/"> <button class="btn " id="btn">Sign Up</button> </a> 
+            <h2 id="maintext"></h2>
+            <div>
+                <a href="/login" class="btn btn-lg" id="prebtn"> Log In </a>&nbsp;&nbsp;
+                <a href="/signup" class="btn btn-lg" id="btn"> Sign Up </a> 
             </div>  
         </div>
         <div class="row">
           <p id="type"> </p>
         </div>
     </div>
-    <div class="col-md-8 ">
-          <img src="../public/images/main5.jpeg" id="mainimg" alt="image" class="img-fluid">
+    <div class="col-md-8" >
+          <img src="../public/images/main5.svg " id="mainimg" alt="image" style="transform: scale(1.4);" >
     </div>
 </div>
 </header>
+<!-- Section: Features v.1 -->
+<section class="text-center my-5">
+
+  <!-- Section heading -->
+  <h2 class="h1-responsive font-weight-bold my-5">Why is it so great?</h2>
+  <!-- Section description -->
+  <p class="lead grey-text w-responsive mx-auto mb-5">
+    You can use this tool to boost collaboration and foster communication. Teamify tells you what's being worked on, who's working on what, and where something is in a process. The team can be managed by the team leader and the managers can manage different projects, it can also be used for personal use - more like a list-making/to-do tool. Projects progress can be tracked and deadlines can be set. It makes assigning tasks and managing the team much easier. Make team management a smooth experience with Teamify.
+  </p>
+
+  <!-- Grid row -->
+  <div class="row">
+
+    <!-- Grid column -->
+    <div class="col-md-4">
+
+      <img src="../public/images/meet.svg" width="70%" class="image-fluid">
+      <h5 class="font-weight-bold my-4">Meet</h5>
+      <p class="grey-text mb-md-0 mb-5">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reprehenderit
+        maiores aperiam minima assumenda deleniti hic.
+      </p>
+
+    </div>
+    <!-- Grid column -->
+
+    <!-- Grid column -->
+    <div class="col-md-4">
+
+      <img src="../public/images/collab.svg" width="70%" class="image-fluid">
+      <h5 class="font-weight-bold my-4">collaboration</h5>
+      <p class="grey-text mb-md-0 mb-5">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reprehenderit
+        maiores aperiam minima assumenda deleniti hic.
+      </p>
+
+    </div>
+    <!-- Grid column -->
+
+    <!-- Grid column -->
+    <div class="col-md-4">
+
+      <img src="../public/images/manage.svg" width="70%" class="image-fluid">
+      <h5 class="font-weight-bold my-4">Manage</h5>
+      <p class="grey-text mb-0"   >Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reprehenderit maiores
+        aperiam minima assumenda deleniti hic.
+      </p>
+
+    </div>
+    <!-- Grid column -->
+
+  </div>
+  <!-- Grid row -->
+
+</section>
+<!-- Section: Features v.1 -->
 
 <!-- <div class="imageclass">
     <img src="main5.svg" alt="main image" class="img-fluid">   
@@ -87,5 +141,14 @@
 <script
   type="text/javascript"
   src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.3.0/mdb.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/typeit@7.0.4/dist/typeit.min.js"></script>
+  <script>
+  new TypeIt("#maintext", {
+  strings: "Teamify lets you organize and prioritize projects in a fun, flexible way",
+  speed: 75,
+  loop: true
+}).go()
+  </script>
 </body>
+
 </html>
