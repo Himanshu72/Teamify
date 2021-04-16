@@ -1,0 +1,35 @@
+@import url('https://fonts.googleapis.com/css2?family=Quicksand&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@200&display=swap');
+*{
+   margin: 0px;
+   padding: 0px;
+   
+}
+body{
+   /* background-color:  #e6f5e8;*/
+   background-color: #f7f7f7;
+}
+.main
+{
+    padding: 0px;
+    /* background-color: #1B1924;
+     */
+     background-color: #4e333b;
+    /* font-size: 40px;  */
+   
+}
+.navbar{
+    width: 100%;
+    margin-bottom: 5px;
+}
+a{
+    color: #fcf6f1;
+    font-family: 'Quicksand', sans-serif;
+    font-size: 18px;
+}
+.home{
+    font-size: 30px;
+}
+a:hover{
+    color: rgb(187, 208, 226);
+}
