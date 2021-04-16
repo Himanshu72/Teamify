@@ -17,14 +17,37 @@ body {
     padding-top: 20px;
 }
 
-/* .row{
+
+.formcls{
+     width: 70%; 
     height: 100%;
-    width: 100%;      
-} */
+    padding: 5px 40px;
+    margin: auto;
+}
 .main {
     padding: 0px 10px;
 }
-/* .formcls{
-    height: 100%;
-    width: 100%;
-} */
+.mainheading{
+    margin-top: 20px;
+     text-align: center;
+     margin-bottom: 35px;
+}
+.containering{
+    margin: 10px;
+}
+.text-center a{
+    color:  #4e333b;
+}
+.col a{
+    color: #4e333b;
+}
+.mybutton{
+    background-color: #694651; 
+    border-color: #694651;  
+    width: 30%;  
+    margin: auto;
+}
+.mybutton:hover{
+    background-color: #4e333b;
+    border-color:   #4e333b;
+}
