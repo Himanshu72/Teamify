@@ -13,6 +13,7 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.3.0/mdb.min.css" rel="stylesheet"/>
     <link href="../public/stylesheets/navbar.css" rel="stylesheet"/>
     <link href="../public/stylesheets/dashboard_style.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <title>Document</title>
     <style>
       .card-img-top{
@@ -41,7 +42,7 @@
       aria-expanded="false"
       aria-label="Toggle navigation"
     >
-      <i class="fas fa-bars"></i>
+      
     </button>
 
     <!-- Collapsible wrapper -->
@@ -65,7 +66,6 @@
   <!-- Container wrapper -->
 </nav>
 </div>
-
 <div class="container-fluid" >
   <br>
   <br>
@@ -81,7 +81,7 @@
 
       <!--Card image-->
       <div class="view overlay">
-        <img class="card-img-top" src="../public/images/img.svg"
+        <img class="card-img-top" src="../public/images/card_img1.svg"
           alt="Card image cap">
         <a href="#!">
           <div class="mask rgba-white-slight"></div>
@@ -92,17 +92,33 @@
       <div class="card-body">
 
         <!--Title-->
-        <h4 class="card-title">Card title</h4>
+        <h4 class="card-title">Project Name</h4>
         <!--Text-->
-        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
-          card's content.</p>
-          
-          <p><strong>Created By:</strong><em>Himanshu Joshi</em> </p>
+           <p><strong>Created By:</strong><em>Himanshu Joshi</em> </p>
+           <button
+           class="btn btn-primary"
+           type="button"
+           data-mdb-toggle="collapse"
+           data-mdb-target="#collapseExample"
+           aria-expanded="false"
+           aria-controls="collapseExample"
+           style="position: relative; width: 100%; background-color: #5f424b; color: white;"
+         
+         >
+           Description
+         </button>  <br />
         <!-- Provides extra visual weight and identifies the primary action in a set of buttons -->
-        <button type="button" class="btn btn-light-blue btn-md">view project</button>
+        <p class="card-text collapse mt-3" id="collapseExample">
+          Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad
+          squid. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt
+          sapiente ea proident.
+        </p><br >
+        <button type="button" class="btn btn-primary btn-md">view project</button>
 
       </div>
-
+ 
+         
+       
     </div>
     <!-- Card -->
   </div>
@@ -183,6 +199,7 @@
         <!--Title-->
         <h4 class="card-title">Card title</h4>
         <!--Text-->
+       
         <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
           card's content.</p>
         <!-- Provides extra visual weight and identifies the primary action in a set of buttons -->
@@ -199,10 +216,12 @@
 </div>
 
 
-</div>
-
 <script
   type="text/javascript"
   src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.3.0/mdb.min.js"></script>
+
+  
+
+  
 </body>
 </html>
