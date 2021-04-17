@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+  <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+  <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+  <!------ Include the above in your HEAD tag ---------->
+  <link href="../public/stylesheets/navbar.css" rel="stylesheet" />
+  <link href="../public/stylesheets/signup_style.css" rel="stylesheet" />
+
+
+  <title>Signup</title>
+</head>
+
+<body>
+
+  <!-- Navbar -->
+  <div class="main">
+    <nav class=" navbar navbar-expand-lg ">
+      <!-- Container wrapper -->
+      <div class="container-fluid">
+        <!-- Navbar brand -->
+        <a class="navbar-brand home" href="#">Teamify</a>
+
+        <!-- Toggle button -->
+        <button class="navbar-toggler" type="button" data-mdb-toggle="collapse"
+          data-mdb-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+          aria-label="Toggle navigation">
+          <i class="fas fa-bars"></i>
+        </button>
+
+        <!-- Collapsible wrapper -->
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <!-- Left links -->
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+              <a class="nav-link " aria-current="page" href="#">About us</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Log In</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Sign Up</a>
+            </li>
+            <!-- Navbar dropdown -->
+          </ul>
+        </div>
+        <!-- Collapsible wrapper -->
+      </div>
+      <!-- Container wrapper -->
+    </nav>
+  </div>
+  <!-- Navbar -->
+
+
+
+  <div class="containering">
+    
+    <div class="row">
+
+      <div class="col-md">
+       
+        <form class="formcls ">
+          <div class="mainheading">
+            <h1> Sign up</h1>
+          </div>
+      
+
+          <div class="form-outline mb-4">
+            <label class="form-label" for="username">username</label>
+            <input type="text" id="username" class="form-control" name="username" />
+            
+          </div>
+
+
+          <div class="form-outline mb-4">
+            <label class="form-label" for="phonenumber">Phone Number</label>
+            <input type="number" id="phonenumber" class="form-control" name="phonenumber"/>
+            
+          </div>
+
+          <div class="form-outline mb-4">
+            <label class="form-label" for="age">Age</label>
+            <input type="number" id="age" class="form-control"name="age" />
+            
+          </div>
+
+          <br>
+
+          <div class="form-check form-check-inline">
+            <label class="form-check-label" for="inlineRadio1">Gender : </label>
+          </div>
+          
+          <div class="form-check form-check-inline">
+            <input
+              class="form-check-input"
+              type="radio"
+              name="gender"
+              id="inlineRadio1"
+              value="male"
+            />
+            <label class="form-check-label" for="inlineRadio1">male</label>
+          </div>
+          
+          <div class="form-check form-check-inline">
+            <input
+              class="form-check-input"
+              type="radio"
+              name="gender"
+              id="inlineRadio2"
+              value="female"
+            />
+            <label class="form-check-label" for="inlineRadio2">female</label>
+          </div>
+          
+          <br>
+          <br>
+          <br>
+
+          <div class="form-outline mb-4">
+            <label class="form-label" for="email">Email address</label>
+            <input type="email" id="email" class="form-control" name="email" />
+            
+          </div>
+
+          <div class="form-outline mb-4">
+            <label class="form-label" for="password">Password</label>
+            <input type="password" id="password" class="form-control" name="password" />
+            
+          </div>
+
+          <div class="form-outline mb-4">
+            <label class="form-label" for="confirm_password">Confirm Password</label>
+            <input type="password" id="confirm_password" class="form-control" name="confirm_password"/>
+            
+          </div>
+
+
+
+          <button type="submit" class="btn btn-primary btn-block mb-4 mybutton">Sign in</button>
+
+        </form>
+
+      </div>
+      <div class="col-md">
+        <img src="../public/images/signup.svg" class="img-fluid myImage" alt="..." />
+      </div>
+    </div>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
+
+</html>
