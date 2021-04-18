@@ -7,3 +7,6 @@
     color: rgb(165, 34, 34);
   text-shadow: 2px 2px 4px #000000;
 }
+.textArea{
+  height: 100px;
+}
