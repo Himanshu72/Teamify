@@ -8,6 +8,7 @@
   <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
   <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
   <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
   <!------ Include the above in your HEAD tag ---------->
   <link href="../public/stylesheets/navbar.css" rel="stylesheet" />
   <link href="../public/stylesheets/project.css" rel="stylesheet" />
@@ -44,8 +45,26 @@
   color: black  ;
 }
 
+.btn_cust{
+  padding: 2%; 
+  background:#4e333b; 
+  color: #fff; 
+  width: 100%;
+  border-radius: 2px;  
+  outline: none;
+  border: none;
+  cursor: pointer;
+  transition: all ease 0.3s;
+}
+.btn_cust:focus{
+  outline: none;
+  border: none; 
+   
+}
 
-
+.btn_cust:hover{
+  background: #63434c; 
+}
 </style>
 
   <title>Project</title>
@@ -224,7 +243,9 @@
 
 
   </div>
-  
+  <div class="card-footer">
+    <button class="btn_cust"> <i class="fas fa-envelope-open-text"></i> Notification</button>
+   </div> 
  
 </div>
 </div>
@@ -263,8 +284,10 @@
     <p class="card-text">
       With supporting text below as a natural lead-in to additional content. Special title treatment Special title treatment Special title treatment</p>
   </div>
-    <button type="submit" class="btn btn-primary btn-block mb-4 mybutton">Sign in</button>
-
+  <div class="card-footer">
+   <button class="btn_cust"> <i class="fas fa-envelope-open-text"></i> Notification</button>
+  </div>
+    
 </div>
 </div>
 
