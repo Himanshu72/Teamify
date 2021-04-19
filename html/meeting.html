@@ -12,6 +12,9 @@
   <link href="../public/stylesheets/navbar.css" rel="stylesheet" />
   <link href="../public/stylesheets/login_style.css" rel="stylesheet" />
 
+   <!-- Font Awesome -->
+   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" rel="stylesheet" />
+
 
   <title>Meeting</title>
   <style>
@@ -62,6 +65,7 @@
 .formclass{
     width:80%;
     margin: auto;
+    padding:10%;
 }
 .buttons{
     width: 40%;
@@ -74,6 +78,54 @@
     padding: 1%;
     font-size: 1.2em;
    
+}
+
+.list-group > .list-group {
+  display: none;
+  margin-bottom: 0;
+  
+}
+.list-group-item:focus-within + .list-group {
+  display: block;
+  
+}
+
+.list-group > .list-group-item {
+  border-radius: 0;
+  border-width: 1px 0 0 0;
+  color:black;
+}
+
+.list-group > .list-group-item:first-child {
+  border-top-width: 0;
+}
+
+.list-group  > .list-group > .list-group-item {
+  padding-left: 2.5rem;
+}
+.btn_cust{
+  padding: 2%; 
+  background: rgb(81,82,96);
+  color: #fff; 
+  width: 100%;
+  border-radius: 2px;  
+  outline: none;
+  border: none;
+  cursor: pointer;
+  transition: all ease 0.3s;
+}
+.btn_cust:focus{
+  outline: none;
+  border: none; 
+   
+}
+.myBtn{
+  height: 2em;
+  width: 2em;
+}
+.btn_close{
+  background: red;
+  width: 25%;
 }
   </style>
 </head>
@@ -123,7 +175,7 @@
     <button class="nav-link active" id="home-tab0" data-mdb-toggle="tab" data-mdb-target="#home0" type="button" role="tab" aria-controls="home" aria-selected="true">Create meeting</button>
   </li>
   <li class="nav-item" role="presentation">
-    <button class="nav-link" id="profile-tab0" data-mdb-toggle="tab" data-mdb-target="#profile0" type="button" role="tab" aria-controls="profile" aria-selected="false">Profile</button>
+    <button class="nav-link" id="profile-tab0" data-mdb-toggle="tab" data-mdb-target="#profile0" type="button" role="tab" aria-controls="profile" aria-selected="false">Mininute of the meetings</button>
   </li>
   
 </ul>
@@ -182,7 +234,155 @@
         <img src="../public/images/meetingtabimg.svg" class="img-fluid myImage" alt="..." /></div>
     </div>
   </div>
-  <div class="tab-pane fade" id="profile0" role="tabpanel" aria-labelledby="profile-tab0">Tab 2 content</div>
+  <div class="tab-pane fade" id="profile0" role="tabpanel" aria-labelledby="profile-tab0">  
+
+
+
+
+
+
+    
+    <div class="containering">
+
+      <div class="row">
+  
+        <div class="col-md" style="padding: 10%;">
+  
+          <div class="list-group">
+            <a href="#" class="list-group-item">Meeting 1</a>
+            <div class="list-group">
+              <div class="content">
+                    <br><br>
+                    <h2>This is the meeting heading</h2>
+                    
+                    <br><br>
+          
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi neque orci, convallis a malesuada sit amet, scelerisque eget dui. Proin sapien magna, tincidunt quis luctus vitae, vestibulum in velit. Duis vel bibendum tellus, id pharetra ex. Nam eget cursus quam. Maecenas eget leo ac quam consequat venenatis eu ut sem. Cras quis est sit amet leo malesuada consectetur. Pellentesque gravida eget lacus id condimentum.</p>
+          
+                    <p>
+                      Etiam luctus massa risus, sed posuere magna accumsan ac. In velit magna, finibus eu suscipit sed, placerat a enim. Vivamus imperdiet ipsum a magna interdum feugiat. Nunc turpis lorem, ultrices ac imperdiet sed, dignissim et urna. Integer fermentum, erat ut mollis ultricies, neque erat pretium ipsum, ac aliquet sem justo vel ante. Cras ultrices ipsum sit amet consequat facilisis. Aenean consequat nunc leo, at ultricies risus venenatis nec. Sed gravida mauris vel eros porttitor, vel tristique nisl hendrerit. Donec ultrices mauris et elit aliquet gravid.
+                    </p>
+          
+                    <span  style="margin-right:0"> - by vishwam pandya</span>
+          
+              </div>
+            </div>
+            
+            <a href="#" class="list-group-item">Meeting 2</a>
+            <div class="list-group">
+              <div class="content">
+                    <br><br>
+                    <h2>This is the meeting heading</h2>
+                    
+                    <br><br>
+          
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi neque orci, convallis a malesuada sit amet, scelerisque eget dui. Proin sapien magna, tincidunt quis luctus vitae, vestibulum in velit. Duis vel bibendum tellus, id pharetra ex. Nam eget cursus quam. Maecenas eget leo ac quam consequat venenatis eu ut sem. Cras quis est sit amet leo malesuada consectetur. Pellentesque gravida eget lacus id condimentum.</p>
+          
+                    <p>
+                      Etiam luctus massa risus, sed posuere magna accumsan ac. In velit magna, finibus eu suscipit sed, placerat a enim. Vivamus imperdiet ipsum a magna interdum feugiat. Nunc turpis lorem, ultrices ac imperdiet sed, dignissim et urna. Integer fermentum, erat ut mollis ultricies, neque erat pretium ipsum, ac aliquet sem justo vel ante. Cras ultrices ipsum sit amet consequat facilisis. Aenean consequat nunc leo, at ultricies risus venenatis nec. Sed gravida mauris vel eros porttitor, vel tristique nisl hendrerit. Donec ultrices mauris et elit aliquet gravid.
+                    </p>
+          
+                    <span  style="margin-right:0"> - by vishwam pandya</span>
+          
+              </div>
+            </div>
+            
+            
+            <a href="#" class="list-group-item">Meeting 3</a>
+            <div class="list-group">
+              <div class="content">
+                    <br><br>
+                    <h2>This is the meeting heading</h2>
+                    
+                    <br><br>
+          
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi neque orci, convallis a malesuada sit amet, scelerisque eget dui. Proin sapien magna, tincidunt quis luctus vitae, vestibulum in velit. Duis vel bibendum tellus, id pharetra ex. Nam eget cursus quam. Maecenas eget leo ac quam consequat venenatis eu ut sem. Cras quis est sit amet leo malesuada consectetur. Pellentesque gravida eget lacus id condimentum.</p>
+          
+                    <p>
+                      Etiam luctus massa risus, sed posuere magna accumsan ac. In velit magna, finibus eu suscipit sed, placerat a enim. Vivamus imperdiet ipsum a magna interdum feugiat. Nunc turpis lorem, ultrices ac imperdiet sed, dignissim et urna. Integer fermentum, erat ut mollis ultricies, neque erat pretium ipsum, ac aliquet sem justo vel ante. Cras ultrices ipsum sit amet consequat facilisis. Aenean consequat nunc leo, at ultricies risus venenatis nec. Sed gravida mauris vel eros porttitor, vel tristique nisl hendrerit. Donec ultrices mauris et elit aliquet gravid.
+                    </p>
+          
+                    <span  style="margin-right:0"> - by vishwam pandya</span>
+          
+              </div>
+            </div>
+          </div>
+          
+          
+  
+        </div>
+  
+        <div class="col-md">
+          <img src="../public/images/minOfmeeting.svg" class="img-fluid " alt="..." />
+        </div>
+      </div>
+  
+      <button type="button"  class="myBtn" data-mdb-toggle="modal" 
+        data-mdb-target="#exampleModal"
+        style="background-color:#ff636b;color:white;font-size: 1.5em;; position: fixed; bottom: 6%;left: 4%; ">
+        <i class="fas fa-plus"></i>
+      </button>
+  
+  
+      <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Add Miniute of the meeting</h5>
+              
+            </div>
+            <div class="modal-body">
+              <form>
+                
+                <!-- meeting title input -->
+                <div class="form-outline mb-4">
+                  <input type="text" id="meetingTitle" class="form-control" name="meetingTitle" />
+                  <label class="form-label" for="meetingTitle">Meeting title</label>
+                </div>
+  
+                 <!-- meeting description input -->
+                 <div class="form-outline mb-4">
+                  <input type="textarea" id="meetingDescription" class="form-control textArea" name="meetingDescription"/>
+                  <label class="form-label" for="meetingDescription">Meeting Description </label>
+                </div>
+  
+                <!-- author input -->
+                <div class="form-outline mb-4">
+                  <input type="text" id="author" class="form-control textArea" name="author"/>
+                  <label class="form-label" for="author">Author </label>
+                </div>
+  
+                <!-- date input -->
+                <div class="form-outline mb-4">
+                  <input type="date" id="date" class="form-control textArea" name="date"/>
+                  <label class="form-label" for="date">meeting date </label>
+                </div>
+                
+  
+                <!-- Submit button -->
+                <button type="submit" class="btn_cust btn-primary btn-block mb-4">Submit</button>
+  
+                
+              </form>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn_cust btn_close btn-danger" data-mdb-dismiss="modal">
+                Close
+              </button>
+  
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+
+
+
+
+
+
+  </div>
   
 </div>
 
