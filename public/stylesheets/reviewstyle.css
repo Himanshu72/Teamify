@@ -1,0 +1,146 @@
+body {
+font-family: #555;
+}
+
+.select-list {
+font-family: 'Open Sans', sans-serif;
+color: #555;
+background: #fff;
+}
+
+.select-list .title {
+display: inline-block;
+cursor: pointer;
+background: #fff;
+border: 1px solid #eaeaec;
+border-radius: 5px;
+padding: 10px 15px 10px 15px;
+}
+
+.select-list .title::after {
+display: inline-block;
+content: '>';
+margin-left: 15px;
+font-size: 11px;
+transform: rotate(90deg) scale(1, 2);
+}
+
+.select-list .title:hover {
+background: #eaeaec;
+}
+
+.select-list .select-options {
+margin-top: 5px;
+display: none;
+position: absolute;
+z-index: 500;
+border: 1px solid #eaeaec;
+background: #fff;
+}
+
+.select-list .select-options .option label {
+display: inline-block;
+padding: 10px 30px 10px 10px;
+}
+
+.select-list .select-options .option:hover {
+background: #eaeaec;
+}
+
+.select-list .select-options .option input {
+margin: 10px 0 12px 15px;
+}
+
+.formclass {
+width: 80%;
+margin: auto;
+padding: 10%;
+}
+
+.buttons {
+width: 40%;
+background-color: #4e333b;
+border-radius: 4px;
+outline: none;
+border: none;
+cursor: pointer;
+color: white;
+padding: 1%;
+font-size: 1.2em;
+
+}
+
+.list-group>.list-group {
+display: none;
+margin-bottom: 0;
+
+}
+
+.list-group-item:focus-within+.list-group {
+display: block;
+
+}
+
+.list-group>.list-group-item {
+border-radius: 0;
+border-width: 1px 0 0 0;
+color: black;
+}
+
+.list-group>.list-group-item:first-child {
+border-top-width: 0;
+}
+
+.list-group>.list-group>.list-group-item {
+padding-left: 2.5rem;
+}
+
+
+
+.mybutton{
+background-color: #694651;
+border-color: #694651;
+width: 40%;
+margin: auto;
+border-radius: 3px;
+cursor: pointer;
+color: #fff;
+}
+.mybutton:hover{
+background-color: #4e333b;
+border-color: #4e333b;
+}
+.mainclass{
+    background-color: rgb(184, 181, 181);
+    margin: 1%;
+    padding: 2%;
+}
+.myBtn{
+    height: 2em;
+    width: 2em;
+    border-radius: 1px;
+    outline: none;
+}
+.btn_cust{
+    padding: 2%; 
+    background: rgb(81,82,96);
+    color: #fff; 
+    width: 100%;
+    border-radius: 2px;  
+    outline: none;
+    border: none;
+    cursor: pointer;
+    transition: all ease 0.3s;
+  }
+  .btn_cust:focus{
+    outline: none;
+    border: none; 
+     
+  }
+  .btn_close{
+    background: red;
+    width: 25%;
+  }
+  .closeB{
+      display: block;
+  }
