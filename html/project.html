@@ -313,19 +313,28 @@ var swiper = new Swiper('.swiper-container', {
           }
           let childs=document.querySelectorAll(`*[data-parent='${target.dataset.parent}']`);
             
-          for(let child of   childs ){
-            console.log(child.dataset.status)   
-            if(child.dataset.status==0){
-                document.getElementById(child.dataset.parent).style.background="#4BB543"
-                    break;
-               }  
-               
-           }
+                    if(hander(childs)){
+                      document.getElementById(target.dataset.parent).style.background="#4BB543"; 
+                    }else{
+                      document.getElementById(target.dataset.parent).style.background="#cc3300";
+                    }
            
        } );
     })
 
-  
+    function hander(childs){
+     
+      for(let child of   childs ){
+            console.log(child.dataset.status)   
+            if(child.dataset.status==0){
+            
+                    return false;
+               }  
+               
+           }
+          return true; 
+    }
+
   </script>
   
 </body>
