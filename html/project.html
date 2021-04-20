@@ -226,7 +226,30 @@ Main Task
     
   </ul>
 </div>      
-  </div>  
+  </div>
+  <br /> <br /> <br />
+  <div class="col col-12">
+          
+    <a
+data-mdb-toggle="collapse"
+href="#collapseExample2"
+role="button"
+aria-expanded="false"
+aria-controls="collapseExample2"
+class="parent"
+id="p02"
+style=" background-color:#cc3300; color:white; padding: 4%; width: 100%; outline: none; "
+>
+Main Task 2
+    </a>
+<div class="collapse mt-3" id="collapseExample2">
+<ul class="list-group list-group-flush">
+<li class="list-group-item"> <i class="fas fa-check toggle" data-parent="p02" data-status="1" id="s99"style="color: green;"></i> SubTask</li>
+<li class="list-group-item"> <i class="fas fa-spinner toggle" data-parent="p02" data-status="0" id="s69" style="color: #cc3300;" ></i> SubTask</li>
+
+</ul>
+</div>      
+</div>   
   </div>
          </p>
 
@@ -276,6 +299,7 @@ Main Task
   src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.3.0/mdb.min.js"></script>
  
   <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
  <script>
 
 
@@ -334,6 +358,13 @@ var swiper = new Swiper('.swiper-container', {
            }
           return true; 
     }
+
+    document.querySelectorAll(".btn_cust").forEach((ele)=>{
+
+        ele.addEventListener("click",(e)=>{
+          swal("Good job!", "Notification has been sent", "success");
+        });
+    })
 
   </script>
   
