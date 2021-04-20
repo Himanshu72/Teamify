@@ -16,55 +16,94 @@
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" rel="stylesheet" />
 
 
-  <title>Mininute of the meeting</title>
+  <title>test</title>
   <style>
-    .list-group > .list-group {
-  display: none;
-  margin-bottom: 0;
-  
-}
-.list-group-item:focus-within + .list-group {
-  display: block;
-  
-}
+    .select-list {
+      font-family: 'Open Sans', sans-serif;
+      color: #555;
+      background: #fff;
 
-.list-group > .list-group-item {
-  border-radius: 0;
-  border-width: 1px 0 0 0;
-  color:black;
-}
 
-.list-group > .list-group-item:first-child {
-  border-top-width: 0;
-}
+    }
 
-.list-group  > .list-group > .list-group-item {
-  padding-left: 2.5rem;
-}
-.btn_cust{
-  padding: 2%; 
-  background: rgb(81,82,96);
-  color: #fff; 
-  width: 100%;
-  border-radius: 2px;  
-  outline: none;
-  border: none;
-  cursor: pointer;
-  transition: all ease 0.3s;
-}
-.btn_cust:focus{
-  outline: none;
-  border: none; 
-   
-}
-.myBtn{
-  height: 2em;
-  width: 2em;
-}
-.btn_close{
-  background: red;
-  width: 25%;
-}
+    .select-list .title {
+      display: inline-block;
+      cursor: pointer;
+      background: #fff;
+      border: 1px solid #eaeaec;
+      border-radius: 5px;
+      padding: 10px 15px 10px 15px;
+    }
+
+    .select-list .title::after {
+      display: inline-block;
+      content: '>';
+      margin-left: 15px;
+      font-size: 11px;
+      transform: rotate(90deg) scale(1, 2);
+    }
+
+    .select-list .title:hover {
+      background: #eaeaec;
+    }
+
+    .select-list .select-options {
+      margin-top: 5px;
+      display: none;
+      position: absolute;
+      z-index: 500;
+      border: 1px solid #eaeaec;
+      background: #fff;
+
+    }
+
+    .select-list .select-options .option label {
+      display: inline-block;
+      padding: 10px 30px 10px 10px;
+    }
+
+    .select-list .select-options .option:hover {
+      background: #eaeaec;
+
+    }
+
+    .select-list .select-options .option input {
+      margin: 10px 0 12px 15px;
+    }
+
+    .formclass {
+      /* width:80%;
+    margin: auto;
+    padding:10%; */
+    }
+
+    .btn_cust {
+      padding: 2%;
+      background: rgb(81, 82, 96);
+      color: #fff;
+      width: 100%;
+      border-radius: 2px;
+      outline: none;
+      border: none;
+      cursor: pointer;
+      transition: all ease 0.3s;
+    }
+
+    .btn_cust:focus {
+      outline: none;
+      border: none;
+
+    }
+
+    .myBtn {
+      height: 2em;
+      width: 2em;
+    }
+
+    .btn_close {
+      background: red;
+      width: 30%;
+    }
   </style>
 </head>
 
@@ -116,137 +155,191 @@
 
       <div class="col-md" style="padding: 10%;">
 
-        <div class="list-group">
-          <a href="#" class="list-group-item">Meeting 1</a>
-          <div class="list-group">
-            <div class="content">
-                  <br><br>
-                  <h2>This is the meeting heading</h2>
-                  
-                  <br><br>
-        
-                  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi neque orci, convallis a malesuada sit amet, scelerisque eget dui. Proin sapien magna, tincidunt quis luctus vitae, vestibulum in velit. Duis vel bibendum tellus, id pharetra ex. Nam eget cursus quam. Maecenas eget leo ac quam consequat venenatis eu ut sem. Cras quis est sit amet leo malesuada consectetur. Pellentesque gravida eget lacus id condimentum.</p>
-        
-                  <p>
-                    Etiam luctus massa risus, sed posuere magna accumsan ac. In velit magna, finibus eu suscipit sed, placerat a enim. Vivamus imperdiet ipsum a magna interdum feugiat. Nunc turpis lorem, ultrices ac imperdiet sed, dignissim et urna. Integer fermentum, erat ut mollis ultricies, neque erat pretium ipsum, ac aliquet sem justo vel ante. Cras ultrices ipsum sit amet consequat facilisis. Aenean consequat nunc leo, at ultricies risus venenatis nec. Sed gravida mauris vel eros porttitor, vel tristique nisl hendrerit. Donec ultrices mauris et elit aliquet gravid.
-                  </p>
-        
-                  <span  style="margin-right:0"> - by vishwam pandya</span>
-        
+        <ol class="list-group list-group-numbered">
+          <li class="list-group-item">
+
+            <div class="container">
+              <div class="row">
+                <div class="col-md" style="padding: 0.5em;">
+                  Member 1
+                </div>
+                <div class="col-md">
+                  <form class="formclass">
+                    <div class="select-list">
+                      <div class="title">Task Assigned</div>
+                      <div class="select-options">
+                        <div class="option">
+                          <input type="checkbox" name="vehicle" id="option1" value="" />
+                          <label for="option1">task 1</label>
+                        </div>
+                        <div class="option">
+                          <input type="checkbox" name="vehicle" id="option2" />
+                          <label for="option2">task 2</label>
+                        </div>
+                        <div class="option">
+                          <input type="checkbox" name="vehicle" id="option3" />
+                          <label for="option3">task 3</label>
+                        </div>
+                        <div class="option">
+                          <input type="checkbox" name="vehicle" id="option4" />
+                          <label for="option4">task 4</label>
+                        </div>
+                      </div>
+                    </div>
+                  </form>
+                </div>
+
+
+
+              </div>
             </div>
-          </div>
-          
-          <a href="#" class="list-group-item">Meeting 2</a>
-          <div class="list-group">
-            <div class="content">
-                  <br><br>
-                  <h2>This is the meeting heading</h2>
-                  
-                  <br><br>
-        
-                  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi neque orci, convallis a malesuada sit amet, scelerisque eget dui. Proin sapien magna, tincidunt quis luctus vitae, vestibulum in velit. Duis vel bibendum tellus, id pharetra ex. Nam eget cursus quam. Maecenas eget leo ac quam consequat venenatis eu ut sem. Cras quis est sit amet leo malesuada consectetur. Pellentesque gravida eget lacus id condimentum.</p>
-        
-                  <p>
-                    Etiam luctus massa risus, sed posuere magna accumsan ac. In velit magna, finibus eu suscipit sed, placerat a enim. Vivamus imperdiet ipsum a magna interdum feugiat. Nunc turpis lorem, ultrices ac imperdiet sed, dignissim et urna. Integer fermentum, erat ut mollis ultricies, neque erat pretium ipsum, ac aliquet sem justo vel ante. Cras ultrices ipsum sit amet consequat facilisis. Aenean consequat nunc leo, at ultricies risus venenatis nec. Sed gravida mauris vel eros porttitor, vel tristique nisl hendrerit. Donec ultrices mauris et elit aliquet gravid.
-                  </p>
-        
-                  <span  style="margin-right:0"> - by vishwam pandya</span>
-        
+
+
+
+          </li>
+          <li class="list-group-item">
+
+            <div class="container">
+              <div class="row">
+                <div class="col-md" style="padding: 0.5em;">
+                  Member 1
+                </div>
+                <div class="col-md">
+                  <form class="formclass">
+                    <div class="select-list">
+                      <div class="title">Task Assigned</div>
+                      <div class="select-options">
+                        <div class="option">
+                          <input type="checkbox" name="vehicle" id="option1" value="" />
+                          <label for="option1">task 1</label>
+                        </div>
+                        <div class="option">
+                          <input type="checkbox" name="vehicle" id="option2" />
+                          <label for="option2">task 2</label>
+                        </div>
+                        <div class="option">
+                          <input type="checkbox" name="vehicle" id="option3" />
+                          <label for="option3">task 3</label>
+                        </div>
+                        <div class="option">
+                          <input type="checkbox" name="vehicle" id="option4" />
+                          <label for="option4">task 4</label>
+                        </div>
+                      </div>
+                    </div>
+                  </form>
+                </div>
+
+
+
+              </div>
             </div>
-          </div>
-          
-          
-          <a href="#" class="list-group-item">Meeting 3</a>
-          <div class="list-group">
-            <div class="content">
-                  <br><br>
-                  <h2>This is the meeting heading</h2>
-                  
-                  <br><br>
-        
-                  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi neque orci, convallis a malesuada sit amet, scelerisque eget dui. Proin sapien magna, tincidunt quis luctus vitae, vestibulum in velit. Duis vel bibendum tellus, id pharetra ex. Nam eget cursus quam. Maecenas eget leo ac quam consequat venenatis eu ut sem. Cras quis est sit amet leo malesuada consectetur. Pellentesque gravida eget lacus id condimentum.</p>
-        
-                  <p>
-                    Etiam luctus massa risus, sed posuere magna accumsan ac. In velit magna, finibus eu suscipit sed, placerat a enim. Vivamus imperdiet ipsum a magna interdum feugiat. Nunc turpis lorem, ultrices ac imperdiet sed, dignissim et urna. Integer fermentum, erat ut mollis ultricies, neque erat pretium ipsum, ac aliquet sem justo vel ante. Cras ultrices ipsum sit amet consequat facilisis. Aenean consequat nunc leo, at ultricies risus venenatis nec. Sed gravida mauris vel eros porttitor, vel tristique nisl hendrerit. Donec ultrices mauris et elit aliquet gravid.
-                  </p>
-        
-                  <span  style="margin-right:0"> - by vishwam pandya</span>
-        
+
+
+
+          </li>
+          <li class="list-group-item">
+
+            <div class="container">
+              <div class="row">
+                <div class="col-md" style="padding: 0.5em;">
+                  Member 1
+                </div>
+                <div class="col-md">
+                  <form class="formclass">
+                    <div class="select-list">
+                      <div class="title">Task Assigned</div>
+                      <div class="select-options">
+                        <div class="option">
+                          <input type="checkbox" name="vehicle" id="option1" value="" />
+                          <label for="option1">task 1</label>
+                        </div>
+                        <div class="option">
+                          <input type="checkbox" name="vehicle" id="option2" />
+                          <label for="option2">task 2</label>
+                        </div>
+                        <div class="option">
+                          <input type="checkbox" name="vehicle" id="option3" />
+                          <label for="option3">task 3</label>
+                        </div>
+                        <div class="option">
+                          <input type="checkbox" name="vehicle" id="option4" />
+                          <label for="option4">task 4</label>
+                        </div>
+                      </div>
+                    </div>
+                  </form>
+                </div>
+
+
+
+              </div>
             </div>
-          </div>
-        </div>
-        
-        
+
+
+
+          </li>
+        </ol>
 
       </div>
 
       <div class="col-md">
-        <img src="../public/images/minOfmeeting.svg" class="img-fluid " alt="..." />
+        <img src="../public/images/memberTask.svg" class="img-fluid " style="height: 80%;" alt="..." />
       </div>
     </div>
 
-    <button type="button"  class="myBtn" data-mdb-toggle="modal" 
-      data-mdb-target="#exampleModal"
-      style="background-color:#ff636b;color:white;font-size: 1.5em;; position: fixed; bottom: 6%;left: 4%; ">
-      <i class="fas fa-plus"></i>
-    </button>
 
+  </div>
+  
 
-    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Add Miniute of the meeting</h5>
-            
-          </div>
-          <div class="modal-body">
-            <form>
-              
-              <!-- meeting title input -->
-              <div class="form-outline mb-4">
-                <input type="text" id="meetingTitle" class="form-control" name="meetingTitle" />
-                <label class="form-label" for="meetingTitle">Meeting title</label>
-              </div>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+    integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+  <script>
+    (function ($) {
+      $.fn.multiselect = function () {
 
-               <!-- meeting description input -->
-               <div class="form-outline mb-4">
-                <input type="textarea" id="meetingDescription" class="form-control textArea" name="meetingDescription"/>
-                <label class="form-label" for="meetingDescription">Meeting Description </label>
-              </div>
+        var selector = this;
+        var options = $.extend({
+          onChange: function () { }
+        }, arguments[0] || {});
 
-              <!-- author input -->
-              <div class="form-outline mb-4">
-                <input type="text" id="author" class="form-control textArea" name="author"/>
-                <label class="form-label" for="author">Author </label>
-              </div>
+        activate();
 
-              <!-- date input -->
-              <div class="form-outline mb-4">
-                <input type="date" id="date" class="form-control textArea" name="date"/>
-                <label class="form-label" for="date">meeting date </label>
-              </div>
-              
+        /////////
 
-              <!-- Submit button -->
-              <button type="submit" class="btn_cust btn-primary btn-block mb-4">Submit</button>
+        function activate() {
 
-              
-            </form>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn_cust btn_close btn-danger" data-mdb-dismiss="modal">
-              Close
-            </button>
+          //events
+          $(selector).find('.title').on('click', function (e) {
+            $(this).parent().find('.select-options').toggle();
+          });
 
-          </div>
-        </div>
-      </div>
-    </div>
+          $(selector).find('input[type="checkbox"]').change(function (e) {
+            options.onChange.call(this);
+          });
 
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.3.0/mdb.min.js"></script>
+        }
+      };
+
+    }(jQuery));
+
+    $(document).ready(function () {
+      $('.select-list').multiselect({
+        onChange: updateTable
+      });
+    });
+
+    function updateTable() {
+      var checkboxValue = $(this).val();
+      var isChecked = $(this).is(':checked');
+
+    }
+  </script>
+
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.3.0/mdb.min.js"></script>
 </body>
 
-  
+
 </body>
 
 </html>
