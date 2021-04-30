@@ -17,7 +17,106 @@
 
 
     <title>Review Project</title>
+    <style>
+        .icon_btn{
+            padding: 2%;
+            background: transparent;
+            border: 1px solid;
+            width: 35px;
+        }
 
+        .danger{
+            border-color: rgb(204, 54, 54);
+            color: rgb(204, 54, 54);
+        }
+        .warn{
+            border-color:  rgb(213, 224, 53);
+            color: rgb(213, 224, 53);
+        }
+        .select-list {
+  font-family: 'Open Sans', sans-serif;
+  color: #555;
+  background: #fff;
+}
+.select-list .title {
+  display: inline-block;
+  cursor: pointer;
+  background: #fff;
+  border: 1px solid  #eaeaec;
+  border-radius: 5px;
+  padding: 10px 15px 10px 15px;
+}
+.select-list .title::after {
+  display: inline-block;
+  content: '>';
+  margin-left: 15px;
+  font-size: 11px;
+  transform: rotate(90deg) scale(1, 2);
+}
+.select-list .title:hover {
+  background: #eaeaec;
+}
+.select-list .select-options {
+  margin-top: 5px;
+  display: none;
+  position: absolute;
+  z-index: 500;
+  border: 1px solid  #eaeaec;
+  background: #fff;
+}
+.select-list .select-options .option label {
+  display: inline-block;
+  padding: 10px 30px 10px 10px;
+}
+.select-list .select-options .option:hover {
+  background: #eaeaec;
+}
+.select-list .select-options .option input {
+  margin: 10px 0 12px 15px;
+}
+.formclass{
+    width:80%;
+    margin: auto;
+    padding:10%;
+}
+.buttons{
+    width: 40%;
+    background-color: #4e333b;
+    border-radius: 4px;  
+    outline: none;
+    border: none;
+    cursor: pointer;
+    color: white;
+    padding: 1%;
+    font-size: 1.2em;
+   
+}
+
+.list-group > .list-group {
+  display: none;
+  margin-bottom: 0;
+  
+}
+.list-group-item:focus-within + .list-group {
+  display: block;
+  
+}
+
+.list-group > .list-group-item {
+  border-radius: 0;
+  border-width: 1px 0 0 0;
+  color:black;
+}
+
+.list-group > .list-group-item:first-child {
+  border-top-width: 0;
+}
+
+.list-group  > .list-group > .list-group-item {
+  padding-left: 2.5rem;
+}
+
+        </style>
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <script type="text/javascript">
         google.charts.load('current', { 'packages': ['corechart'] });
@@ -107,11 +206,16 @@
                             <div class="card text-center">
                                 <div class="card-body">
                                     <div class="closeB">
-                                    <h5 class="card-title" >Task 1 heading  <button type="button" class="crossbtn"
-                                        style="background-color:#ff636b;color:white;font-size: 1.2em; border-radius: 1px; ">
-                                        <i class="fas fa-times"></i>
-                                      </button> </h5>
-                                    
+                                        <div class="row btn_group" style="text-align: center; margin: auto;">
+                                            <div class="col">
+                                            <button class="icon_btn warn" ><i class="fas fa-edit"></i> </button>
+                                            <button class="icon_btn danger" ><i class="fas fa-trash-alt"></i></button>
+                                            </div> 
+                                        </div> <br >
+                                        <h5 class="card-title" >Task 1 heading  </h5>
+                                  
+                                  
+                                  
                                     
                                 </div>  
                                     <button class="mybutton" type="button" data-mdb-toggle="collapse"
@@ -136,20 +240,28 @@
                                 <div class="card-body">
                                     <h5 class="card-title">Subtasks in it</h5>
                                     <div class="dropdown">
-                                        <button class="mybutton dropdown-toggle" type="button" id="dropdownMenuButton"
-                                            data-mdb-toggle="dropdown" aria-expanded="false">
-                                            Subtasks
-                                        </button>
-                                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                            <div class="closeB">
-                                            <li><a class="dropdown-item" href="#">Action</a><button type="button" class="crossbtn"
-                                                style="background-color:#ff636b;color:white;font-size: 0.7em; ">
-                                                <i class="fas fa-times"></i>
-                                              </button></li>
-                                            </div>
-                                            <li><a class="dropdown-item" href="#">Another action</a></li>
-                                            <li><a class="dropdown-item" href="#">Something else here</a></li>
-                                        </ul>
+                                        <div class="select-list">
+                                            <div class="title">Invite members</div>
+                                           <div class="select-options">
+                                               <div class="option"> 
+                                                   <input type="checkbox" name="vehicle" id="option1" value="" />
+                                                   <label for="option1">Platform</label>
+                                               </div>
+                                               <div class="option"> 
+                                                   <input type="checkbox" name="vehicle" id="option2" />
+                                                   <label for="option2">Device ID</label>
+                                               </div>
+                                                   <div class="option"> 
+                                                   <input type="checkbox" name="vehicle" id="option3" />
+                                                   <label for="option3">Token</label>
+                                               </div>
+                                                   <div class="option"> 
+                                                   <input type="checkbox" name="vehicle" id="option4" />
+                                                   <label for="option4">Option 1</label>
+                                               </div>
+                                           </div>
+                                           </div>
+                                       
                                     </div>
                                 </div>
 
@@ -177,9 +289,9 @@
 
                             </div>
                         </div>
-                        <div class="col-md-3">
+                        <div class="col-md-3  "   >
                             <div class="card text-center">
-                                <div class="card-body">
+                                <div class="card-body" style="border-radius: 50px; border-left:5px solid rgb(202, 73, 73); ">
                                     <h5 class="card-title">Deadline</h5>
                                     <p class="card-text">
                                         13 August 2021
@@ -209,6 +321,7 @@
                                         nesciunt
                                         sapiente ea proident.
                                     </p>
+                                    
                                 </div>
                             </div>
 
@@ -333,12 +446,10 @@
         <div class="tab-pane fade" id="profile0" role="tabpanel" aria-labelledby="profile-tab0">
             <div class="row">
 
-                <div class="col col-md-6">
-                    <div id="piechart" style="width: 1200px; height: 1500px;"></div>
+                <div class="col col-md-12">
+                    <div id="piechart" ></div> <!--Bug-->
                 </div>
-                <div class="col col-md-6">
-
-                </div>
+        
             </div>
 
         </div>
@@ -346,8 +457,51 @@
     </div>
     </div>
 
+    <script
+    src="https://code.jquery.com/jquery-3.6.0.min.js"
+    integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+    crossorigin="anonymous"></script>
+<script>
+function($){
+  $.fn.multiselect = function() {
+    
+    var selector = this;
+    var options = $.extend({
+          onChange: function() {}
+      }, arguments[0] || {});
+      
+    activate();
 
+    /////////
 
+    function activate() {
+           
+      //events
+      $(selector).find('.title').on('click', function(e) {
+        $(this).parent().find('.select-options').toggle();
+      });
+      
+      $(selector).find('input[type="checkbox"]').change(function(e){
+        options.onChange.call(this);
+      });
+      
+    }
+  };
+  
+}(jQuery);
+
+$(document).ready(function() {
+  $('.select-list').multiselect({
+    onChange: updateTable
+  });
+});
+  
+function updateTable() {
+  var checkboxValue = $(this).val();
+  var isChecked = $(this).is(':checked');
+  
+}
+</script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"
         integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 
