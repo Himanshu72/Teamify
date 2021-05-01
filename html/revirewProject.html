@@ -134,9 +134,16 @@
     </style>
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <script type="text/javascript">
+    
+        window.onresize = doALoadOfStuff;
         google.charts.load('current', { 'packages': ['corechart'] });
         google.charts.setOnLoadCallback(drawChart);
 
+    function doALoadOfStuff() {
+        google.charts.load('current', { 'packages': ['corechart'] });
+        google.charts.setOnLoadCallback(drawChart);
+
+    }
         function drawChart() {
 
             var data = google.visualization.arrayToDataTable([
@@ -149,7 +156,10 @@
             ]);
 
             var options = {
-                title: 'My Daily Activities'
+                title: 'My Daily Activities',
+                height: window.innerHeight-100,
+                width: window.innerWidth-100   ,
+                
             };
 
             var chart = new google.visualization.PieChart(document.getElementById('piechart'));
@@ -501,8 +511,8 @@
             <div class="row">
 
                 <div class="col col-md-12">
-                    <div id="piechart"></div>
-                    <!--Bug-->
+                    <div id="piechart" style="width: 1000px; height: 500px;"></div>
+                    
                 </div>
 
             </div>
