@@ -214,42 +214,20 @@
               </div>
               <div class="content">
                 <form>
-                  <div class="row">
-                    <div class="col-md-5">
-                      <div class="form-group">
-                        <label>Company (disabled)</label>
-                        <input type="text" class="form-control" name="company" disabled placeholder="Company"
-                          value="IISP">
-                      </div>
-                    </div>
-                    <div class="col-md-3">
-                      <div class="form-group">
-                        <label>Username</label>
-                        <input type="text" class="form-control" name="username" placeholder="Username" value="rushita01"
-                          disabled>
-                      </div>
-                    </div>
-                    <div class="col-md-4">
-                      <div class="form-group">
-                        <label for="exampleInputEmail1">Email address</label>
-                        <input type="email" name="email" class="form-control" placeholder="Email"
-                          value="vachhanirushi1234@gmail.com" disabled>
-                      </div>
-                    </div>
-                  </div>
+                  
 
                   <div class="row">
                     <div class="col-md-6">
                       <div class="form-group">
                         <label>First Name</label>
-                        <input type="text" name="fname" disabled class="form-control" placeholder="Company"
+                        <input type="text" name="fname" disabled class="form-control edit" placeholder="Company"
                           value="Rushita">
                       </div>
                     </div>
                     <div class="col-md-6">
                       <div class="form-group">
                         <label>Last Name</label>
-                        <input type="text" name="lname" disabled class="form-control" placeholder="Last Name"
+                        <input type="text" name="lname" disabled class="form-control edit" placeholder="Last Name"
                           value="vachhani">
                       </div>
                     </div>
@@ -259,21 +237,21 @@
                     <div class="col-md-4">
                       <div class="form-group">
                         <label>Gender</label>
-                        <input type="text" disabled class="form-control" name="gender" placeholder="Gender"
+                        <input type="text" disabled class="form-control edit" name="gender" placeholder="Gender"
                           value="female">
                       </div>
                     </div>
                     <div class="col-md-4">
                       <div class="form-group">
-                        <label>DOB</label>
-                        <input type="text" disabled class="form-control" name="DOB" placeholder="Dateogbirth"
-                          value="1-2-1998">
+                        <label>Age</label>
+                        <input type="text" disabled class="form-control edit" name="Age" placeholder="Dateogbirth"
+                          value="22">
                       </div>
                     </div>
                     <div class="col-md-4">
                       <div class="form-group">
                         <label>Phone Number</label>
-                        <input type="number" disabled name="phone" class="form-control" placeholder="Phone Number"
+                        <input type="number" disabled name="phone edit" class="form-control edit" placeholder="Phone Number"
                           value="98981456723">
                       </div>
                     </div>
@@ -281,50 +259,13 @@
 
 
 
-                  <div class="row">
-                    <div class="col-md-12">
-                      <div class="form-group">
-                        <label>Address</label>
-                        <input type="text" name="address" disabled class="form-control" placeholder="Home Address"
-                          value="A-10 chandra society surat gujrat">
-                      </div>
-                    </div>
-                  </div>
+               
 
-                  <div class="row">
-                    <div class="col-md-4">
-                      <div class="form-group">
-                        <label>City</label>
-                        <input type="text" class="form-control" disabled name="city" placeholder="City" value="surat">
-                      </div>
-                    </div>
-                    <div class="col-md-4">
-                      <div class="form-group">
-                        <label>State</label>
-                        <input type="text" disabled class="form-control" placeholder="Country" name="state"
-                          value="Gujrat">
-                      </div>
-                    </div>
-                    <div class="col-md-4">
-                      <div class="form-group">
-                        <label>Pin Code</label>
-                        <input type="number" disabled class="form-control" name="pincode" placeholder="Pin Code"
-                          value="123456">
-                      </div>
-                    </div>
-                  </div>
-
-                  <div class="row">
-                    <div class="col-md-12">
-                      <div class="form-group">
-                        <label>About Me</label>
-                        <textarea rows="5" disabled class="form-control" placeholder="Here can be your description"
-                          value="Mike">I am working two hard</textarea>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div class="buttons" id="edit" onclick="update()">Edit</div>
+             
+                  
+                  <button class="buttons" id="edit" >Edit</button>
+                   &nbsp;
+                  <button class="buttons"  >Submit</button>
                   <div class="clearfix"></div>
                 </form>
               </div>
@@ -379,7 +320,7 @@
 
 
 
-                  <div class="buttons" id="edit" onclick="update()">Submit</div>
+                  <div class="buttons" id="edit" >Submit</div>
                   <div class="clearfix"></div>
                 </form>
               </div>
@@ -400,49 +341,20 @@
 
 
 
-  <script src="https://code.jquery.com/jquery-3.6.0.min.js"
-    integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
   <script>
-    (function ($) {
-      $.fn.multiselect = function () {
+    let flag=1;
+     let edit=document.querySelector("#edit");
+      edit.addEventListener("click",(e)=>{
+          e.preventDefault();
+          let edits=document.querySelectorAll(".edit");
+           edits.forEach( (ele)=>{
+                 
+                 ele.disabled=(flag==1)? false : true;   
+           } );
+           flag= !flag;
+      } );
 
-        var selector = this;
-        var options = $.extend({
-          onChange: function () { }
-        }, arguments[0] || {});
-
-        activate();
-
-        /////////
-
-        function activate() {
-
-          //events
-          $(selector).find('.title').on('click', function (e) {
-            $(this).parent().find('.select-options').toggle();
-          });
-
-          $(selector).find('input[type="checkbox"]').change(function (e) {
-            options.onChange.call(this);
-          });
-
-        }
-      };
-
-    }(jQuery));
-
-    $(document).ready(function () {
-      $('.select-list').multiselect({
-        onChange: updateTable
-      });
-    });
-
-    function updateTable() {
-      var checkboxValue = $(this).val();
-      var isChecked = $(this).is(':checked');
-
-    }
-  </script>
+    </script>
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.3.0/mdb.min.js"></script>
 </body>
 
