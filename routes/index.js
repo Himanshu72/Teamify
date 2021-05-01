@@ -8,7 +8,7 @@ const notify=require("../utility/notifications");
 
 router.get('/', async function (req, res, next) {
 
-  res.render('index', { title: 'Express' });
+  res.render('index', { title: 'Teamify' });
 });
 
 module.exports = router;
