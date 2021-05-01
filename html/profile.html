@@ -16,159 +16,434 @@
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" rel="stylesheet" />
 
 
-  <title>Notification</title>
-  
+  <title>Profile</title>
+  <style>
+    body {
+      font-family: #555;
+    }
+
+    .select-list {
+      font-family: 'Open Sans', sans-serif;
+      color: #555;
+      background: #fff;
+    }
+
+    .select-list .title {
+      display: inline-block;
+      cursor: pointer;
+      background: #fff;
+      border: 1px solid #eaeaec;
+      border-radius: 5px;
+      padding: 10px 15px 10px 15px;
+    }
+
+    .select-list .title::after {
+      display: inline-block;
+      content: '>';
+      margin-left: 15px;
+      font-size: 11px;
+      transform: rotate(90deg) scale(1, 2);
+    }
+
+    .select-list .title:hover {
+      background: #eaeaec;
+    }
+
+    .select-list .select-options {
+      margin-top: 5px;
+      display: none;
+      position: absolute;
+      z-index: 500;
+      border: 1px solid #eaeaec;
+      background: #fff;
+    }
+
+    .select-list .select-options .option label {
+      display: inline-block;
+      padding: 10px 30px 10px 10px;
+    }
+
+    .select-list .select-options .option:hover {
+      background: #eaeaec;
+    }
+
+    .select-list .select-options .option input {
+      margin: 10px 0 12px 15px;
+    }
+
+    .formclass {
+      width: 80%;
+      margin: auto;
+      padding: 10%;
+    }
+
+    .buttons {
+      width: 7em;
+      text-align: center;
+      background-color: #4e333b;
+      border-radius: 4px;
+      outline: none;
+      border: none;
+      cursor: pointer;
+      color: white;
+      padding: 1%;
+      font-size: 1.2em;
+
+    }
+
+    .list-group>.list-group {
+      display: none;
+      margin-bottom: 0;
+
+    }
+
+    .list-group-item:focus-within+.list-group {
+      display: block;
+
+    }
+
+    .list-group>.list-group-item {
+      border-radius: 0;
+      border-width: 1px 0 0 0;
+      color: black;
+    }
+
+    .list-group>.list-group-item:first-child {
+      border-top-width: 0;
+    }
+
+    .list-group>.list-group>.list-group-item {
+      padding-left: 2.5rem;
+    }
+
+    .btn_cust {
+      padding: 2%;
+      background: rgb(81, 82, 96);
+      color: #fff;
+      width: 100%;
+      border-radius: 2px;
+      outline: none;
+      border: none;
+      cursor: pointer;
+      transition: all ease 0.3s;
+    }
+
+    .btn_cust:focus {
+      outline: none;
+      border: none;
+
+    }
+
+    .myBtn {
+      height: 2em;
+      width: 2em;
+    }
+
+    .btn_close {
+      background: red;
+      width: 25%;
+    }
+  </style>
 </head>
 
 <body>
-    <div class="content">
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-md-8">
-                    <div class="card">
-                        <div class="header">
-                            <h4 class="title">Edit Profile</h4>
-                        </div>
-                        <div class="content">
-                            <form>
-                                <div class="row">
-                                    <div class="col-md-5">
-                                        <div class="form-group">
-                                            <label>Company (disabled)</label>
-                                            <input type="text" class="form-control" name="company" disabled placeholder="Company" value="IISP">
-                                        </div>
-                                    </div>
-                                    <div class="col-md-3">
-                                        <div class="form-group">
-                                            <label>Username</label>
-                                            <input type="text" class="form-control" name="username" placeholder="Username" value="rushita01" disabled>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <div class="form-group">
-                                            <label for="exampleInputEmail1">Email address</label>
-                                            <input type="email" name="email" class="form-control" placeholder="Email" value="vachhanirushi1234@gmail.com" disabled>
-                                        </div>
-                                    </div>
-                                </div>
 
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label>First Name</label>
-                                            <input type="text" name="fname" disabled class="form-control" placeholder="Company" value="Rushita">
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label>Last Name</label>
-                                            <input type="text" name="lname" disabled class="form-control" placeholder="Last Name" value="vachhani">
-                                        </div>
-                                    </div>
-                                </div>
-                                
-                                <div class="row">
-                                    <div class="col-md-4">
-                                        <div class="form-group">
-                                            <label>Gender</label>
-                                            <input type="text" disabled class="form-control" name="gender"  placeholder="Gender" value="female">
-                                        </div>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <div class="form-group">
-                                            <label>DOB</label>
-                                            <input type="text" disabled class="form-control" name="DOB" placeholder="Dateogbirth" value="1-2-1998">
-                                        </div>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <div class="form-group">
-                                            <label >Phone Number</label>
-                                            <input type="number" disabled name="phone" class="form-control" placeholder="Phone Number" value="98981456723">
-                                        </div>
-                                    </div>
-                                </div>
+  <!-- Navbar -->
+  <div class="main">
+    <nav class=" navbar navbar-expand-lg ">
+      <!-- Container wrapper -->
+      <div class="container-fluid">
+        <!-- Navbar brand -->
+        <a class="navbar-brand home" href="#">Teamify</a>
 
+        <!-- Toggle button -->
+        <button class="navbar-toggler" type="button" data-mdb-toggle="collapse"
+          data-mdb-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+          aria-label="Toggle navigation">
+          <i class="fas fa-bars"></i>
+        </button>
 
-
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <div class="form-group">
-                                            <label>Address</label>
-                                            <input type="text" name="address" disabled class="form-control" placeholder="Home Address" value="A-10 chandra society surat gujrat">
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="row">
-                                    <div class="col-md-4">
-                                        <div class="form-group">
-                                            <label>City</label>
-                                            <input type="text" class="form-control" disabled name="city" placeholder="City" value="surat">
-                                        </div>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <div class="form-group">
-                                            <label>State</label>
-                                            <input type="text" disabled class="form-control" placeholder="Country" name="state" value="Gujrat">
-                                        </div>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <div class="form-group">
-                                            <label>Pin Code</label>
-                                            <input type="number" disabled class="form-control"name="pincode" placeholder="Pin Code" value="123456">
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <div class="form-group">
-                                            <label>About Me</label>
-                                            <textarea rows="5" disabled class="form-control" placeholder="Here can be your description" value="Mike">I am working two hard</textarea>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                 <a  class="btn btn-info btn-fill pull-right" id="edit" onclick="update()">Edit</a> 
-                                <div class="clearfix"></div>
-                            </form>
-                        </div>  
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="card card-user">
-                        <div class="image">
-                            <img src="https://ununsplash.imgix.net/photo-1431578500526-4d9613015464?fit=crop&fm=jpg&h=300&q=75&w=400" alt="..."/>
-                        </div>
-                        <div class="content">
-                            <div class="author">
-                                 <a href="#">
-                                <img class="avatar border-gray" src="assets/img/faces/face-3.jpg" alt="..."/>
-
-                                  <h4 class="title">Rushita Vachhani<br />
-                                     <small>Rushita01</small>
-                                  </h4>
-                                </a>
-                            </div>
-                            <p class="description text-center"> "java is <br>
-                                                my favrate  <br>
-                                                language
-                            </p>
-                        </div>
-                        <hr>
-                        <div class="text-center">
-                            <button href="#" class="btn btn-simple"><i class="fa fa-facebook-square"></i></button>
-                            <button href="#" class="btn btn-simple"><i class="fa fa-twitter"></i></button>
-                            <button href="#" class="btn btn-simple"><i class="fa fa-google-plus-square"></i></button>
-
-                        </div>
-                    </div>
-                </div>
-
-            </div>
+        <!-- Collapsible wrapper -->
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <!-- Left links -->
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+              <a class="nav-link " aria-current="page" href="#">About us</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Log In</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Sign Up</a>
+            </li>
+            <!-- Navbar dropdown -->
+          </ul>
         </div>
+        <!-- Collapsible wrapper -->
+      </div>
+      <!-- Container wrapper -->
+    </nav>
+  </div>
+  <!-- Navbar -->
+
+  <ul class="nav nav-tabs mb-3" id="myTab0" role="tablist">
+    <li class="nav-item" role="presentation">
+      <button class="nav-link active" id="home-tab0" data-mdb-toggle="tab" data-mdb-target="#home0" type="button"
+        role="tab" aria-controls="home" aria-selected="true">Create meeting</button>
+    </li>
+    <li class="nav-item" role="presentation">
+      <button class="nav-link" id="profile-tab0" data-mdb-toggle="tab" data-mdb-target="#profile0" type="button"
+        role="tab" aria-controls="profile" aria-selected="false">Mininute of the meetings</button>
+    </li>
+
+  </ul>
+
+
+  <div class="tab-content" id="myTabContent0">
+
+    <div class="tab-pane fade show active" id="home0" role="tabpanel" aria-labelledby="home-tab0">
+      <!--Tab 1-->
+      <div class="container-fluid">
+
+        <div class="row">
+
+          <div class="col-md-8" style="padding: 3%;">
+            <div class="card" style="padding: 3%;">
+              <div class="header">
+                <h4 class="title">Edit Profile</h4>
+              </div>
+              <div class="content">
+                <form>
+                  <div class="row">
+                    <div class="col-md-5">
+                      <div class="form-group">
+                        <label>Company (disabled)</label>
+                        <input type="text" class="form-control" name="company" disabled placeholder="Company"
+                          value="IISP">
+                      </div>
+                    </div>
+                    <div class="col-md-3">
+                      <div class="form-group">
+                        <label>Username</label>
+                        <input type="text" class="form-control" name="username" placeholder="Username" value="rushita01"
+                          disabled>
+                      </div>
+                    </div>
+                    <div class="col-md-4">
+                      <div class="form-group">
+                        <label for="exampleInputEmail1">Email address</label>
+                        <input type="email" name="email" class="form-control" placeholder="Email"
+                          value="vachhanirushi1234@gmail.com" disabled>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="row">
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label>First Name</label>
+                        <input type="text" name="fname" disabled class="form-control" placeholder="Company"
+                          value="Rushita">
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label>Last Name</label>
+                        <input type="text" name="lname" disabled class="form-control" placeholder="Last Name"
+                          value="vachhani">
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="row">
+                    <div class="col-md-4">
+                      <div class="form-group">
+                        <label>Gender</label>
+                        <input type="text" disabled class="form-control" name="gender" placeholder="Gender"
+                          value="female">
+                      </div>
+                    </div>
+                    <div class="col-md-4">
+                      <div class="form-group">
+                        <label>DOB</label>
+                        <input type="text" disabled class="form-control" name="DOB" placeholder="Dateogbirth"
+                          value="1-2-1998">
+                      </div>
+                    </div>
+                    <div class="col-md-4">
+                      <div class="form-group">
+                        <label>Phone Number</label>
+                        <input type="number" disabled name="phone" class="form-control" placeholder="Phone Number"
+                          value="98981456723">
+                      </div>
+                    </div>
+                  </div>
+
+
+
+                  <div class="row">
+                    <div class="col-md-12">
+                      <div class="form-group">
+                        <label>Address</label>
+                        <input type="text" name="address" disabled class="form-control" placeholder="Home Address"
+                          value="A-10 chandra society surat gujrat">
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="row">
+                    <div class="col-md-4">
+                      <div class="form-group">
+                        <label>City</label>
+                        <input type="text" class="form-control" disabled name="city" placeholder="City" value="surat">
+                      </div>
+                    </div>
+                    <div class="col-md-4">
+                      <div class="form-group">
+                        <label>State</label>
+                        <input type="text" disabled class="form-control" placeholder="Country" name="state"
+                          value="Gujrat">
+                      </div>
+                    </div>
+                    <div class="col-md-4">
+                      <div class="form-group">
+                        <label>Pin Code</label>
+                        <input type="number" disabled class="form-control" name="pincode" placeholder="Pin Code"
+                          value="123456">
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="row">
+                    <div class="col-md-12">
+                      <div class="form-group">
+                        <label>About Me</label>
+                        <textarea rows="5" disabled class="form-control" placeholder="Here can be your description"
+                          value="Mike">I am working two hard</textarea>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="buttons" id="edit" onclick="update()">Edit</div>
+                  <div class="clearfix"></div>
+                </form>
+              </div>
+            </div>
+
+          </div>
+
+          <div class="col-md-4" style="padding-left: 12%">
+            <img src="../public/images/profilePic.svg" class="img-fluid " alt="..." width="80%"/>
+          </div>
+        </div>
+
+      </div>
+
     </div>
-    
+
+    <div class="tab-pane fade" id="profile0" role="tabpanel" aria-labelledby="profile-tab0">
+      <!--Tab2-->
+
+      <div class="container-fluid">
+
+        <div class="row">
+
+          <div class="col-md" style="padding: 8%;">
+            <div class="card" style="padding: 6%;">
+              <div class="header">
+                <h4 class="title">Change Password</h4>
+              </div>
+              <div class="content" style="padding: 6%;" >
+                <form>
+
+
+
+
+                  <div class="row">
+                    <div class="col-md-12">
+                      <div class="form-group">
+                        <label>New Password</label>
+                        <input type="text" name="new_password"  class="form-control" >
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="row">
+                    <div class="col-md-12">
+                      <div class="form-group">
+                        <label>Confirm Password</label>
+                        <input type="text" name="new_password"  class="form-control" >
+                      </div>
+                    </div>
+                  </div>
+
+
+
+                  <div class="buttons" id="edit" onclick="update()">Submit</div>
+                  <div class="clearfix"></div>
+                </form>
+              </div>
+            </div>
+
+          </div>
+
+          <div class="col-md-7">
+            <img src="../public/images/changePassword.svg" class="img-fluid " alt="..." />
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+    integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+  <script>
+    (function ($) {
+      $.fn.multiselect = function () {
+
+        var selector = this;
+        var options = $.extend({
+          onChange: function () { }
+        }, arguments[0] || {});
+
+        activate();
+
+        /////////
+
+        function activate() {
+
+          //events
+          $(selector).find('.title').on('click', function (e) {
+            $(this).parent().find('.select-options').toggle();
+          });
+
+          $(selector).find('input[type="checkbox"]').change(function (e) {
+            options.onChange.call(this);
+          });
+
+        }
+      };
+
+    }(jQuery));
+
+    $(document).ready(function () {
+      $('.select-list').multiselect({
+        onChange: updateTable
+      });
+    });
+
+    function updateTable() {
+      var checkboxValue = $(this).val();
+      var isChecked = $(this).is(':checked');
+
+    }
+  </script>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.3.0/mdb.min.js"></script>
 </body>
 
 </html>
