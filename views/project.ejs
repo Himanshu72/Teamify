@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>
+        <%= title %>
+    </title>
+
+    <%- include('common/links'); %>
+        <style>
+            .card {
+                margin: 1%;
+            }
+
+            .list-group {
+                text-align: left;
+            }
+
+            .list-group>.list-group {
+                display: none;
+                margin-bottom: 0;
+
+            }
+
+            .list-group-item:focus-within+.list-group {
+                display: block;
+            }
+
+            .list-group>.list-group-item {
+                border-radius: 0;
+                border-width: 1px 0 0 0;
+                color: black;
+            }
+
+            .list-group>.list-group-item:first-child {
+                border-top-width: 0;
+            }
+
+            .list-group>.list-group>.list-group-item {
+                padding-left: 2.5rem;
+                color: black;
+            }
+
+            .btn_cust {
+                padding: 2%;
+                background: rgb(81, 82, 96);
+                ;
+                color: #fff;
+                width: 100%;
+                border-radius: 2px;
+                outline: none;
+                border: none;
+                cursor: pointer;
+                transition: all ease 0.3s;
+            }
+
+            .btn_cust:focus {
+                outline: none;
+                border: none;
+
+            }
+
+            .toggle {
+                cursor: pointer;
+                border: 1px solid;
+                padding: 1%;
+            }
+
+            .btn_cust:hover {
+                background: #63434c;
+            }
+
+            html,
+            body {
+                position: relative;
+                height: 100%;
+            }
+
+            body {
+                background: #eee;
+                font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+                font-size: 14px;
+                color: #000;
+                margin: 0;
+                padding: 0;
+            }
+
+
+            .swiper-slide {
+                text-align: center;
+                font-size: 1.3em;
+                background: rgb(81, 82, 96);
+                color: white;
+                border-radius: 2px;
+
+                /* Center slide text vertically */
+                display: -webkit-box;
+                display: -ms-flexbox;
+                display: -webkit-flex;
+                display: flex;
+                -webkit-box-pack: center;
+                -ms-flex-pack: center;
+                -webkit-justify-content: center;
+                justify-content: center;
+                -webkit-box-align: center;
+                -ms-flex-align: center;
+                -webkit-align-items: center;
+                align-items: center;
+            }
+
+            /* @media only screen and (max-width: 600px) {
+          
+        } */
+        </style>
+</head>
+
+<body>
+    <%- include('common/navbar'); %>
+
+        <div class="swiper-container">
+            <div class="swiper-wrapper">
+                <div class="swiper-slide  "><i class="fas fa-laptop-house"></i> &nbsp;Workspace &nbsp;<i
+                        class="fas fa-angle-double-right"></i></div>
+                <div class="swiper-slide"> <i class="fas fa-user-plus"></i> &nbsp; Access Control &nbsp;<i
+                        class="fas fa-angle-double-right"></i></div>
+                <div class="swiper-slide"><i class="fas fa-eye"></i> &nbsp; Manage Task &nbsp;<i
+                        class="fas fa-angle-double-right"></i></div>
+                <div class="swiper-slide"><i class="fas fa-video"></i>&nbsp; Meet&nbsp;<i
+                        class="fas fa-angle-double-right"></i></div>
+                <div class="swiper-slide"> <i class="fas fa-comment-alt"></i> &nbsp; Communication </div>
+
+
+            </div>
+            <!-- Add Pagination -->
+
+        </div>
+        <br />
+        <div class="container-fluid">
+            <div class="row">
+
+
+                <div class="col-md-3">
+                    <div class="card text-center">
+                        <div class="card-header" style="background-color:#4e333b; color: white; font-size:22px"><i
+                                class="fas fa-bullhorn"></i> &nbsp;Announcement</div>
+                        <div class="card-body">
+
+
+                            <div class="form-group green-border-focus">
+                                <textarea class="form-control" id="exampleFormControlTextarea5" rows="3"></textarea>
+                            </div>
+
+
+
+                        </div>
+                        <div class="card-footer">
+                            <button class="btn_cust"> <i class="fas fa-envelope-open-text"></i> Notify Status </button>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="col-md-3">
+                    <div class="card text-center">
+                        <div class="card-header" style="background-color:#4e333b; color: white; font-size:22px"><i
+                                class="fas fa-tasks"></i> &nbsp;Group</div>
+                        <div class="card-body">
+
+                            <p class="card-text">
+
+                            <div class="row" style="text-align: left;">
+                                <div class="col col-12">
+
+                                    <a data-mdb-toggle="collapse" href="#collapseExample" role="button"
+                                        aria-expanded="false" aria-controls="collapseExample" class="parent" id="p01"
+                                        style=" background-color:#cc3300; color:white; padding: 4%; width: 100%; outline: none; ">
+                                        Main Task
+                                    </a>
+                                    <div class="collapse mt-3" id="collapseExample">
+                                        <ul class="list-group list-group-flush">
+                                            <li class="list-group-item"> <i class="fas fa-check toggle"
+                                                    data-parent="p01" data-status="1" id="s01"
+                                                    style="color: green;"></i> SubTask</li>
+                                            <li class="list-group-item"> <i class="fas fa-spinner toggle"
+                                                    data-parent="p01" data-status="0" id="s102"
+                                                    style="color: #cc3300;"></i> SubTask</li>
+
+                                        </ul>
+                                    </div>
+                                </div>
+                                <br /> <br /> <br />
+                                <div class="col col-12">
+
+                                    <a data-mdb-toggle="collapse" href="#collapseExample2" role="button"
+                                        aria-expanded="false" aria-controls="collapseExample2" class="parent" id="p02"
+                                        style=" background-color:#cc3300; color:white; padding: 4%; width: 100%; outline: none; ">
+                                        Main Task 2
+                                    </a>
+                                    <div class="collapse mt-3" id="collapseExample2">
+                                        <ul class="list-group list-group-flush">
+                                            <li class="list-group-item"> <i class="fas fa-check toggle"
+                                                    data-parent="p02" data-status="1" id="s99"
+                                                    style="color: green;"></i> SubTask</li>
+                                            <li class="list-group-item"> <i class="fas fa-spinner toggle"
+                                                    data-parent="p02" data-status="0" id="s69"
+                                                    style="color: #cc3300;"></i> SubTask</li>
+
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            </p>
+
+
+
+                        </div>
+                        <div class="card-footer">
+                            <button class="btn_cust"> <i class="fas fa-envelope-open-text"></i> Notify Status</button>
+                        </div>
+
+                    </div>
+                </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                <!-- 
+    <div class="col-md-3">
+    <div class="card text-center  ">
+      <div class="card-header" style="background-color:  rgb(81,82,96); color: white; font-size:22px">Backend</div>
+      <div class="card-body">
+        <p class="card-text">
+          With supporting text below as a natural lead-in to additional content. Special title treatment Special title treatment Special title treatment</p>
+      </div>
+      <div class="card-footer" style="background-color:  #9a7781db; color: white">2 days ago</div>
+    </div>
+    </div> -->
+
+            </div>
+        </div>
+
+        <%- include('common/footer'); %>
+            <script>
+
+
+
+                $(document).ready(function () {
+                    $('.stepper').mdbStepper();
+                })
+
+                var swiper = new Swiper('.swiper-container', {
+                    slidesPerView: 3,
+                    spaceBetween: 30,
+                    pagination: {
+                        el: '.swiper-pagination',
+                        clickable: true,
+                    },
+                    loop: true
+                });
+
+                document.querySelectorAll(".toggle").forEach((ele) => {
+                    ele.addEventListener("click", (e) => {
+
+                        let target = document.getElementById(e.target.id)
+                        if (e.target.dataset.status == 0) {
+                            e.target.dataset = 1;
+                            target.classList.remove("fa-spinner");
+                            target.classList.add("fa-check")
+                            target.style.color = "green";
+                            target.dataset.status = 1;
+                        } else {
+                            target.dataset = 0;
+                            target.classList.remove("fa-check");
+                            target.classList.add("fa-spinner");
+                            target.style.color = "#cc3300";
+                            target.dataset.status = 0;
+                        }
+                        let childs = document.querySelectorAll(`*[data-parent='${target.dataset.parent}']`);
+
+                        if (hander(childs)) {
+                            document.getElementById(target.dataset.parent).style.background = "#4BB543";
+                        } else {
+                            document.getElementById(target.dataset.parent).style.background = "#cc3300";
+                        }
+
+                    });
+                })
+
+                function hander(childs) {
+
+                    for (let child of childs) {
+                        console.log(child.dataset.status)
+                        if (child.dataset.status == 0) {
+
+                            return false;
+                        }
+
+                    }
+                    return true;
+                }
+
+                document.querySelectorAll(".btn_cust").forEach((ele) => {
+
+                    ele.addEventListener("click", (e) => {
+                        swal("Good job!", "Notification has been sent", "success");
+                    });
+                })
+
+            </script>
+             <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.css" />
+</body>
+
+</html>

@@ -32,10 +32,24 @@ router.get("/dashboard/:id",(req,res)=>{
   res.render('dashboard',{title:"dashboard"});
 });
 
+router.get("/project",(req,res)=>{
+
+  res.render('project',{title:"project"});
+});
+
 
 router.get("/test",(req,res)=>{
 
   res.render('test',{title:"test"});
 });
 
+router.get("/meeting",(req,res)=>{
+
+  res.render('meeting',{title:"meeting"});
+});
+
+router.get("/accessControl",(req,res)=>{
+
+  res.render('accessControl',{title:"meeting"});
+});
 module.exports = router;
