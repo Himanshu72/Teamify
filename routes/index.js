@@ -50,6 +50,14 @@ router.get("/meeting",(req,res)=>{
 
 router.get("/accessControl",(req,res)=>{
 
-  res.render('accessControl',{title:"meeting"});
+  res.render('accessControl',{title:"accessControl"});
+});
+router.get("/notification",(req,res)=>{
+
+  res.render('notification',{title:"notification"});
+});
+router.get("/manageTask",(req,res)=>{
+
+  res.render('Manage_Task',{title:"manageTask"});
 });
 module.exports = router;

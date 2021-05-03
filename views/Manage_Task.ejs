@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    
+    <%- include('common/links'); %>
+    <link href="/stylesheets/reviewstyle.css" rel="stylesheet" />
+    <style>
+        .icon_btn {
+            padding: 2%;
+            background: transparent;
+            border: 1px solid;
+            width: 35px;
+        }
+
+        .danger {
+            border-color: rgb(204, 54, 54);
+            color: rgb(204, 54, 54);
+        }
+
+        .warn {
+            border-color: rgb(213, 224, 53);
+            color: rgb(213, 224, 53);
+        }
+
+        .select-list {
+            font-family: 'Open Sans', sans-serif;
+            color: #555;
+            background: #fff;
+        }
+
+        .select-list .title {
+            display: inline-block;
+            cursor: pointer;
+            background: #fff;
+            border: 1px solid #eaeaec;
+            border-radius: 5px;
+            padding: 10px 15px 10px 15px;
+        }
+
+        .select-list .title::after {
+            display: inline-block;
+            content: '>';
+            margin-left: 15px;
+            font-size: 11px;
+            transform: rotate(90deg) scale(1, 2);
+        }
+
+        .select-list .title:hover {
+            background: #eaeaec;
+        }
+
+        .select-list .select-options {
+            margin-top: 5px;
+            display: none;
+            position: absolute;
+            z-index: 500;
+            border: 1px solid #eaeaec;
+            background: #fff;
+        }
+
+        .select-list .select-options .option label {
+            display: inline-block;
+            padding: 10px 30px 10px 10px;
+        }
+
+        .select-list .select-options .option:hover {
+            background: #eaeaec;
+        }
+
+        .select-list .select-options .option input {
+            margin: 10px 0 12px 15px;
+        }
+
+        .formclass {
+            width: 80%;
+            margin: auto;
+            padding: 10%;
+        }
+
+        .buttons {
+            width: 40%;
+            background-color: #4e333b;
+            border-radius: 4px;
+            outline: none;
+            border: none;
+            cursor: pointer;
+            color: white;
+            padding: 1%;
+            font-size: 1.2em;
+
+        }
+
+        .list-group>.list-group {
+            display: none;
+            margin-bottom: 0;
+
+        }
+
+        .list-group-item:focus-within+.list-group {
+            display: block;
+
+        }
+
+        .list-group>.list-group-item {
+            border-radius: 0;
+            border-width: 1px 0 0 0;
+            color: black;
+        }
+
+        .list-group>.list-group-item:first-child {
+            border-top-width: 0;
+        }
+
+        .list-group>.list-group>.list-group-item {
+            padding-left: 2.5rem;
+        }
+
+        .option {
+            font-size: 0.8em;
+            text-align: left;
+        }
+    </style>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+
+        window.onresize = doALoadOfStuff;
+        google.charts.load('current', { 'packages': ['corechart'] });
+        google.charts.setOnLoadCallback(drawChart);
+
+        function doALoadOfStuff() {
+            google.charts.load('current', { 'packages': ['corechart'] });
+            google.charts.setOnLoadCallback(drawChart);
+
+        }
+        function drawChart() {
+
+            var data = google.visualization.arrayToDataTable([
+                ['Task', 'Hours per Day'],
+                ['Work', 11],
+                ['Eat', 2],
+                ['Commute', 2],
+                ['Watch TV', 2],
+                ['Sleep', 7]
+            ]);
+
+            var options = {
+                title: 'My Daily Activities',
+                height: window.innerHeight - 100,
+                width: window.innerWidth - 100,
+
+            };
+
+            var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+
+            chart.draw(data, options);
+        }
+    </script>
+
+  </head>
+  <body>
+    <%- include('common/navbar'); %>
+ 
+    <ul class="nav nav-tabs mb-3" id="myTab0" role="tablist">
+        <li class="nav-item" role="presentation">
+            <button class="nav-link active" id="home-tab0" data-mdb-toggle="tab" data-mdb-target="#home0" type="button"
+                role="tab" aria-controls="home" aria-selected="true">All tasks</button>
+        </li>
+        <li class="nav-item" role="presentation">
+            <button class="nav-link" id="profile-tab0" data-mdb-toggle="tab" data-mdb-target="#profile0" type="button"
+                role="tab" aria-controls="profile" aria-selected="false">Graphical view</button>
+        </li>
+
+    </ul>
+
+
+    <div class="tab-content" id="myTabContent0">
+        <div class="tab-pane fade show active" id="home0" role="tabpanel" aria-labelledby="home-tab0">
+            <div class="myclass">
+                <div class="mainclass">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <div class="card text-center">
+                                <div class="card-body">
+                                    <div class="closeB">
+                                        <div class="row btn_group" style="text-align: center; margin: auto;">
+                                            <div class="col">
+
+
+                                                <button type="button" class="icon_btn warn" data-mdb-toggle="modal"
+                                                    data-mdb-target="#exampleModal" style="font-size: 0.8em;;">
+                                                    <i class="fas fa-edit"></i>
+                                                </button>
+
+                                                <button class="icon_btn danger"><i
+                                                        class="fas fa-trash-alt"></i></button>
+                                            </div>
+                                        </div> <br>
+                                        <h5 class="card-title">Task 1 heading </h5>
+
+
+
+
+                                    </div>
+                                    <button class="mybutton" type="button" data-mdb-toggle="collapse"
+                                        data-mdb-target="#collapseExample" aria-expanded="false"
+                                        aria-controls="collapseExample">
+                                        Description
+                                    </button> <br />
+                                    <!-- Provides extra visual weight and identifies the primary action in a set of buttons -->
+                                    <p class="card-text collapse mt-3" id="collapseExample">
+                                        Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry
+                                        richardson ad
+                                        squid. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred
+                                        nesciunt
+                                        sapiente ea proident.
+                                    </p>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="col-md-3">
+                            <div class="card text-center">
+                                <div class="card-body">
+                                    <h5 class="card-title">Subtasks in it &nbsp;
+
+                                        <!--Modal for subtask-->
+                                        <button type="button" class="myBtn" data-mdb-toggle="modal"
+                                            data-mdb-target="#exampleModal2"
+                                            style="background-color:#ff636b;color:white;font-size: 0.8em; z-index:10;">
+                                            <i class="fas fa-plus"></i>
+                                        </button>
+
+                                    </h5>
+                                    <div class="dropdown">
+                                        <div class="select-list" style="text-align: center;">
+                                            <div class="title">Subtask</div>
+                                            <div class="select-options" style="text-align: left;">
+                                                <div class="option">
+                                                    <div class="row">
+                                                        <div class="col col-3">
+                                                            <input type="checkbox" name="vehicle" id="option1"
+                                                                value="" />
+                                                        </div>
+                                                        <div class="col col-3">
+                                                            <label for="option1">Platform</label>
+                                                        </div>
+                                                        <div class="col col-3">
+                                                            <button type="button" class="icon_btn warn"
+                                                                data-mdb-toggle="modal" data-mdb-target="#exampleModal2"
+                                                                style=" font-size: 0.8em;;">
+                                                                <i class="fas fa-edit"></i>
+                                                            </button>
+                                                        </div>
+                                                        <div class="col col-3">
+                                                            <button class="icon_btn danger"><i
+                                                                    class="fas fa-trash-alt"></i></button>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                                <div class="option">
+                                                    <div class="row">
+                                                        <div class="col col-3">
+                                                            <input type="checkbox" name="vehicle" id="option2" />
+                                                        </div>
+                                                        <div class="col col-3">
+                                                            <label for="option2">DeviceID</label>
+                                                        </div>
+                                                        <div class="col col-3">
+                                                            <button class="icon_btn warn"><i class="fas fa-edit"></i>
+                                                            </button>
+                                                        </div>
+                                                        <div class="col col-3">
+                                                            <button class="icon_btn danger"><i
+                                                                    class="fas fa-trash-alt"></i></button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="option">
+                                                    <div class="row">
+                                                        <div class="col col-3">
+                                                            <input type="checkbox" name="vehicle" id="option4" />
+                                                        </div>
+                                                        <div class="col col-3">
+                                                            <label for="option4">Option</label>
+                                                        </div>
+                                                        <div class="col col-3">
+                                                            <button class="icon_btn warn"><i class="fas fa-edit"></i>
+                                                            </button>
+                                                        </div>
+                                                        <div class="col col-3">
+                                                            <button class="icon_btn danger"><i
+                                                                    class="fas fa-trash-alt"></i></button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <div class="col-md-3">
+                            <div class="card text-center">
+
+                                <div class="card-body">
+                                    <h5 class="card-title">Members of the task</h5>
+
+                                    <div class="dropdown">
+                                        <button class="mybutton dropdown-toggle" type="button" id="dropdownMenuButton"
+                                            data-mdb-toggle="dropdown" aria-expanded="false">
+                                            Members
+                                        </button>
+                                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                            <li><a class="dropdown-item" href="#">Action</a></li>
+                                            <li><a class="dropdown-item" href="#">Another action</a></li>
+                                            <li><a class="dropdown-item" href="#">Something else here</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="col-md-3  ">
+                            <div class="card text-center">
+                                <div class="card-body"
+                                    style="border-radius: 50px; border-left:5px solid rgb(202, 73, 73); ">
+                                    <h5 class="card-title">Deadline</h5>
+                                    <p class="card-text">
+                                        13 August 2021
+                                    </p>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="mainclass">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <div class="card text-center">
+                                <div class="card-body">
+                                    <h5 class="card-title">Task 1 heading</h5>
+                                    <button class="mybutton" type="button" data-mdb-toggle="collapse"
+                                        data-mdb-target="#collapseExample1" aria-expanded="false"
+                                        aria-controls="collapseExample">
+                                        Description
+                                    </button> <br />
+                                    <!-- Provides extra visual weight and identifies the primary action in a set of buttons -->
+                                    <p class="card-text collapse mt-3" id="collapseExample1">
+                                        Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry
+                                        richardson ad
+                                        squid. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred
+                                        nesciunt
+                                        sapiente ea proident.
+                                    </p>
+
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="col-md-3">
+
+                            <div class="card text-center">
+
+                                <div class="card-body">
+                                    <h5 class="card-title">Subtasks in it
+
+                                    </h5>
+
+                                    <div class="dropdown">
+                                        <button class="mybutton dropdown-toggle" type="button" id="dropdownMenuButton"
+                                            data-mdb-toggle="dropdown" aria-expanded="false">
+                                            Subtasks
+                                        </button>
+                                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                            <li><a class="dropdown-item" href="#">Action</a></li>
+                                            <li><a class="dropdown-item" href="#">Another action</a></li>
+                                            <li><a class="dropdown-item" href="#">Something else here</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <div class="col-md-3">
+                            <div class="card text-center">
+
+                                <div class="card-body">
+                                    <h5 class="card-title">Members of the task</h5>
+
+                                    <div class="dropdown">
+                                        <button class="mybutton dropdown-toggle" type="button" id="dropdownMenuButton"
+                                            data-mdb-toggle="dropdown" aria-expanded="false">
+                                            Members
+                                        </button>
+                                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                            <li><a class="dropdown-item" href="#">Action</a></li>
+                                            <li><a class="dropdown-item" href="#">Another action</a></li>
+                                            <li><a class="dropdown-item" href="#">Something else here</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="card text-center">
+                                <div class="card-body">
+                                    <h5 class="card-title">Deadline</h5>
+                                    <p class="card-text">
+                                        13 August 2021
+                                    </p>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <!--Modal for subtask-->
+                <button type="button" class="myBtn" data-mdb-toggle="modal" data-mdb-target="#exampleModal"
+                    style="background-color:#ff636b;color:white;font-size: 1.5em;; position: fixed; bottom: 6%;left: 4%; z-index:10; ">
+                    <i class="fas fa-plus"></i>
+                </button>
+
+                <!--Modal for main task-->>
+                <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                    aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Add Task</h5>
+
+                            </div>
+                            <div class="modal-body">
+                                <form>
+
+                                    <!-- meeting title input -->
+                                    <div class="form-outline mb-4">
+                                        <input type="text" id="meetingTitle" class="form-control" name="meetingTitle" />
+                                        <label class="form-label" for="meetingTitle">Name of the task</label>
+                                    </div>
+
+                                    <!-- meeting description input -->
+                                    <div class="form-outline mb-4">
+                                        <input type="textarea" id="meetingDescription" class="form-control textArea"
+                                            name="meetingDescription" />
+                                        <label class="form-label" for="meetingDescription">Task Description </label>
+                                    </div>
+
+
+
+
+
+
+                                    <!-- Submit button -->
+                                    <button type="submit" class="btn_cust btn-primary btn-block mb-4">Submit</button>
+
+
+                                </form>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn_cust btn_close btn-danger" data-mdb-dismiss="modal">
+                                    Close
+                                </button>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+
+
+                <!--Modal for sub task-->>
+                <div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModal2Label"
+                    aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModal2Label">Add Task</h5>
+
+                            </div>
+                            <div class="modal-body">
+                                <form>
+
+                                    <!-- meeting title input -->
+                                    <div class="form-outline mb-4">
+                                        <input type="text" id="meetingTitle" class="form-control" name="meetingTitle" />
+                                        <label class="form-label" for="meetingTitle">Name of the sub task</label>
+                                    </div>
+
+
+
+                                    <!-- date input -->
+
+
+                                    <!-- Submit button -->
+                                    <button type="submit" class="btn_cust btn-primary btn-block mb-4">Submit</button>
+
+
+                                </form>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn_cust btn_close btn-danger" data-mdb-dismiss="modal">
+                                    Close
+                                </button>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+
+
+
+
+            </div>
+
+
+        </div>
+
+
+
+        <div class="tab-pane fade" id="profile0" role="tabpanel" aria-labelledby="profile-tab0">
+            <div class="row">
+
+                <div class="col col-md-12">
+                    <div id="piechart" style="width: 1000px; height: 500px;"></div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+    </div>
+
+    <%- include('common/footer'); %>
+    <script>
+        (function ($) {
+            $.fn.multiselect = function () {
+
+                var selector = this;
+                var options = $.extend({
+                    onChange: function () { }
+                }, arguments[0] || {});
+
+                activate();
+
+                /////////
+
+                function activate() {
+
+                    //events
+                    $(selector).find('.title').on('click', function (e) {
+                        $(this).parent().find('.select-options').toggle();
+                    });
+
+                    $(selector).find('input[type="checkbox"]').change(function (e) {
+                        options.onChange.call(this);
+                    });
+
+                }
+            };
+
+        }(jQuery));
+
+        $(document).ready(function () {
+            $('.select-list').multiselect({
+                onChange: updateTable
+            });
+        });
+
+        function updateTable() {
+            var checkboxValue = $(this).val();
+            var isChecked = $(this).is(':checked');
+
+        }
+    </script>
+
+  </body>
+  </html>
+
