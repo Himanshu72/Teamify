@@ -8,7 +8,34 @@ const notify=require("../utility/notifications");
 
 router.get('/', async function (req, res, next) {
 
-  res.render('index', { title: 'Teamify' });
+  res.render('index',{title:"Home"});
+});
+
+router.get("/login",(req,res)=>{
+
+  res.render('login',{title:"login"});
+});
+
+router.get("/signup",(req,res)=>{
+
+  res.render('signup',{title:"signup"});
+});
+
+router.get("/profile",(req,res)=>{
+
+  res.render('profile',{title:"profile"});
+});
+
+
+router.get("/dashboard/:id",(req,res)=>{
+
+  res.render('dashboard',{title:"dashboard"});
+});
+
+
+router.get("/test",(req,res)=>{
+
+  res.render('test',{title:"test"});
 });
 
 module.exports = router;

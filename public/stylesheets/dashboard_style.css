@@ -1,12 +1,16 @@
-.card{
-    max-width: 100%;
-    height: auto;
+.card {
+  max-width: 100%;
+  height: auto;
 }
 
-#txtshd{
-    color: rgb(165, 34, 34);
+#txtshd {
+  color: rgb(165, 34, 34);
   text-shadow: 2px 2px 4px #000000;
 }
-.textArea{
+.textArea {
   height: 100px;
+}
+.card-img-top {
+  width: 100%;
+  height: 200px;
 }

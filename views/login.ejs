@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <%- include('common/links'); %>
+    <style>
+        @media only screen and (max-width: 500px) {
+           .mybutton{
+             width: 100%;
+           }
+         } 
+       </style>      
+       
+       <link href="/stylesheets/login_style.css" rel="stylesheet" />
+
+  
+  </head>
+  <body>
+    <%- include('common/navbar'); %>
+    <div class="containering">
+
+        <div class="row">
+    
+          <div class="col-md">
+    
+            <form class="formcls ">
+              <div class="mainheading">
+                <h1> Log In</h1>
+              </div>
+    
+    
+              <div class="form-outline mb-4">
+                <input type="email" id="email" class="form-control" name="email"/>
+                <label class="form-label" for="email">Email address</label>
+              </div>
+    
+    
+              <div class="form-outline mb-4">
+                <input type="password" id="password" class="form-control" name="password"/>
+                <label class="form-label" for="password">Password</label>
+              </div>
+    
+    
+              <div class="row mb-4">
+                
+    
+                <div class="col">
+    
+                  <a href="#!">Forgot password?</a>
+                </div>
+              </div>
+    
+    
+              <button type="submit" class="btn btn-primary btn-block mb-4 mybutton">Sign in</button>
+    
+    
+              <div class="text-center">
+                <p>Not a member? <a href="#">Register</a></p>
+              </div>
+            </form>
+    
+          </div>
+          <div class="col-md">
+            <img src="/images/login_image.svg" class="img-fluid " alt="..." />
+          </div>
+        </div>
+      </div>
+    <%- include('common/footer'); %>
+  </body>
+  </html>
+
+  

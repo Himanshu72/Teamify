@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    
+    <%- include('common/links'); %>
+    <link href="/stylesheets/signup_style.css" rel="stylesheet" />
+
+
+  </head>
+  <body>
+    <%- include('common/navbar'); %>
+       
+  <div class="containering">
+    
+    <div class="row" >
+
+      <div class="col-md">
+       
+        <form class="formcls ">
+          <div class="mainheading">
+            <h1> Sign up</h1>
+          </div>
+      
+
+          <div class="form-outline mb-4">
+            <label class="form-label" for="username">username</label>
+            <input type="text" id="username" class="form-control" name="username" />
+            
+          </div>
+
+
+          <div class="form-outline mb-4">
+            <label class="form-label" for="phonenumber">Phone Number</label>
+            <input type="number" id="phonenumber" class="form-control" name="phonenumber"/>
+            
+          </div>
+
+          <div class="form-outline mb-4">
+            <label class="form-label" for="age">Age</label>
+            <input type="number" id="age" class="form-control"name="age" />
+            
+          </div>
+
+          <br>
+
+          <div class="form-check form-check-inline">
+            <label class="form-check-label" for="inlineRadio1">Gender : </label>
+          </div>
+          
+          <div class="form-check form-check-inline">
+            <input
+              class="form-check-input"
+              type="radio"
+              name="gender"
+              id="inlineRadio1"
+              value="male"
+            />
+            <label class="form-check-label" for="inlineRadio1">male</label>
+          </div>
+          
+          <div class="form-check form-check-inline">
+            <input
+              class="form-check-input"
+              type="radio"
+              name="gender"
+              id="inlineRadio2"
+              value="female"
+            />
+            <label class="form-check-label" for="inlineRadio2">female</label>
+          </div>
+          
+          <br>
+          <br>
+          <br>
+
+          <div class="form-outline mb-4">
+            <label class="form-label" for="email">Email address</label>
+            <input type="email" id="email" class="form-control" name="email" />
+            
+          </div>
+
+          <div class="form-outline mb-4">
+            <label class="form-label" for="password">Password</label>
+            <input type="password" id="password" class="form-control" name="password" />
+            
+          </div>
+
+          <div class="form-outline mb-4">
+            <label class="form-label" for="confirm_password">Confirm Password</label>
+            <input type="password" id="confirm_password" class="form-control" name="confirm_password"/>
+            
+          </div>
+
+
+
+          <button type="submit" class="btn btn-primary btn-block mb-4 mybutton">Sign Up</button>
+
+        </form>
+
+      </div>
+      <div class="col-md" >
+        <img src="/images/signup.svg" style="position: fixed;" class="img-fluid myImage" alt="..." />
+      </div>
+    </div>
+  </div>
+    <%- include('common/footer'); %>
+  </body>
+  </html>
+
+  
