@@ -120,6 +120,27 @@
             font-size: 0.8em;
             text-align: left;
         }
+        .swiper-slide {
+                text-align: center;
+                font-size: 1.3em;
+                background: rgb(81, 82, 96);
+                color: white;
+                border-radius: 2px;
+
+                /* Center slide text vertically */
+                display: -webkit-box;
+                display: -ms-flexbox;
+                display: -webkit-flex;
+                display: flex;
+                -webkit-box-pack: center;
+                -ms-flex-pack: center;
+                -webkit-justify-content: center;
+                justify-content: center;
+                -webkit-box-align: center;
+                -ms-flex-align: center;
+                -webkit-align-items: center;
+                align-items: center;
+            }
     </style>
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <script type="text/javascript">
@@ -160,6 +181,7 @@
   </head>
   <body>
     <%- include('common/navbar'); %>
+    <%- include('common/sidenav'); %>
  
     <ul class="nav nav-tabs mb-3" id="myTab0" role="tablist">
         <li class="nav-item" role="presentation">
@@ -429,7 +451,7 @@
                     <i class="fas fa-plus"></i>
                 </button>
 
-                <!--Modal for main task-->>
+                <!--Modal for main task-->
                 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
                     aria-hidden="true">
                     <div class="modal-dialog">
@@ -478,7 +500,7 @@
 
 
 
-                <!--Modal for sub task-->>
+                <!--Modal for sub task-->
                 <div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModal2Label"
                     aria-hidden="true">
                     <div class="modal-dialog">
@@ -586,7 +608,22 @@
 
         }
     </script>
+ <script>
+    $(document).ready(function () {
+        $('.stepper').mdbStepper();
+    })
 
+    var swiper = new Swiper('.swiper-container', {
+        slidesPerView: 3,
+        spaceBetween: 30,
+        pagination: {
+            el: '.swiper-pagination',
+            clickable: true,
+        },
+        loop: true
+    });
+</script>
+<link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.css" />
   </body>
   </html>
 
