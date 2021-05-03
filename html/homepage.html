@@ -1,160 +1,167 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-     <!-- Font Awesome -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" rel="stylesheet"/>
-    
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" rel="stylesheet"/>
-    <!-- MDB -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.3.0/mdb.min.css" rel="stylesheet"/>
-    <link href="../public/stylesheets/navbar.css" rel="stylesheet"/>
-    <link href="../public/stylesheets/style.css" rel="stylesheet"/>
-    <title>Document</title>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Font Awesome -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" rel="stylesheet" />
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" rel="stylesheet" />
+  <!-- MDB -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.3.0/mdb.min.css" rel="stylesheet" />
+  <link href="../public/stylesheets/navbar.css" rel="stylesheet" />
+  <link href="../public/stylesheets/style.css" rel="stylesheet" />
+  <title>Document</title>
 </head>
+
 <body>
-<!-- Navbar -->
-<div class="main">
-<nav class=" navbar navbar-expand-lg ">
-  <!-- Container wrapper -->
-  <div class="container-fluid">
-    <!-- Navbar brand -->
-    <a class="navbar-brand home" href="#">Teamify</a>
+  <!-- Navbar -->
+  <div class="main">
+    <nav class=" navbar navbar-expand-lg ">
+      <!-- Container wrapper -->
+      <div class="container-fluid">
+        <!-- Navbar brand -->
+        <a class="navbar-brand home" href="#">Teamify</a>
 
-    <!-- Toggle button -->
-    <button
-      class="navbar-toggler"
-      type="button"
-      data-mdb-toggle="collapse"
-      data-mdb-target="#navbarSupportedContent"
-      aria-controls="navbarSupportedContent"
-      aria-expanded="false"
-      aria-label="Toggle navigation"
-    >
-      <i class="fas fa-bars"></i>
-    </button>
+        <!-- Toggle button -->
+        <button class="navbar-toggler" type="button" data-mdb-toggle="collapse"
+          data-mdb-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+          aria-label="Toggle navigation">
+          <i class="fas fa-bars"></i>
+        </button>
 
-    <!-- Collapsible wrapper -->
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <!-- Left links -->
-      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-        <li class="nav-item">
-          <a class="nav-link " aria-current="page" href="#about">About us</a>
-        </li>
-        
-        <li class="nav-item">
-          <a class="nav-link" href="#">Log In</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Sign Up</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link " aria-current="page" href="#">Log Out</a>
-          <li class="nav-item">
-          <a class="nav-link " aria-current="page" href="#">Profile</a>
-        </li>
-        </li>
-        <!-- Navbar dropdown -->    
-      </ul>
-    </div>
-    <!-- Collapsible wrapper -->
+        <!-- Collapsible wrapper -->
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <!-- Left links -->
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+              <a class="nav-link " aria-current="page" href="#about">About us</a>
+            </li>
+
+
+            <li class="nav-item">
+              <a class="nav-link " aria-current="page" href="#">Profile</a>
+            </li>
+
+            <!-- Navbar dropdown -->
+          </ul>
+
+          <!-- Search form -->
+
+
+          <button class="btn " type="button" data-mdb-ripple-color="dark" style="background-color:whitesmoke;">
+            Login
+          </button>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          <button class="btn " type="button" data-mdb-ripple-color="dark" style="background-color:whitesmoke;">
+            Logout
+          </button>
+
+
+
+
+
+        </div>
+        <!-- Collapsible wrapper -->
+      </div>
+      <!-- Container wrapper -->
+    </nav>
   </div>
-  <!-- Container wrapper -->
-</nav>
-</div>
-<!-- Navbar -->
-    <!-- MDB -->
-<header>
-<div class="row" style="height: 100vh; overflow: hidden; text-align: center;">
-    <div class="col-md-4" id="textid">
+  <!-- Navbar -->
+  <!-- MDB -->
+  <header>
+    <div class="row" style="height: 100vh; overflow: hidden; text-align: center;">
+      <div class="col-md-4" id="textid">
         <div class="row">
-            <h2 id="maintext"></h2>
-            <div>
-                <a href="/login" class="btn btn-lg" id="prebtn"> Log In </a>&nbsp;&nbsp;
-                <a href="/signup" class="btn btn-lg" id="btn"> Sign Up </a> 
-            </div>  
+          <h2 id="maintext"></h2>
+          <div>
+            <a href="/login" class="btn btn-lg" id="prebtn"> Log In </a>&nbsp;&nbsp;
+            <a href="/signup" class="btn btn-lg" id="btn"> Sign Up </a>
+          </div>
         </div>
         <div class="row">
           <p id="type"> </p>
         </div>
+      </div>
+      <div class="col-md-8">
+        <img src="../public/images/main5.svg " id="mainimg" alt="image" style="transform: scale(1.4);">
+      </div>
     </div>
-    <div class="col-md-8" >
-          <img src="../public/images/main5.svg " id="mainimg" alt="image" style="transform: scale(1.4);" >
+  </header>
+  <!-- Section: Features v.1 -->
+  <section class="text-center my-5" id="about">
+
+    <!-- Section heading -->
+    <h2 class="h1-responsive font-weight-bold my-5">Why is it so great?</h2>
+    <!-- Section description -->
+    <p class="lead grey-text w-responsive mx-auto mb-5">
+      You can use this tool to boost collaboration and foster communication. Teamify tells you what's being worked on,
+      who's working on what, and where something is in a process. The team can be managed by the team leader and the
+      managers can manage different projects, it can also be used for personal use - more like a list-making/to-do tool.
+      Projects progress can be tracked and deadlines can be set. It makes assigning tasks and managing the team much
+      easier. Make team management a smooth experience with Teamify.
+    </p>
+
+    <!-- Grid row -->
+    <div class="row">
+
+      <!-- Grid column -->
+      <div class="col-md-4">
+
+        <img src="../public/images/meet.svg" width="70%" class="image-fluid">
+        <h5 class="font-weight-bold my-4">Meet</h5>
+        <p class="grey-text mb-md-0 mb-5">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reprehenderit
+          maiores aperiam minima assumenda deleniti hic.
+        </p>
+
+      </div>
+      <!-- Grid column -->
+
+      <!-- Grid column -->
+      <div class="col-md-4">
+
+        <img src="../public/images/collab.svg" width="70%" class="image-fluid">
+        <h5 class="font-weight-bold my-4">collaboration</h5>
+        <p class="grey-text mb-md-0 mb-5">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reprehenderit
+          maiores aperiam minima assumenda deleniti hic.
+        </p>
+
+      </div>
+      <!-- Grid column -->
+
+      <!-- Grid column -->
+      <div class="col-md-4">
+
+        <img src="../public/images/manage.svg" width="70%" class="image-fluid">
+        <h5 class="font-weight-bold my-4">Manage</h5>
+        <p class="grey-text mb-0">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reprehenderit maiores
+          aperiam minima assumenda deleniti hic.
+        </p>
+
+      </div>
+      <!-- Grid column -->
+
     </div>
-</div>
-</header>
-<!-- Section: Features v.1 -->
-<section class="text-center my-5" id="about">
+    <!-- Grid row -->
 
-  <!-- Section heading -->
-  <h2 class="h1-responsive font-weight-bold my-5">Why is it so great?</h2>
-  <!-- Section description -->
-  <p class="lead grey-text w-responsive mx-auto mb-5">
-    You can use this tool to boost collaboration and foster communication. Teamify tells you what's being worked on, who's working on what, and where something is in a process. The team can be managed by the team leader and the managers can manage different projects, it can also be used for personal use - more like a list-making/to-do tool. Projects progress can be tracked and deadlines can be set. It makes assigning tasks and managing the team much easier. Make team management a smooth experience with Teamify.
-  </p>
+  </section>
+  <!-- Section: Features v.1 -->
 
-  <!-- Grid row -->
-  <div class="row">
-
-    <!-- Grid column -->
-    <div class="col-md-4">
-
-      <img src="../public/images/meet.svg" width="70%" class="image-fluid">
-      <h5 class="font-weight-bold my-4">Meet</h5>
-      <p class="grey-text mb-md-0 mb-5">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reprehenderit
-        maiores aperiam minima assumenda deleniti hic.
-      </p>
-
-    </div>
-    <!-- Grid column -->
-
-    <!-- Grid column -->
-    <div class="col-md-4">
-
-      <img src="../public/images/collab.svg" width="70%" class="image-fluid">
-      <h5 class="font-weight-bold my-4">collaboration</h5>
-      <p class="grey-text mb-md-0 mb-5">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reprehenderit
-        maiores aperiam minima assumenda deleniti hic.
-      </p>
-
-    </div>
-    <!-- Grid column -->
-
-    <!-- Grid column -->
-    <div class="col-md-4">
-
-      <img src="../public/images/manage.svg" width="70%" class="image-fluid">
-      <h5 class="font-weight-bold my-4">Manage</h5>
-      <p class="grey-text mb-0"   >Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reprehenderit maiores
-        aperiam minima assumenda deleniti hic.
-      </p>
-
-    </div>
-    <!-- Grid column -->
-
-  </div>
-  <!-- Grid row -->
-
-</section>
-<!-- Section: Features v.1 -->
-
-<!-- <div class="imageclass">
+  <!-- <div class="imageclass">
     <img src="main5.svg" alt="main image" class="img-fluid">   
 </div> -->
 
-<script
-  type="text/javascript"
-  src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.3.0/mdb.min.js"></script>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.3.0/mdb.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/typeit@7.0.4/dist/typeit.min.js"></script>
   <script>
-  new TypeIt("#maintext", {
-  strings: "Teamify lets you organize and prioritize projects in a fun, flexible way",
-  speed: 75,
-  loop: true
-}).go()
+    new TypeIt("#maintext", {
+      strings: "Teamify lets you organize and prioritize projects in a fun, flexible way",
+      speed: 75,
+      loop: true
+    }).go()
   </script>
 </body>
 
