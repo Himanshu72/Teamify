@@ -80,12 +80,20 @@ router.post("/login",(req,res)=>{
   //utility.insertUser(req.body);
   res.redirect("/dashboard");
 });
+router.post("/dashboard",(req,res)=>{
+  
+  req.body.projects={ name:req.body.name,description:req.body.description };
+  console.log(req.body);
+  //req.body._id=req.body.username;
+  //utility.insertUser(req.body);
+  res.redirect("/dashboard");
+});
 
 router.post("/meeting",(req,res)=>{
 
  
  
-  //req.body.minutesOfMeeting={ name:req.body.name,description:req.body.description, date:req.body.date , author:req.body.author};
+  req.body.minutesOfMeeting={ name:req.body.name,description:req.body.description, date:req.body.date , author:req.body.author};
 
   console.log(req.body);
  // req.body._id=req.body.username;

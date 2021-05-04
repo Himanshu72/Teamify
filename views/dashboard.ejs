@@ -167,17 +167,17 @@
                 <button type="button" class="btn-close" data-mdb-dismiss="modal" aria-label="Close"></button>
               </div>
               <div class="modal-body">
-                <form>
+                <form method="post" action="/dashboard">
                   
                   <!-- Project name input -->
-                  <div class="form-outline mb-4">
-                    <input type="text" id="projectName" class="form-control" name="projectDescription" />
+                  <div class="form-outline mb-4"name="projects">
+                    <input type="text" id="projectName" class="form-control" name="name" />
                     <label class="form-label" for="projectName">Project Name </label>
                   </div>
     
                    <!-- Project description input -->
-                   <div class="form-outline mb-4">
-                    <input type="textarea" id="projectDescription" class="form-control textArea" name="projectDescription"/>
+                   <div class="form-outline mb-4"name="projects">
+                    <input type="textarea" id="projectDescription" class="form-control textArea" name="description"/>
                     <label class="form-label" for="projectDescription">Project Description </label>
                   </div>
                   
