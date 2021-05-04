@@ -1,10 +1,10 @@
 const mongoose = require("mongoose");
 const  Schema = mongoose.Schema;
 let meet= new Schema({
-    _id:{type:String,required:true,unique:true},
+    name:{type:String,required:true,unique:true},
     meetLink:{type:String,required:true},
     meetPassword:{type:String},
-    minutesOfMeeting:{type:String},
+    minutesOfMeeting:{ name:String,discription:String,date:Date,author:String },
     creatorID:{type:String,required:true},
     attendes:[
         {type:String,required:true}
