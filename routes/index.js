@@ -27,7 +27,7 @@ router.get("/profile",(req,res)=>{
 });
 
 
-router.get("/dashboard/:id",(req,res)=>{
+router.get("/dashboard",(req,res)=>{
 
   res.render('dashboard',{title:"dashboard"});
 });
@@ -73,4 +73,14 @@ router.post("/signup",(req,res)=>{
   res.redirect("/login");
 });
 
+
+router.post("/login",(req,res)=>{
+
+  console.log(req.body);
+
+  
+  //req.body._id=req.body.username;
+  //utility.insertUser(req.body);
+  res.redirect("/dashboard");
+});
 module.exports = router;

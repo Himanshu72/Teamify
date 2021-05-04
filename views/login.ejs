@@ -23,20 +23,20 @@
     
           <div class="col-md">
     
-            <form class="formcls ">
+            <form class="formcls " method = "post" action="/login">
               <div class="mainheading">
                 <h1> Log In</h1>
               </div>
     
     
               <div class="form-outline mb-4">
-                <input type="email" id="email" class="form-control" name="email"/>
+                <input type="email" id="email" class="form-control" name="email" required/>
                 <label class="form-label" for="email">Email address</label>
               </div>
     
     
               <div class="form-outline mb-4">
-                <input type="password" id="password" class="form-control" name="password"/>
+                <input type="password" id="password" class="form-control" name="password" required/>
                 <label class="form-label" for="password">Password</label>
               </div>
     
@@ -51,11 +51,12 @@
               </div>
     
     
-              <button type="submit" class="btn btn-primary btn-block mb-4 mybutton">Sign in</button>
+              <button type="submit" class="btn-block mb-4 mybutton" style="color: white;">Log In</button>
+
     
     
               <div class="text-center">
-                <p>Not a member? <a href="#">Register</a></p>
+                <p>Not a member? <a href="/signup">Sign Up</a></p>
               </div>
             </form>
     
