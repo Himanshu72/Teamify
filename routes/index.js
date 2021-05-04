@@ -83,8 +83,11 @@ router.post("/login",(req,res)=>{
 
 router.post("/meeting",(req,res)=>{
 
-  console.log(req.body);
  
+ 
+  //req.body.minutesOfMeeting={ name:req.body.name,description:req.body.description, date:req.body.date , author:req.body.author};
+
+  console.log(req.body);
  // req.body._id=req.body.username;
 //  utility.insertMeet(req.body);
   res.redirect("/project");
