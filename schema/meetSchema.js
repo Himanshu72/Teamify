@@ -4,7 +4,7 @@ let meet= new Schema({
     name:{type:String,required:true,unique:true},
     meetLink:{type:String,required:true},
     meetPassword:{type:String},
-    minutesOfMeeting:{ name:String,discription:String,date:Date,author:String },
+    minutesOfMeeting:{ title:String,discription:String,date:Date,author:String },
     creatorID:{type:String,required:true},
     attendes:[
         {type:String,required:true}
