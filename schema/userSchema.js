@@ -6,7 +6,7 @@ let user= new Schema({
     email:{type:String,required:true,unique:true },
     phone:{type:Number,required:true,unique:true},
     password:{type:String,required:true},
-    age:Number,
+    DOB:{type:Date,required:true},
     gender:String,
     projects:[ {_id:{type:String,required:true,unique:true} ,name:{type:String,required:true},description:{type:String,required:true},state:{type:Number,required:true,default:0},Owner:{type:String,required:true} }]
 

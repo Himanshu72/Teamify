@@ -16,7 +16,7 @@ mongoose.connect(env.dbserver, {
   
   db.on("error", console.error.bind(console, "connection error:"));
 
-  const usermodel=  mongoose.model("users",user);
+  const userModel=  mongoose.model("users",user);
   // create model
   const taskmodel= mongoose.model("tasks",task);
   // preapre data
