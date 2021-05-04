@@ -75,12 +75,19 @@ router.post("/signup",(req,res)=>{
 
 
 router.post("/login",(req,res)=>{
-
   console.log(req.body);
-
-  
   //req.body._id=req.body.username;
   //utility.insertUser(req.body);
   res.redirect("/dashboard");
 });
+
+router.post("/meeting",(req,res)=>{
+
+  console.log(req.body);
+ 
+ // req.body._id=req.body.username;
+//  utility.insertMeet(req.body);
+  res.redirect("/project");
+});
+
 module.exports = router;
