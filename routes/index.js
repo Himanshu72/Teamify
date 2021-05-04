@@ -68,8 +68,8 @@ router.post("/signup",(req,res)=>{
 
   console.log(req.body);
   req.body.name={ fname:req.body.fname,lname:req.body.lname };
-  req.body._id=req.body.username;
-  utility.insertUser(req.body);
+ req.body._id=req.body.username;
+ utility.insertUser(req.body);
   res.redirect("/login");
 });
 
@@ -101,4 +101,12 @@ router.post("/meeting",(req,res)=>{
   res.redirect("/project");
 });
 
+router.post("/manageTask",(req,res)=>{
+  
+ // req.body.projects={ name:req.body.name,description:req.body.description };
+  console.log(req.body);
+  //req.body._id=req.body.username;
+  //utility.insertUser(req.body);
+  res.redirect("/manageTask");
+});
 module.exports = router;

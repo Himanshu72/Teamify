@@ -461,18 +461,18 @@
 
                             </div>
                             <div class="modal-body">
-                                <form>
+                                <form method="post" action="/manageTask">
 
                                     <!-- meeting title input -->
                                     <div class="form-outline mb-4">
-                                        <input type="text" id="meetingTitle" class="form-control" name="meetingTitle" />
+                                        <input type="text" id="meetingTitle" class="form-control" name="taskTitle" />
                                         <label class="form-label" for="meetingTitle">Name of the task</label>
                                     </div>
 
                                     <!-- meeting description input -->
                                     <div class="form-outline mb-4">
                                         <input type="textarea" id="meetingDescription" class="form-control textArea"
-                                            name="meetingDescription" />
+                                            name="taskDescription" />
                                         <label class="form-label" for="meetingDescription">Task Description </label>
                                     </div>
 
@@ -510,7 +510,7 @@
 
                             </div>
                             <div class="modal-body">
-                                <form>
+                                <form method="post" action="/manageTask">
 
                                     <!-- meeting title input -->
                                     <div class="form-outline mb-4">
