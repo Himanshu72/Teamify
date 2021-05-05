@@ -80,9 +80,13 @@ username: 'admin',
   _id: 'admin'
 
 */
-  
+  validator.isEmail('req.body.email'); 
+  let a=validator.isLength('req.body.username', 2,5); 
+  console.log(a);
+
   req.body.name={ fname:req.body.fname,lname:req.body.lname };
  req.body._id=req.body.username;
+
  console.log(req.body);
  //char limite 
  //pass=cpass
