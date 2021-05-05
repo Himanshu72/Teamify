@@ -4,6 +4,7 @@ const env = require("../env");
 const mongoose = require('mongoose');
 const utility = require("../utility/DB");
 const notify=require("../utility/notifications");
+var validator = require('validator');
 /* G  ET home page. */
 
 router.get('/', async function (req, res, next) {
@@ -65,11 +66,27 @@ router.get("/manageTask",(req,res)=>{
 
 /*POST*/
 router.post("/signup",(req,res)=>{
+/*
+username: 'admin',
+  fname: 'Himanshu',
+  lname: 'Joshi',
+  phone: '647895145',
+  DOB: '2021-05-20',
+  gender: 'male',
+  email: 'hjoshi111@gmail.com',
+  password: '123',
+  confirm_password: '123',
+  name: { fname: 'Himanshu', lname: 'Joshi' },
+  _id: 'admin'
 
-  console.log(req.body);
+*/
+  
   req.body.name={ fname:req.body.fname,lname:req.body.lname };
  req.body._id=req.body.username;
- utility.insertUser(req.body);
+ console.log(req.body);
+ //char limite 
+ //pass=cpass
+ //utility.insertUser(req.body);
   res.redirect("/login");
 });
 
