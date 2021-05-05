@@ -67,6 +67,12 @@
         </div>
       </div>
     <%- include('common/footer'); %>
+    <script>
+      <% if (err) { %>
+        swal("ERROR", "<%=msg%>", "<%=type%>");
+      <% } %>
+
+    </script>
   </body>
   </html>
 

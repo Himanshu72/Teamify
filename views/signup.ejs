@@ -91,13 +91,13 @@
 
           <div class="form-outline mb-4">
             <label class="form-label" for="email">Email address</label>
-            <input type="text" id="email" class="form-control" name="email" />
+            <input type="email" id="email" class="form-control" name="email" />
             
           </div>
 
           <div class="form-outline mb-4">
             <label class="form-label" for="password">Password</label>
-            <input type="password" id="password" class="form-control" name="password" required />
+            <input type="password" id="password" minlength="8" class="form-control" name="password" required />
             
           </div>
 
@@ -120,6 +120,12 @@
     </div>
   </div>
     <%- include('common/footer'); %>
+    <script>
+      <% if (err) { %>
+        swal("ERROR", "<%=msg%>", "<%=type%>");
+      <% } %>
+
+    </script>
   </body>
   </html>
 

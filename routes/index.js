@@ -14,12 +14,14 @@ router.get('/', async function (req, res, next) {
 
 router.get("/login",(req,res)=>{
 
-  res.render('login',{title:"login"});
+    res.render('login',{title:"login",err:false,msg:"",type:""});
+  
+ 
 });
 
 router.get("/signup",(req,res)=>{
 
-  res.render('signup',{title:"signup"});
+  res.render('signup',{title:"signup" ,err:false,msg:"",type:""});
 });
 
 router.get("/profile",(req,res)=>{
@@ -80,27 +82,50 @@ username: 'admin',
   _id: 'admin'
 
 */
-  validator.isEmail('req.body.email'); 
-  let a=validator.isLength('req.body.username', 2,5); 
-  console.log(a);
+console.log(req.body);
+if(
+  validator.isEmail(req.body.email) &&
+  validator.isLength(req.body.username, {min:3,max:15}) &&
+  validator.isLength(req.body.fname, {min:3,max:12}) &&
+  validator.isLength(req.body.lname, {min:3,max:12}) &&
+  validator.isLength(req.body.phone, {min:10,max:12})&&
+  validator.isLength(req.body.password, {min:8,max:20}) &&
+  validator.equals(req.body.confirm_password,req.body.password) 
+){
+ 
 
-  req.body.name={ fname:req.body.fname,lname:req.body.lname };
+ req.body.name={ fname:req.body.fname,lname:req.body.lname };
  req.body._id=req.body.username;
 
- console.log(req.body);
+ 
  //char limite 
  //pass=cpass
+
  //utility.insertUser(req.body);
   res.redirect("/login");
+
+}
+else{
+  res.render('signup',{title:"signup",err:true,msg:"Validation failed",type:"error"});
+}
+
 });
 
 
 router.post("/login",(req,res)=>{
+  if( validator.isEmail(req.body.email)){
+    res.render('dashboard',{title:"dashboard"});
+  }
+  else{
+    res.render('login',{title:"login",err:true,msg:"login failed",type:"error"});
+  }
   console.log(req.body);
   //req.body._id=req.body.username;
   //utility.insertUser(req.body);
-  res.redirect("/dashboard");
+  //res.redirect("/dashboard");
 });
+
+
 router.post("/dashboard",(req,res)=>{
   
   req.body.projects={ name:req.body.name,description:req.body.description };
@@ -111,9 +136,6 @@ router.post("/dashboard",(req,res)=>{
 });
 
 router.post("/meeting",(req,res)=>{
-
- 
- 
   req.body.minutesOfMeeting={ name:req.body.name,description:req.body.description, date:req.body.date , author:req.body.author};
 
   console.log(req.body);
