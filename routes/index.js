@@ -108,9 +108,6 @@ console.log(resum)
 //   res.render('signup',{title:"signup",err:true,msg:"Something went wrong...",type:"error"})
 //  }
 
- 
- 
-
 }
 else{
      res.render('signup',{title:"signup",err:true,msg:"Validation failed",type:"error"});
