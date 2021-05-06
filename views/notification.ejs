@@ -4,7 +4,29 @@
     <title><%= title %></title>
     
     <%- include('common/links'); %>
-
+<style>
+  .Joinb{
+    background-color: rgb(39, 53, 116);
+    width: 10%;
+    color: aliceblue;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  .acc{
+    background-color: brown;
+    width: 10%;
+    color: aliceblue;
+    border-radius: 4px;
+    cursor: pointer;
+   
+  }
+  .acc:hover{
+    background-color: rgb(170, 68, 68);
+  }
+  .Joinb:hover{
+    background-color: rgba(39, 53, 116,0.9);
+  }
+</style>
   </head>
   <body>
     <%- include('common/navbar'); %>
@@ -13,8 +35,8 @@
         <br><br>
             <ul class="list-group">
             <li class="list-group-item active" aria-current="true">Notifications </li>
-            <li class="list-group-item" style="position: relative;">Dapibus ac facilisis in <button class="btn btn-info" style=" position:absolute; right: 10px; bottom: 5px; ">Join</button> </li>
-            <li class="list-group-item" style="position: relative;" >Morbi leo risus <button class="btn btn-danger" style=" position:absolute; right: 10px; bottom: 5px;">Give Access</button>  </li>
+            <li class="list-group-item" style="position: relative;">Dapibus ac facilisis in <button class="Joinb " style=" position:absolute; right: 10px; bottom: 5px; ">Join</button> </li>
+            <li class="list-group-item" style="position: relative;" >Morbi leo risus <button class="acc " style=" position:absolute; right: 10px; bottom: 5px;">Give Access</button>  </li>
             <li class="list-group-item">Porta ac consectetur ac</li>
             <li class="list-group-item">Vestibulum at eros</li>
           </ul>
