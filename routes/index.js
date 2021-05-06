@@ -97,13 +97,10 @@ if(
  req.body.name={ fname:req.body.fname,lname:req.body.lname };
  req.body._id=req.body.username;
 
- 
- 
-
  if(utility.insertUser(req.body)){
       res.redirect("/login");
- }else{
-
+ }
+ else{
   res.render('signup',{title:"signup",err:true,msg:"Something went wrong...",type:"error"})
  }
 
