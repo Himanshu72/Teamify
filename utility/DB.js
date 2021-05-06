@@ -89,19 +89,20 @@ module.exports={
   // finds
     finduserByusername:(id)=>{
       
-      return Promise((resolve,rej)=>{
+      return new Promise((resolve,rej)=>{
+      
+        userModel.findById(id,(err,res)=>{
+          if(!err){
+              resolve(res) 
+          }else{
+               rej(res);
+          }
+        });
 
 
       } );
       
-      userModel.findById(id,(err,res)=>{
-            if(!err){
-                console.log(res);
-                return res; 
-            }else{
-                 return false;
-            }
-      })
+     
     },    
     
 }

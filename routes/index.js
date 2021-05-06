@@ -77,7 +77,6 @@ router.post("/signup",async (req,res)=>{
 
 
 
-console.log(req.body);
 if(
   validator.isEmail(req.body.email) &&
   validator.isLength(req.body.username, {min:3,max:15}) &&
@@ -93,13 +92,12 @@ if(
  req.body._id=req.body.username;
 
   
- let r=utility.insertUser(req.body);
- r.then((value)=>{
-   res.redirect("/login");
+ utility.insertUser(req.body).then(()=>{
+  res.redirect("/login");
  }).catch(()=>{
   res.render('signup',{title:"signup",err:true,msg:"Something went wrong...",type:"error"})
- })   
-     
+ })
+
  
 
 }
