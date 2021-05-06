@@ -69,7 +69,7 @@ router.get("/manageTask",(req,res)=>{
 
 
 /*POST*/
-router.post("/signup",(req,res)=>{
+router.post("/signup",async (req,res)=>{
 /*
 username: 'admin',
   fname: 'Himanshu',
@@ -99,15 +99,16 @@ if(
  req.body.name={ fname:req.body.fname,lname:req.body.lname };
  req.body._id=req.body.username;
 
- if(utility.insertUser(req.body)){
-      res.redirect("/login");
- }
- else{
-  res.render('signup',{title:"signup",err:true,msg:"Something went wrong...",type:"error"})
- }
-
+await utility.insertUser(req.body);
+console.log(resum)
+    res.redirect("/login");
+  
+   
+     
  
- 
+//  else{
+//   res.render('signup',{title:"signup",err:true,msg:"Something went wrong...",type:"error"})
+//  }
 
 }
 else{
