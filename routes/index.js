@@ -48,7 +48,7 @@ router.get("/test",(req,res)=>{
 
 router.get("/meeting",(req,res)=>{
 
-  res.render('meeting',{title:"meeting"});
+  res.render('meeting',{title:"meeting",err:false,msg:"",type:""});
 });
 
 router.get("/accessControl",(req,res)=>{
@@ -135,14 +135,25 @@ router.post("/dashboard",(req,res)=>{
   res.redirect("/dashboard");
 });
 
-router.post("/meeting",(req,res)=>{
-  req.body.minutesOfMeeting={ name:req.body.name,description:req.body.description, date:req.body.date , author:req.body.author};
 
-  console.log(req.body);
+
+router.post("/meeting",(req,res)=>{
+  if(validator.isLength(req.body.name, {min:3,max:15}) && validator.isLength(req.body.meetPassword, {min:5,max:15}) ){
+    
+    console.log(req.body);
+    res.redirect("/project");
+  }
+  //req.body.minutesOfMeeting={ name:req.body.name,description:req.body.description, date:req.body.date , author:req.body.author};
+
+ else{
+  res.render('meeting',{title:"meeting",err:true,msg:"Failed to create meet link",type:"error"});
+ }
  // req.body._id=req.body.username;
 //  utility.insertMeet(req.body);
-  res.redirect("/project");
+  
 });
+
+
 
 router.post("/manageTask",(req,res)=>{
   

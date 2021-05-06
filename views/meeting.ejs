@@ -183,14 +183,14 @@
                             <form class="formclass" method="POST" action="/meeting">
                                 <!-- Email input -->
                                 <div class="form-outline mb-4">
-                                    <input type="text" id="form1Example1" class="form-control" name="name" />
+                                    <input type="text" id="form1Example1" class="form-control" name="name" minlength="5"/>
                                     <label class="form-label" for="form1Example1">Meeting name</label>
                                 </div>
 
                                 <!-- Password input -->
                                 <div class="form-outline mb-4">
                                     <input type="password" id="form1Example2" class="form-control"
-                                        name="meetPassword" minlength="5" />
+                                        name="meetPassword" />
                                     <label class="form-label" for="form1Example2">Password</label>
                                 </div>
 
@@ -512,6 +512,12 @@
                         loop: true
                     });
                 </script>
+                <script>
+                    <% if (err) { %>
+                      swal("ERROR", "<%=msg%>", "<%=type%>");
+                    <% } %>
+              
+                  </script>
                 <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.css" />
 
 </body>
