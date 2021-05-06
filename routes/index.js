@@ -86,8 +86,8 @@ console.log(req.body);
 if(
   validator.isEmail(req.body.email) &&
   validator.isLength(req.body.username, {min:3,max:15}) &&
-  validator.isLength(req.body.fname, {min:3,max:12}) &&
-  validator.isLength(req.body.lname, {min:3,max:12}) &&
+  validator.isLength(req.body.fname, {min:3,max:15}) &&
+  validator.isLength(req.body.lname, {min:3,max:20}) &&
   validator.isLength(req.body.phone, {min:10,max:12})&&
   validator.isLength(req.body.password, {min:8,max:20}) &&
   validator.equals(req.body.confirm_password,req.body.password) 
