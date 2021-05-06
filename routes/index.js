@@ -98,15 +98,22 @@ if(
  req.body._id=req.body.username;
 
  
- //char limite 
- //pass=cpass
+ 
 
- //utility.insertUser(req.body);
-  res.redirect("/login");
+ if(utility.insertUser(req.body)){
+      res.redirect("/login");
+ }else{
+
+  res.render('signup',{title:"signup",err:true,msg:"Something went wrong...",type:"error"})
+ }
+
+ 
+ 
 
 }
 else{
-  res.render('signup',{title:"signup",err:true,msg:"Validation failed",type:"error"});
+     res.render('signup',{title:"signup",err:true,msg:"Validation failed",type:"error"});
+
 }
 
 });

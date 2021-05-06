@@ -32,11 +32,15 @@ module.exports={
      
       const userdata = new userModel(obj);
       userdata.save((err,res)=>{
-        if(err)
-           console.log(err); 
-         else
-          console.log(res);  
-      });
+            if(res){
+                console.log(res);
+                  return true;
+            }else{
+              console.log(err);
+                return false;
+            }
+                
+    });
     },
     insertTask:(obj)=>{
        const taskData= new taskmodel(obj);
