@@ -28,12 +28,12 @@ mongoose.connect(env.dbserver, {
 
 module.exports={
 
-    insertUser:(obj)=>{
+    insertUser:async (obj)=>{
      
       const userdata = new userModel(obj);
-      userdata.save((err,res)=>{
+      await userdata.save((err,res)=>{
             if(res){
-                console.log(res);
+                console.log("dkng");
                   return true;
             }else{
               console.log(err);
