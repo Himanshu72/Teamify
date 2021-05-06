@@ -28,19 +28,25 @@ mongoose.connect(env.dbserver, {
 
 module.exports={
 
-    insertUser:async (obj)=>{
+    insertUser:(obj)=>{
      
-      const userdata = new userModel(obj);
-      await userdata.save((err,res)=>{
+        userdata = new userModel(obj);
+          
+        return new Promise((resolve,rej)=>{
+          userdata.save((err,res)=>{
             if(res){
                 console.log("dkng");
-                  return true;
+                resolve(obj);
             }else{
               console.log(err);
-                return false;
+                rej(err);
             }
                 
-    });
+           });
+        });
+          
+        
+    
     },
     insertTask:(obj)=>{
        const taskData= new taskmodel(obj);

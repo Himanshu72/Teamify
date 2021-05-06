@@ -7,6 +7,8 @@ const notify=require("../utility/notifications");
 var validator = require('validator');
 /* G  ET home page. */
 
+
+
 router.get('/', async function (req, res, next) {
 
   res.render('index',{title:"Home"});
@@ -21,8 +23,8 @@ router.get("/login",(req,res)=>{
  
 });
 
-router.get("/signup",(req,res)=>{
-
+router.get("/signup",async(req,res)=>{
+ 
   res.render('signup',{title:"signup" ,err:false,msg:"",type:""});
 });
 
@@ -70,20 +72,11 @@ router.get("/manageTask",(req,res)=>{
 
 /*POST*/
 router.post("/signup",async (req,res)=>{
-/*
-username: 'admin',
-  fname: 'Himanshu',
-  lname: 'Joshi',
-  phone: '647895145',
-  DOB: '2021-05-20',
-  gender: 'male',
-  email: 'hjoshi111@gmail.com',
-  password: '123',
-  confirm_password: '123',
-  name: { fname: 'Himanshu', lname: 'Joshi' },
-  _id: 'admin'
 
-*/
+ 
+
+
+
 console.log(req.body);
 if(
   validator.isEmail(req.body.email) &&
@@ -99,16 +92,15 @@ if(
  req.body.name={ fname:req.body.fname,lname:req.body.lname };
  req.body._id=req.body.username;
 
-await utility.insertUser(req.body);
-console.log(resum)
-    res.redirect("/login");
   
-   
+ let r=utility.insertUser(test);
+ r.then((value)=>{
+   res.redirect("/login");
+ }).catch(()=>{
+  res.render('signup',{title:"signup",err:true,msg:"Something went wrong...",type:"error"})
+ })   
      
  
-//  else{
-//   res.render('signup',{title:"signup",err:true,msg:"Something went wrong...",type:"error"})
-//  }
 
 }
 else{
