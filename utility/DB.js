@@ -92,7 +92,7 @@ module.exports={
       return new Promise((resolve,rej)=>{
       
         userModel.findById(id,(err,res)=>{
-          if(!err){
+          if(res != null){
               resolve(res) 
           }else{
                rej(res);

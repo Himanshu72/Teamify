@@ -1,4 +1,5 @@
 var express = require('express');
+
 var router = express.Router();
 const env = require("../env");
 const mongoose = require('mongoose');
@@ -7,17 +8,25 @@ const notify=require("../utility/notifications");
 var validator = require('validator');
 /* G  ET home page. */
 
-
+function requiredAuthentication(req, res, next) {
+ if(!req.session.user)
+  res.render('login',{title:"login",err:false,msg:"",type:""});
+  else
+       next();
+  
+}
 
 router.get('/', async function (req, res, next) {
-
+ 
   res.render('index',{title:"Home"});
+
 });
 
 router.get("/login",(req,res)=>{
-    if(utility.finduserByusername("hj01")==false){
-      res.render('login',{title:"login",err:true,msg:"invalid username and password",type:"error"});
-    }
+   
+  if(req.session.user)
+       res.redirect(`/dashboard/${req.session.user._id}`);
+  else
     res.render('login',{title:"login",err:false,msg:"",type:""});
   
  
@@ -34,7 +43,7 @@ router.get("/profile",(req,res)=>{
 });
 
 
-router.get("/dashboard",(req,res)=>{
+router.get("/dashboard/:id",(req,res)=>{
 
   res.render('dashboard',{title:"dashboard"});
 });
@@ -112,14 +121,24 @@ else{
 router.post("/login",(req,res)=>{
   
   
-  if( validator.isEmail(req.body.email)){
-    res.render('dashboard',{title:"dashboard"});
-
-
-
+  if( validator.isLength(req.body.username,{min:3,max:15}) && validator.isLength(req.body.password,{min:8,max:20}) ){
+   
+    utility.finduserByusername(req.body.username).then((result)=>{
+      if(validator.equals(req.body.password,result.password)){  
+        req.session.user=result;
+        res.redirect(`/dashboard/${req.body.username}`);
+       
+      }else{
+        res.render('login',{title:"login",err:true,msg:"Invalid password",type:"error"});
+      }
+    }).catch(()=>{
+      res.render('login',{title:"login",err:true,msg:"Invalid username or password",type:"error"});  
+    });
+    
   }
   else{
-    res.render('login',{title:"login",err:true,msg:"Email in valid",type:"error"});
+
+    res.render('login',{title:"login",err:true,msg:"Email or Password validation failed",type:"error"});
   }
   console.log(req.body);
   //req.body._id=req.body.username;
