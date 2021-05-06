@@ -78,6 +78,18 @@ module.exports={
         else
           console.log(res);
       })
-    }
+    },
+
+  // finds
+    finduserByusername:(id)=>{
+      userModel.findById(id,(err,res)=>{
+            if(!err){
+                console.log(res);
+                return res; 
+            }else{
+                 return false;
+            }
+      })
+    },    
     
 }

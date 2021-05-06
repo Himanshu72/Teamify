@@ -13,7 +13,9 @@ router.get('/', async function (req, res, next) {
 });
 
 router.get("/login",(req,res)=>{
-
+    if(utility.finduserByusername("hj01")==false){
+      res.render('login',{title:"login",err:true,msg:"invalid username and password",type:"error"});
+    }
     res.render('login',{title:"login",err:false,msg:"",type:""});
   
  
