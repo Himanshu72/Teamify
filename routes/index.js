@@ -93,7 +93,7 @@ if(
  req.body._id=req.body.username;
 
   
- let r=utility.insertUser(test);
+ let r=utility.insertUser(req.body);
  r.then((value)=>{
    res.redirect("/login");
  }).catch(()=>{
@@ -112,11 +112,16 @@ else{
 
 
 router.post("/login",(req,res)=>{
+  
+  
   if( validator.isEmail(req.body.email)){
     res.render('dashboard',{title:"dashboard"});
+
+
+
   }
   else{
-    res.render('login',{title:"login",err:true,msg:"login failed",type:"error"});
+    res.render('login',{title:"login",err:true,msg:"Email in valid",type:"error"});
   }
   console.log(req.body);
   //req.body._id=req.body.username;

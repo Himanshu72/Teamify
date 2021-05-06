@@ -88,6 +88,12 @@ module.exports={
 
   // finds
     finduserByusername:(id)=>{
+      
+      return Promise((resolve,rej)=>{
+
+
+      } );
+      
       userModel.findById(id,(err,res)=>{
             if(!err){
                 console.log(res);
