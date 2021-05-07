@@ -144,6 +144,17 @@ module.exports={
       } );
       
      
-    },    
+    },
+     getAllusers:()=>{
+      return new Promise((resolve,reject)=>{
+        userModel.find({},(err,res)=>{
+            if(res)
+                resolve(res);
+             else
+                reject(err);   
+        })
+      }) 
+     
+     }   
     
 }

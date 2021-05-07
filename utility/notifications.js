@@ -11,20 +11,24 @@ const  transport = nodemailer.createTransport({
 
   module.exports={
         sendEmail:(data)=>{
+           
+          return new Promise((resolve,reject)=>{
             const mailOptions = {
-                from: env.email,
-                to: data.email,
-                subject: data.subject,
-                text: data.text
-              };
+              from: env.email,
+              to: data.email,
+              subject: data.subject,
+              text: data.text
+            };
 
-              transport.sendMail(mailOptions, function(error, info){
-                if (error) {
-                  console.log(error);
-                } else {
-                  console.log('Email sent: ' + info.response);
-                }
-              });
+            transport.sendMail(mailOptions, function(error, info){
+              if (error) {
+                  reject(error);
+              } else {
+                 resolve(info);
+              }
+            });
+          });
+         
               
         },
         sendOtp:(data)=>{

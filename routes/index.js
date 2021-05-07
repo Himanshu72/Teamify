@@ -92,14 +92,44 @@ router.get("/manageTask",(req,res)=>{
   res.render('Manage_Task',{title:"manageTask",navbar:{user:true}});
 });
 router.get("/forgotPassword",(req,res)=>{
-
-  res.render('forgotPassword',{title:"Forgot Password",navbar:{user:false}});
+  
+  res.render('forgotPassword',{title:"Forgot Password",navbar:{user:false},err:false,msg:"",type:"",mtitle:""  });
 });
 
 
 
 /*POST*/
 
+router.post("/forgotpassword",(req,res)=>{
+        if(validator.isEmail(req.body.email)){
+          let flag=0; 
+          utility.getAllusers().then((result)=>{
+            
+              result.forEach((element)=>{
+                      if(element.email==req.body.email){
+                          flag=1;
+                          notify.sendEmail({
+                            email:req.body.email,
+                            subject:"Forgot password teamify",
+                            text:`your password : ${element.password}`
+                        }).then((result)=>{
+                          res.render('forgotPassword',{title:"Forgot Password",navbar:{user:false},err:true,msg:"Email sent successfully",type:"success",mtitle:"Email Sent"  });
+                        }).catch((err)=>{
+                          res.render('forgotPassword',{title:"Forgot Password",navbar:{user:false},err:true,msg:"Unable to send email",type:"error",mtitle:"ERROR"  });
+                        })
+                      }
+              });
+                  if(!flag)
+                  res.render('forgotPassword',{title:"Forgot Password",navbar:{user:false},err:true,msg:"Email not exists",type:"error",mtitle:"ERROR"  });
+           
+          }).catch(()=>{
+            res.render('forgotPassword',{title:"Forgot Password",navbar:{user:false},err:true,msg:"Something Went Wrong",type:"error",mtitle:"ERROR"  });
+          })
+          
+        }else{
+          res.render('forgotPassword',{title:"Forgot Password",navbar:{user:false},err:true,msg:"Email not valid",type:"error",mtitle:"ERROR"  });
+        }
+});
 
 
  router.post("/createProject",checkuser,(req,res)=>{
@@ -195,10 +225,12 @@ router.post("/changepassword",checkuser,(req,res)=>{
       if(validator.equals(req.body.n_password,req.body.c_password)){
           utility.updatePassword(req.session.user._id,req.body.c_password).then((result)=>{
             console.log(result);
-            if(result.nModified==1)
-                res.redirect("/profile");
+            if(result.nModified==1){
+              req.session.user.password=req.body.c_password;
+              res.redirect("/profile");
+            }
               else  
-              res.render('profile',{title:"profile",navbar:{user:true},data:req.session.user,err:true,msg:"Something Went wrong",type:"error"});
+              res.render('profile',{title:"profile",navbar:{user:true},data:req.session.user,err:true,msg:"Something Went wrong",type:"error"});  
           }).catch(()=>{
             res.render('profile',{title:"profile",navbar:{user:true},data:req.session.user,err:true,msg:"Something Went wrong",type:"error"});
           })
