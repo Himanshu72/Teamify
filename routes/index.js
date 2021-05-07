@@ -92,7 +92,7 @@ router.get("/manageTask",(req,res)=>{
 });
 router.get("/forgotPassword",(req,res)=>{
 
-  res.render('forgotPassword',{title:"manageTask",navbar:{user:true}});
+  res.render('forgotPassword',{title:"Forgot Password",navbar:{user:true}});
 });
 
 
