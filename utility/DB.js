@@ -76,6 +76,18 @@ module.exports={
           console.log(res);
       })
     },
+    updatePassword:(id,pass)=>{
+      return new Promise((resolve,reject)=>{
+        userModel.updateOne({_id:id},{$set:{password:pass}},(err,res)=>{
+             if(res)
+                  resolve(res);
+              else
+                  reject(err);           
+        });
+      })
+      
+    }
+    ,
     insertProject:(obj)=>{
       const projectData = new projectModel(obj);
       projectData.save((err,res)=>{
@@ -101,7 +113,22 @@ module.exports={
     })
     
    
-   },finduserByusername:(id)=>{
+   },
+    updateProfile:(id,obj)=>{
+      return new Promise((resolve,reject)=>{
+          userModel.findOneAndUpdate({_id:id}, {$set:obj}, {
+            new:true
+          },(err,res)=>{
+              if(res){
+                 console.log(res);  
+                resolve(res);
+              }else{
+                reject(err);
+              }
+          });
+      });
+    }
+   ,finduserByusername:(id)=>{
       
       return new Promise((resolve,rej)=>{
       

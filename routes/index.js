@@ -35,6 +35,7 @@ router.get('/logout', async function (req, res, next) {
 
 router.get("/login",(req,res)=>{
    
+
   if(req.session.user)
        res.redirect(`/dashboard/${req.session.user._id}`);
   else
@@ -48,9 +49,9 @@ router.get("/signup",async(req,res)=>{
   res.render('signup',{title:"signup" ,err:false,msg:"",type:"",navbar:{user:false}});
 });
 
-router.get("/profile",(req,res)=>{
+router.get("/profile",checkuser,(req,res)=>{
 
-  res.render('profile',{title:"profile",navbar:{}});
+  res.render('profile',{title:"profile",navbar:{user:true},data:req.session.user,err:false,msg:"",type:""});
 });
 
 
@@ -98,6 +99,9 @@ router.get("/forgotPassword",(req,res)=>{
 
 
 /*POST*/
+
+
+
  router.post("/createProject",checkuser,(req,res)=>{
  
       
@@ -187,8 +191,50 @@ router.post("/login",(req,res)=>{
   //res.redirect("/dashboard");
 });
 
+router.post("/changepassword",checkuser,(req,res)=>{
+      if(validator.equals(req.body.n_password,req.body.c_password)){
+          utility.updatePassword(req.session.user._id,req.body.c_password).then((result)=>{
+            console.log(result);
+            if(result.nModified==1)
+                res.redirect("/profile");
+              else  
+              res.render('profile',{title:"profile",navbar:{user:true},data:req.session.user,err:true,msg:"Something Went wrong",type:"error"});
+          }).catch(()=>{
+            res.render('profile',{title:"profile",navbar:{user:true},data:req.session.user,err:true,msg:"Something Went wrong",type:"error"});
+          })
+      }else{
+        res.render('profile',{title:"profile",navbar:{user:true},data:req.session.user,err:true,msg:"Password and confirm password must be same..",type:"error"});
+      }
+});
 
+router.post("/profile",checkuser,(req,res)=>{
+  console.log(req.body);
+  
+  if(validator.isLength(req.body.fname, {min:3,max:15}) &&
+  validator.isLength(req.body.lname, {min:3,max:20}) &&
+  validator.isLength(req.body.phone, {min:10,max:12}) && ( validator.equals(req.body.gender,"male") || validator.equals(req.body.gender,"female"))  ){
+    let obj={};
+    obj.name={
+           fname:req.body.fname,
+           lname:req.body.lname
+    }
+    obj.gender=req.body.gender;
+    obj.DOB=req.body.DOB;
+    if(req.body.phone!= req.session.user.phone )
+        obj.phone=req.body.phone;
 
+    utility.updateProfile(req.session.user._id,obj).then((result)=>{
+       req.session.user=result;
+       res.redirect("/profile")
+    }).catch((err)=>{
+      res.render('profile',{title:"profile",navbar:{user:true},data:req.session.user,err:true,msg:"unable to update profile",type:"error"}); 
+      console.log(err);
+    })
+
+  }else{
+    res.render('profile',{title:"profile",navbar:{user:true},data:req.session.user,err:true,msg:"validation failed in profile",type:"error"});
+  }
+});
 
 
 

@@ -163,7 +163,7 @@
                     <h4 class="title">Edit Profile</h4>
                   </div>
                   <div class="content">
-                    <form>
+                    <form action="/profile" method="POST">
                       
     
                       <div class="row">
@@ -171,14 +171,14 @@
                           <div class="form-group">
                             <label>First Name</label>
                             <input type="text" name="fname" disabled class="form-control edit" placeholder="Company"
-                              value="Rushita">
+                              value="<%=data.name.fname%>">
                           </div>
                         </div>
                         <div class="col-md-6">
                           <div class="form-group">
                             <label>Last Name</label>
                             <input type="text" name="lname" disabled class="form-control edit" placeholder="Last Name"
-                              value="vachhani">
+                              value="<%=data.name.lname%>">
                           </div>
                         </div>
                       </div>
@@ -188,21 +188,22 @@
                           <div class="form-group">
                             <label>Gender</label>
                             <input type="text" disabled class="form-control edit" name="gender" placeholder="Gender"
-                              value="female">
+                              value="<%=data.gender%>">
                           </div>
                         </div>
                         <div class="col-md-4">
                           <div class="form-group">
-                            <label>Age</label>
-                            <input type="text" disabled class="form-control edit" name="Age" placeholder="Dateogbirth"
-                              value="22">
+                            <label>D.O.B</label>
+                            <% const date=data.DOB.slice(0,10) %>
+                            <input type="date" disabled class="form-control edit" name="DOB" placeholder="Dateogbirth"
+                              value="<%=date%>">
                           </div>
                         </div>
                         <div class="col-md-4">
                           <div class="form-group">
                             <label>Phone Number</label>
-                            <input type="number" disabled name="phone edit" class="form-control edit" placeholder="Phone Number"
-                              value="98981456723">
+                            <input type="number" disabled name="phone" class="form-control edit" placeholder="Phone Number"
+                              value="<%=data.phone%>">
                           </div>
                         </div>
                       </div>
@@ -236,7 +237,6 @@
           <!--Tab2-->
     
           <div class="container-fluid">
-    
             <div class="row">
     
               <div class="col-md" style="padding: 8%;">
@@ -245,7 +245,7 @@
                     <h4 class="title">Change Password</h4>
                   </div>
                   <div class="content" style="padding: 6%;" >
-                    <form>
+                    <form action="/changepassword" method="POST">
     
     
     
@@ -254,7 +254,7 @@
                         <div class="col-md-12">
                           <div class="form-group">
                             <label>New Password</label>
-                            <input type="text" name="new_password"  class="form-control" >
+                            <input type="password" name="n_password" required minlength="8"  class="form-control" >
                           </div>
                         </div>
                       </div>
@@ -263,14 +263,14 @@
                         <div class="col-md-12">
                           <div class="form-group">
                             <label>Confirm Password</label>
-                            <input type="text" name="new_password"  class="form-control" >
+                            <input type="password" name="c_password" required minlength="8"  class="form-control" >
                           </div>
                         </div>
                       </div>
     
     
     
-                      <div class="buttons" id="edit" >Submit</div>
+                      <button class="buttons"  id="edit" >Submit</button>
                       <div class="clearfix"></div>
                     </form>
                   </div>
@@ -282,7 +282,7 @@
                 <img src="/images/changePassword.svg" class="img-fluid " alt="..." />
               </div>
             </div>
-    
+            
           </div>
     
         </div>
@@ -291,6 +291,11 @@
     
 
     <%- include('common/footer'); %>
+    <script>
+      <% if (err) { %>
+      swal("ERROR", "<%=msg%>", "<%=type%>");
+       <% } %>
+    </script>
     <script>
         let flag=1;
          let edit=document.querySelector("#edit");
