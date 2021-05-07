@@ -12,9 +12,8 @@ let project= new Schema({
             {
               _id:{type:String,required:true,unique:true},
               groupName:{type:String},
-              leader:[
-                {type:String,required:true}
-              ],
+              leader:{type:String,required:true}
+              ,
               member:[
                 {type:String,required:true} 
               ],

@@ -109,6 +109,8 @@ router.get("/videocall/:room",checkuser,(req,res)=>{
 
 /*POST*/
 
+
+
 router.post("/forgotpassword",(req,res)=>{
         if(validator.isEmail(req.body.email)){
           let flag=0; 
@@ -285,8 +287,9 @@ router.post("/profile",checkuser,(req,res)=>{
 
 
 
-router.post("/meeting",(req,res)=>{
-  if(validator.isLength(req.body.name, {min:3,max:15}) && validator.isLength(req.body.meetPassword, {min:5,max:15}) ){
+router.post("/meeting/:projid",(req,res)=>{
+  console.log(req.body);
+  if(validator.isLength(req.body.name, {min:3,max:15}) ){
     
     console.log(req.body);
     res.redirect("/project/1");
