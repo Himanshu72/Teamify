@@ -9,7 +9,14 @@ var validator = require('validator');
 /* G  ET home page. */
 
 
-
+function checkproj(req, res, next){
+    req.session.user.projects.forEach((ele)=>{
+          if(ele._id==req.params.projid){
+            next();
+          }
+    });
+    res.redirect(`/dashboard/${req.session.user._id }`);
+}
 function checkuser(req, res, next) {
  if(!req.session.user){
   res.render('login',{title:"login",err:false,msg:"",type:"",navbar:{user:false}});
@@ -63,9 +70,9 @@ router.get("/dashboard/:id",checkuser,(req,res)=>{
  
 });
 
-router.get("/project/:projid",(req,res)=>{
+router.get("/project/:projid",checkuser,checkproj,(req,res)=>{
 
-  res.render('project',{title:"project",navbar:{user:true}});
+  res.render('project',{title:"project",navbar:{user:true,projid:req.params.projid}});
 });
 
 
@@ -74,29 +81,29 @@ router.get("/test",(req,res)=>{
   res.render('test',{title:"test",navbar:{user:false}});
 });
 
-router.get("/meeting",(req,res)=>{
+router.get("/meeting/:projid",checkuser,checkproj,(req,res)=>{
 
-  res.render('meeting',{title:"meeting",err:false,msg:"",type:"",navbar:{user:true}});
+  res.render('meeting',{title:"meeting",err:false,msg:"",type:"",navbar:{user:true,projid:req.params.projid}});
 });
 
-router.get("/accessControl",(req,res)=>{
+router.get("/accessControl/:projid",(req,res)=>{
 
-  res.render('accessControl',{title:"accessControl",navbar:{user:true}});
+  res.render('accessControl',{title:"accessControl",navbar:{user:true,projid:req.params.projid}});
 });
-router.get("/notification",(req,res)=>{
+router.get("/notification/:projid",(req,res)=>{
 
-  res.render('notification',{title:"notification",navbar:{user:true}});
+  res.render('notification',{title:"notification",navbar:{user:true,projid:req.params.projid}});
 });
-router.get("/manageTask",(req,res)=>{
+router.get("/manageTask/:projid",(req,res)=>{
 
-  res.render('Manage_Task',{title:"manageTask",navbar:{user:true}});
+  res.render('Manage_Task',{title:"manageTask",navbar:{user:true,projid:req.params.projid}});
 });
 router.get("/forgotPassword",(req,res)=>{
   
   res.render('forgotPassword',{title:"Forgot Password",navbar:{user:false},err:false,msg:"",type:"",mtitle:""  });
 });
 
-router.get("/videocall/:room",(req,res)=>{
+router.get("/videocall/:room",checkuser,(req,res)=>{
     res.render("videocall",{title:"videocall",navbar:{user:false}});
 });
 
@@ -143,6 +150,7 @@ router.post("/forgotpassword",(req,res)=>{
           req.body.owner=req.session.user._id;      
       utility.pushProject(req.session.user._id,req.body).then((result)=>{
         req.session.user=result;
+        
         res.redirect(`/dashboard/${req.session.user._id}`);
       }).catch(()=>{
         let {projects}=req.session.user;
