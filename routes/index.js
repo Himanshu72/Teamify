@@ -151,7 +151,12 @@ router.post("/forgotpassword",(req,res)=>{
       utility.pushProject(req.session.user._id,req.body).then((result)=>{
         req.session.user=result;
         
-        res.redirect(`/dashboard/${req.session.user._id}`);
+        utility.insertProject({_id:result.projects[result.projects.length -1]._id }).then(()=>{
+          res.redirect(`/dashboard/${req.session.user._id}`);
+        }).catch(()=>{
+          res.render('dashboard',{title:"dashboard",navbar:{user:true},err:true,msg:"Unable to create Project",type:"error",data:projects})
+        })
+        
       }).catch(()=>{
         let {projects}=req.session.user;
         res.render('dashboard',{title:"dashboard",navbar:{user:true},err:true,msg:"Unable to create Project",type:"error",data:projects});

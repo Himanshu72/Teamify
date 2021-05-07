@@ -89,15 +89,20 @@ module.exports={
     }
     ,
     insertProject:(obj)=>{
-      const projectData = new projectModel(obj);
+      
+      return new Promise((resolve,reject)=>{
+        const projectData = new projectModel(obj);
       projectData.save((err,res)=>{
         if(err)
-          console.log(err);
+           rej(err)
         else
-          console.log(res);
+          resolve(res);
+      })  
       })
-    },
-   pushProject: (username,obj)=>{
+      
+      
+    }
+   ,pushProject: (username,obj)=>{
     
     return new Promise(async (resolve,rej)=>{
          userModel.findOneAndUpdate(
