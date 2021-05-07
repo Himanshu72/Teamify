@@ -96,7 +96,9 @@ router.get("/forgotPassword",(req,res)=>{
   res.render('forgotPassword',{title:"Forgot Password",navbar:{user:false},err:false,msg:"",type:"",mtitle:""  });
 });
 
-
+router.get("/videocall/:room",(req,res)=>{
+    res.render("videocall",{title:"videocall",navbar:{user:false}});
+});
 
 /*POST*/
 

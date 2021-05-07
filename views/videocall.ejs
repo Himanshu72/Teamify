@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    
+    <%- include('common/links'); %>
+
+  </head>
+  <body>
+    <%- include('common/navbar',{user:navbar.user}); %>
+ <span id="meet" style="margin: auto;" > </span>
+
+
+    <%- include('common/footer'); %>
+    <script src='https://meet.jit.si/external_api.js'></script>
+    <script>
+    const domain = 'meet.jit.si';
+const options = {
+    roomName: 'Roomname',
+    width: window.screen.width ,
+    height:window.screen.height- 279,
+    parentNode: document.querySelector('#meet'),
+    interfaceConfigOverwrite:{
+    SHOW_BRAND_WATERMARK: false,
+    SHOW_JITSI_WATERMARK: false,
+    SHOW_WATERMARK_FOR_GUESTS: false,
+    SHOW_POWERED_BY: false
+    }
+    
+};
+const api = new JitsiMeetExternalAPI(domain, options);
+    </script>
+  </body>
+  </html>
+
