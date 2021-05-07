@@ -8,17 +8,28 @@ const notify=require("../utility/notifications");
 var validator = require('validator');
 /* G  ET home page. */
 
-function requiredAuthentication(req, res, next) {
- if(!req.session.user)
-  res.render('login',{title:"login",err:false,msg:"",type:""});
-  else
+
+
+function checkuser(req, res, next) {
+ if(!req.session.user){
+  res.render('login',{title:"login",err:false,msg:"",type:"",navbar:{user:false}});
+ }else
        next();
   
 }
 
-router.get('/', async function (req, res, next) {
- 
-  res.render('index',{title:"Home"});
+router.get('/',async function (req, res, next) {
+ if(req.session.user)
+ {
+  res.redirect(`/dashboard/${req.session.user._id}`);
+ }else{
+  res.render('index',{title:"Home",navbar:{user:false}});
+ }
+});
+
+router.get('/logout', async function (req, res, next) {
+  req.session.destroy();
+  res.redirect("/login");
 
 });
 
@@ -27,59 +38,76 @@ router.get("/login",(req,res)=>{
   if(req.session.user)
        res.redirect(`/dashboard/${req.session.user._id}`);
   else
-    res.render('login',{title:"login",err:false,msg:"",type:""});
+    res.render('login',{title:"login",err:false,msg:"",type:"",navbar:{user:false}});
   
  
 });
 
 router.get("/signup",async(req,res)=>{
  
-  res.render('signup',{title:"signup" ,err:false,msg:"",type:""});
+  res.render('signup',{title:"signup" ,err:false,msg:"",type:"",navbar:{user:false}});
 });
 
 router.get("/profile",(req,res)=>{
 
-  res.render('profile',{title:"profile"});
+  res.render('profile',{title:"profile",navbar:{}});
 });
 
 
-router.get("/dashboard/:id",(req,res)=>{
-
-  res.render('dashboard',{title:"dashboard"});
+router.get("/dashboard/:id",checkuser,(req,res)=>{
+  if(req.params.id!=req.session.user._id)
+        res.redirect(`/dashboard/${req.session.user._id}`);
+  res.render('dashboard',{title:"dashboard",navbar:{user:true}});
+  utility.pushProject("Jellyfish",{
+    name:"project",
+    description:"one two three four five",
+    owner:"jellyfish"
+  }
+).then((result)=>{
+  console.log(result);
+}).catch(()=>{
+   console.log("error");
+})
 });
 
 router.get("/project",(req,res)=>{
 
-  res.render('project',{title:"project"});
+  res.render('project',{title:"project",navbar:{user:true}});
 });
 
 
 router.get("/test",(req,res)=>{
 
-  res.render('test',{title:"test"});
+  res.render('test',{title:"test",navbar:{user:false}});
 });
 
 router.get("/meeting",(req,res)=>{
 
-  res.render('meeting',{title:"meeting",err:false,msg:"",type:""});
+  res.render('meeting',{title:"meeting",err:false,msg:"",type:"",navbar:{user:true}});
 });
 
 router.get("/accessControl",(req,res)=>{
 
-  res.render('accessControl',{title:"accessControl"});
+  res.render('accessControl',{title:"accessControl",navbar:{user:true}});
 });
 router.get("/notification",(req,res)=>{
 
-  res.render('notification',{title:"notification"});
+  res.render('notification',{title:"notification",navbar:{user:true}});
 });
 router.get("/manageTask",(req,res)=>{
 
-  res.render('Manage_Task',{title:"manageTask"});
+  res.render('Manage_Task',{title:"manageTask",navbar:{user:true}});
 });
 
 
 
 /*POST*/
+ router.post("/createProject",checkuser,(req,res)=>{
+ 
+      
+
+ });
+
 router.post("/signup",async (req,res)=>{
 
  
@@ -104,15 +132,14 @@ if(
  utility.insertUser(req.body).then(()=>{
   res.redirect("/login");
  }).catch(()=>{
-  res.render('signup',{title:"signup",err:true,msg:"Something went wrong...",type:"error"})
+  res.render('signup',{title:"signup",err:true,msg:"Something went wrong...",type:"error",navbar:{user:false}})
  })
 
  
 
 }
 else{
-     res.render('signup',{title:"signup",err:true,msg:"Validation failed",type:"error"});
-
+     res.render('signup',{title:"signup",err:true,msg:"Validation failed",type:"error",navbar:{user:false}});
 }
 
 });
@@ -129,16 +156,16 @@ router.post("/login",(req,res)=>{
         res.redirect(`/dashboard/${req.body.username}`);
        
       }else{
-        res.render('login',{title:"login",err:true,msg:"Invalid password",type:"error"});
+        res.render('login',{title:"login",err:true,msg:"Invalid password",type:"error",navbar:{user:false}});
       }
     }).catch(()=>{
-      res.render('login',{title:"login",err:true,msg:"Invalid username or password",type:"error"});  
+      res.render('login',{title:"login",err:true,msg:"Invalid username or password",type:"error",navbar:{user:false}});  
     });
     
   }
   else{
 
-    res.render('login',{title:"login",err:true,msg:"Email or Password validation failed",type:"error"});
+    res.render('login',{title:"login",err:true,msg:"Email or Password validation failed",type:"error",navbar:{user:false}});
   }
   console.log(req.body);
   //req.body._id=req.body.username;
@@ -167,7 +194,7 @@ router.post("/meeting",(req,res)=>{
   //req.body.minutesOfMeeting={ name:req.body.name,description:req.body.description, date:req.body.date , author:req.body.author};
 
  else{
-  res.render('meeting',{title:"meeting",err:true,msg:"Failed to create meet link",type:"error"});
+  res.render('meeting',{title:"meeting",err:true,msg:"Failed to create meet link",type:"error",navbar:{user:true}});
  }
  // req.body._id=req.body.username;
 //  utility.insertMeet(req.body);

@@ -85,9 +85,24 @@ module.exports={
           console.log(res);
       })
     },
-
-  // finds
-    finduserByusername:(id)=>{
+   pushProject: (username,obj)=>{
+    
+    return new Promise(async (resolve,rej)=>{
+      let project=await userModel.findByIdAndUpdate(
+        {_id:username},
+        {
+          projects:{
+            $push:obj
+        } }
+      );
+      if(project!=null)
+           resolve(project);
+       else
+           rej()    
+    })
+    
+   
+   },finduserByusername:(id)=>{
       
       return new Promise((resolve,rej)=>{
       

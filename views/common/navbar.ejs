@@ -35,18 +35,21 @@
           <!-- Search form -->
 
           <span style="position: absolute; right: 10px; ">
+           <%if(!user){%>
             <a href="/login" style="color: black; text-decoration: none;">
             <button class=" btn-lg " type="button" data-mdb-ripple-color="dark" style="background-color:whitesmoke; cursor: pointer;">
               
               Log In 
             </button></a>
+            <%}%>
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            <a href="/login" style="color: black; text-decoration: none;">
+            <%if(user){%>
+            <a href="/logout" style="color: black; text-decoration: none;">
             <button class=" btn-lg" type="button" data-mdb-ripple-color="dark" style="background-color:whitesmoke; cursor: pointer;">
                Log Out 
             </button>
           </a>
-  
+          <%}%>
             </span>
 
 
