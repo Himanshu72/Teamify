@@ -88,17 +88,16 @@ module.exports={
    pushProject: (username,obj)=>{
     
     return new Promise(async (resolve,rej)=>{
-      let project=await userModel.findByIdAndUpdate(
-        {_id:username},
-        {
-          projects:{
-            $push:obj
-        } }
-      );
-      if(project!=null)
-           resolve(project);
-       else
-           rej()    
+         userModel.findOneAndUpdate(
+        {_id:username},{ $push:{projects:obj}},{new:true},(err,res)=>{
+              if(res){
+                
+                resolve(res);
+              }else{
+                rej();
+              }
+        });
+         
     })
     
    

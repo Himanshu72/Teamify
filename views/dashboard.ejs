@@ -21,38 +21,43 @@
         <br>
         <br>
         <div class="row">
-    
+         
+           
+          <%if(data.length > 0 ){%>
+              <% const imgs=["card_img1.svg","card_img.svg","card_img2.svg","card_img3.svg"]  %>
+                <%let cur=0;%>
+             <% data.forEach((ele,index)=>{ %>   
           <div class="col col-md-3 ">
             <!-- Card -->
             <div class="card">
     
               <!--Card image-->
               <div class="view overlay">
-                <img class="card-img-top" src="/images/card_img1.svg" alt="Card image cap">
-                <a href="/project">
+                <img class="card-img-top" src="/images/<%=imgs[cur]%>" alt="Card image cap">
+                <%cur=cur+1%>
+                <% if(cur==4) cur=0 %>
+                 <a href="/project/<%=ele._id%>">
                   <div class="mask rgba-white-slight"></div>
                 </a>
               </div>
     
               <!--Card content-->
               <div class="card-body">
-    
+              
                 <!--Title-->
-                <h4 class="card-title">Project Name</h4>
+                <h4 class="card-title"><%=ele.name%></h4> 
                 <!--Text-->
-                <p><strong>Created By:</strong><em>Himanshu Joshi</em> </p>
-                <button class="btn btn-primary" type="button" data-mdb-toggle="collapse" data-mdb-target="#collapseExample2"
-                  aria-expanded="false" aria-controls="collapseExample2"
+                <p><strong>Created By:</strong><em><%=ele.owner%></em> </p>
+                <button class="btn btn-primary" type="button" data-mdb-toggle="collapse" data-mdb-target="#des<%=index%>"
+                  aria-expanded="false" aria-controls="des<%=index%>"
                   style="position: relative; width: 100%; background-color: #5f424b; color: white;">
                   Description
                 </button> <br />
                 <!-- Provides extra visual weight and identifies the primary action in a set of buttons -->
-                <p class="card-text collapse mt-3" id="collapseExample2">
-                  Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad
-                  squid. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt
-                  sapiente ea proident.
+                <p class="card-text collapse mt-3" id="des<%=index%>">
+                   <%=ele.description%>
                 </p><br>
-                <a class="btn " style="background-color: #515260; color:white" href="/project" role="button">view project</a>
+                <a class="btn " style="background-color: #515260; color:white" href="/project/<%=ele._id%>" role="button">view project</a>
     
               </div>
     
@@ -61,94 +66,10 @@
             </div>
             <!-- Card -->
           </div>
-          <div class="col col-md-3 ">
-            <!-- Card -->
-            <div class="card">
-    
-              <!--Card image-->
-              <div class="view overlay">
-                <img class="card-img-top" src="/images/card_img.svg" alt="Card image cap">
-                <a href="#!">
-                  <div class="mask rgba-white-slight"></div>
-                </a>
-              </div>
-    
-              <!--Card content-->
-              <div class="card-body">
-    
-                <!--Title-->
-                <h4 class="card-title">Card title</h4>
-                <!--Text-->
-                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
-                  card's content.</p>
-                <!-- Provides extra visual weight and identifies the primary action in a set of buttons -->
-                <button type="button" class="btn btn-light-blue btn-md">view project</button>
-    
-              </div>
-    
-            </div>
-            <!-- Card -->
-          </div>
-          <div class="col col-md-3 ">
-            <!-- Card -->
-            <div class="card">
-    
-              <!--Card image-->
-              <div class="view overlay">
-                <img class="card-img-top" src="/images/card_img2.svg" alt="Card image cap">
-                <a href="#!">
-                  <div class="mask rgba-white-slight"></div>
-                </a>
-              </div>
-    
-              <!--Card content-->
-              <div class="card-body">
-    
-                <!--Title-->
-                <h4 class="card-title">Card title</h4>
-                <!--Text-->
-                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
-                  card's content.</p>
-                <!-- Provides extra visual weight and identifies the primary action in a set of buttons -->
-                <button type="button" class="btn  btn-md ">view project</button>
-    
-              </div>
-    
-            </div>
-            <!-- Card -->
-          </div>
-          <div class="col col-md-3 ">
-            <!-- Card -->
-            <div class="card">
-    
-              <!--Card image-->
-              <div class="view overlay">
-                <img class="card-img-top" src="/images/card_img3.svg" alt="Card image cap">
-                <a href="#!">
-                  <div class="mask rgba-white-slight"></div>
-                </a>
-              </div>
-    
-              <!--Card content-->
-              <div class="card-body">
-    
-                <!--Title-->
-                <h4 class="card-title">Card title</h4>
-                <!--Text-->
-    
-                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
-                  card's content.</p>
-                <!-- Provides extra visual weight and identifies the primary action in a set of buttons -->
-                <button type="button" class="btn btn-light-blue btn-md">view project</button>
-    
-              </div>
-    
-            </div>
-            <!-- Card -->
-          </div>
-    
-          <!-- Card -->
-    
+         
+         <% }); %>
+          
+    <%}%>
         </div>
     
     
@@ -203,6 +124,11 @@
     
 
     <%- include('common/footer'); %>
+    <script>
+        <% if (err) { %>
+        swal("ERROR", "<%=msg%>", "<%=type%>");
+         <% } %>
+      </script>
   </body>
   </html>
 

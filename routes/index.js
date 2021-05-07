@@ -55,22 +55,14 @@ router.get("/profile",(req,res)=>{
 
 
 router.get("/dashboard/:id",checkuser,(req,res)=>{
+  let {projects}=req.session.user;
   if(req.params.id!=req.session.user._id)
         res.redirect(`/dashboard/${req.session.user._id}`);
-  res.render('dashboard',{title:"dashboard",navbar:{user:true}});
-  utility.pushProject("Jellyfish",{
-    name:"project",
-    description:"one two three four five",
-    owner:"jellyfish"
-  }
-).then((result)=>{
-  console.log(result);
-}).catch(()=>{
-   console.log("error");
-})
+  res.render('dashboard',{title:"dashboard",navbar:{user:true},err:false,msg:"",type:"error",data:projects});
+ 
 });
 
-router.get("/project",(req,res)=>{
+router.get("/project/:projid",(req,res)=>{
 
   res.render('project',{title:"project",navbar:{user:true}});
 });
@@ -104,7 +96,15 @@ router.get("/manageTask",(req,res)=>{
 /*POST*/
  router.post("/createProject",checkuser,(req,res)=>{
  
-      
+      // tanya do validation here
+        req.body.owner=req.session.user._id;      
+      utility.pushProject(req.session.user._id,req.body).then((result)=>{
+        req.session.user=result;
+        res.redirect(`/dashboard/${req.session.user._id}`);
+      }).catch(()=>{
+        let {projects}=req.session.user;
+        res.render('dashboard',{title:"dashboard",navbar:{user:true},err:true,msg:"Unable to create Project",type:"error",data:projects});
+      })
 
  });
 
@@ -174,14 +174,7 @@ router.post("/login",(req,res)=>{
 });
 
 
-router.post("/dashboard",(req,res)=>{
-  
-  req.body.projects={ name:req.body.name,description:req.body.description };
-  console.log(req.body);
-  //req.body._id=req.body.username;
-  //utility.insertUser(req.body);
-  res.redirect("/dashboard");
-});
+
 
 
 
@@ -189,7 +182,7 @@ router.post("/meeting",(req,res)=>{
   if(validator.isLength(req.body.name, {min:3,max:15}) && validator.isLength(req.body.meetPassword, {min:5,max:15}) ){
     
     console.log(req.body);
-    res.redirect("/project");
+    res.redirect("/project/1");
   }
   //req.body.minutesOfMeeting={ name:req.body.name,description:req.body.description, date:req.body.date , author:req.body.author};
 
