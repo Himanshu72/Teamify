@@ -1,96 +1,110 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title><%= title %></title>
-    
-    <%- include('common/links'); %>
+
+<head>
+  <title>
+    <%= title %>
+  </title>
+
+  <%- include('common/links'); %>
     <style>
-        body{
-          font-family:  #555;
+      body {
+        font-family: #555;
       }
+
       .select-list {
-    font-family: 'Open Sans', sans-serif;
-    color: #555;
-    background: #fff;
-  }
-  .select-list .title {
-    display: inline-block;
-    cursor: pointer;
-    background: #fff;
-    border: 1px solid  #eaeaec;
-    border-radius: 5px;
-    padding: 10px 15px 10px 15px;
-  }
-  .select-list .title::after {
-    display: inline-block;
-    content: '>';
-    margin-left: 15px;
-    font-size: 11px;
-    transform: rotate(90deg) scale(1, 2);
-  }
-  .select-list .title:hover {
-    background: #eaeaec;
-  }
-  .select-list .select-options {
-    margin-top: 5px;
-    display: none;
-    position: absolute;
-    z-index: 500;
-    border: 1px solid  #eaeaec;
-    background: #fff;
-  }
-  .select-list .select-options .option label {
-    display: inline-block;
-    padding: 10px 30px 10px 10px;
-  }
-  .select-list .select-options .option:hover {
-    background: #eaeaec;
-  }
-  .select-list .select-options .option input {
-    margin: 10px 0 12px 15px;
-  }
-  .formclass{
-      width:70%;
-      margin: auto;
-      padding:10%;
-  }
-  .buttons{
-      width: 40%;
-      background-color: #4e333b;
-      border-radius: 4px;  
-      outline: none;
-      border: none;
-      cursor: pointer;
-      color: white;
-      padding: 1%;
-      font-size: 1.2em;
-     
-  }
-  
-  .list-group > .list-group {
-    display: none;
-    margin-bottom: 0;
-    
-  }
-  .list-group-item:focus-within + .list-group {
-    display: block;
-    
-  }
-  
-  .list-group > .list-group-item {
-    border-radius: 0;
-    border-width: 1px 0 0 0;
-    color:black;
-  }
-  
-  .list-group > .list-group-item:first-child {
-    border-top-width: 0;
-  }
-  
-  .list-group  > .list-group > .list-group-item {
-    padding-left: 2.5rem;
-  }
-  
+        font-family: 'Open Sans', sans-serif;
+        color: #555;
+        background: #fff;
+      }
+
+      .select-list .title {
+        display: inline-block;
+        cursor: pointer;
+        background: #fff;
+        border: 1px solid #eaeaec;
+        border-radius: 5px;
+        padding: 10px 15px 10px 15px;
+      }
+
+      .select-list .title::after {
+        display: inline-block;
+        content: '>';
+        margin-left: 15px;
+        font-size: 11px;
+        transform: rotate(90deg) scale(1, 2);
+      }
+
+      .select-list .title:hover {
+        background: #eaeaec;
+      }
+
+      .select-list .select-options {
+        margin-top: 5px;
+        display: none;
+        position: absolute;
+        z-index: 500;
+        border: 1px solid #eaeaec;
+        background: #fff;
+      }
+
+      .select-list .select-options .option label {
+        display: inline-block;
+        padding: 10px 30px 10px 10px;
+      }
+
+      .select-list .select-options .option:hover {
+        background: #eaeaec;
+      }
+
+      .select-list .select-options .option input {
+        margin: 10px 0 12px 15px;
+      }
+
+      .formclass {
+        width: 70%;
+        margin: auto;
+        padding: 10%;
+      }
+
+      .buttons {
+        width: 40%;
+        background-color: #4e333b;
+        border-radius: 4px;
+        outline: none;
+        border: none;
+        cursor: pointer;
+        color: white;
+        padding: 1%;
+        font-size: 1.2em;
+
+      }
+
+      .list-group>.list-group {
+        display: none;
+        margin-bottom: 0;
+
+      }
+
+      .list-group-item:focus-within+.list-group {
+        display: block;
+
+      }
+
+      .list-group>.list-group-item {
+        border-radius: 0;
+        border-width: 1px 0 0 0;
+        color: black;
+      }
+
+      .list-group>.list-group-item:first-child {
+        border-top-width: 0;
+      }
+
+      .list-group>.list-group>.list-group-item {
+        padding-left: 2.5rem;
+      }
+
       .btn_cust {
         padding: 1%;
         background: rgb(81, 82, 96);
@@ -102,24 +116,25 @@
         cursor: pointer;
         transition: all ease 0.3s;
       }
-  
+
       .btn_cust:focus {
         outline: none;
         border: none;
-  
+
       }
-  
+
       .myBtn {
         height: 2em;
         width: 2em;
       }
-  
+
       .btn_close {
         background: red;
         width: 40%;
       }
-      .btn_save{
-          padding: 2%;
+
+      .btn_save {
+        padding: 2%;
         background: rgb(81, 82, 96);
         color: #fff;
         width: 20%;
@@ -130,387 +145,231 @@
         cursor: pointer;
         transition: all ease 0.3s;
       }
-      .swiper-slide {
-                text-align: center;
-                font-size: 1.3em;
-                background: rgb(81, 82, 96);
-                color: white;
-                border-radius: 2px;
 
-                /* Center slide text vertically */
-                display: -webkit-box;
-                display: -ms-flexbox;
-                display: -webkit-flex;
-                display: flex;
-                -webkit-box-pack: center;
-                -ms-flex-pack: center;
-                -webkit-justify-content: center;
-                justify-content: center;
-                -webkit-box-align: center;
-                -ms-flex-align: center;
-                -webkit-align-items: center;
-                align-items: center;
-            }
+      .swiper-slide {
+        text-align: center;
+        font-size: 1.3em;
+        background: rgb(81, 82, 96);
+        color: white;
+        border-radius: 2px;
+
+        /* Center slide text vertically */
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: -webkit-flex;
+        display: flex;
+        -webkit-box-pack: center;
+        -ms-flex-pack: center;
+        -webkit-justify-content: center;
+        justify-content: center;
+        -webkit-box-align: center;
+        -ms-flex-align: center;
+        -webkit-align-items: center;
+        align-items: center;
+      }
     </style>
-  </head>
-  <body>
-    <%- include('common/navbar',{user:navbar.user}); %>
+</head>
+
+<body>
+  <%- include('common/navbar',{user:navbar.user}); %>
     <%- include('common/sidenav',{id:navbar.projid}); %>
- 
-    <ul class="nav nav-tabs mb-3" id="myTab0" role="tablist">
+
+      <ul class="nav nav-tabs mb-3" id="myTab0" role="tablist">
         <li class="nav-item" role="presentation">
-          <button class="nav-link active" id="home-tab0" data-mdb-toggle="tab" data-mdb-target="#home0" type="button" role="tab" aria-controls="home" aria-selected="true">Assign task</button>
+          <button class="nav-link active" id="home-tab0" data-mdb-toggle="tab" data-mdb-target="#home0" type="button"
+            role="tab" aria-controls="home" aria-selected="true">Assign task</button>
         </li>
         <li class="nav-item" role="presentation">
-          <button class="nav-link" id="profile-tab0" data-mdb-toggle="tab" data-mdb-target="#profile0" type="button" role="tab" aria-controls="profile" aria-selected="false">Team members</button>
+          <button class="nav-link" id="profile-tab0" data-mdb-toggle="tab" data-mdb-target="#profile0" type="button"
+            role="tab" aria-controls="profile" aria-selected="false">Team members</button>
         </li>
-        
+        <li class="nav-item" role="presentation">
+          <button class="nav-link" id="new-tab1" data-mdb-toggle="tab" data-mdb-target="#new1" type="button" role="tab"
+            aria-controls="new1" aria-selected="false">Create Group</button>
+        </li>
+
       </ul>
-      
-      
+
+
       <div class="tab-content" id="myTabContent0">
+
         <div class="tab-pane fade show active" id="home0" role="tabpanel" aria-labelledby="home-tab0">
-          
-      
+
+
           <div class="containering">
-      
-              <div class="row">
-          
-                <div class="col-md" style="padding: 10%;">
-      
-                  <button type="button" class="btn_save btn-success" style="height: 12%;">
-                      save changes
-                    </button>
-          
-                  <ol class="list-group list-group-numbered">
-                    <li class="list-group-item">
-          
-                      <div class="container">
-                        <div class="row">
-                          <div class="col-md" style="padding: 0.5em;">
-                            Member 1
-                          </div>
-                          <div class="col-md">
-                            <form class="formclass">
-                              <div class="select-list">
-                                <div class="title">Task Assigned</div>
-                                <div class="select-options">
-                                  <div class="option">
-                                    <input type="checkbox" name="vehicle" id="option1" value="" />
-                                    <label for="option1">task 1</label>
-                                  </div>
-                                  <div class="option">
-                                    <input type="checkbox" name="vehicle" id="option2" />
-                                    <label for="option2">task 2</label>
-                                  </div>
-                                  <div class="option">
-                                    <input type="checkbox" name="vehicle" id="option3" />
-                                    <label for="option3">task 3</label>
-                                  </div>
-                                  <div class="option">
-                                    <input type="checkbox" name="vehicle" id="option4" />
-                                    <label for="option4">task 4</label>
-                                  </div>
-                                </div>
-                              </div>
-                            </form>
-                          </div>
-          
-          
-          
+
+            <div class="row">
+
+              <div class="col-md" style="padding: 10%;">
+
+                <button type="button" class="btn_save btn-success" style="height: 12%;">
+                  save changes
+                </button>
+
+                <ol class="list-group list-group-numbered">
+                  <li class="list-group-item">
+
+                    <div class="container">
+                      <div class="row">
+                        <div class="col-md" style="padding: 0.5em;">
+                          Member 1
                         </div>
-                      </div>
-          
-          
-          
-                    </li>
-                    <li class="list-group-item">
-          
-                      <div class="container">
-                        <div class="row">
-                          <div class="col-md" style="padding: 0.5em;">
-                            Member 1
-                          </div>
-                          <div class="col-md">
-                            <form class="formclass">
-                              <div class="select-list">
-                                <div class="title">Task Assigned</div>
-                                <div class="select-options">
-                                  <div class="option">
-                                    <input type="checkbox" name="vehicle" id="option1" value="" />
-                                    <label for="option1">task 1</label>
-                                  </div>
-                                  <div class="option">
-                                    <input type="checkbox" name="vehicle" id="option2" />
-                                    <label for="option2">task 2</label>
-                                  </div>
-                                  <div class="option">
-                                    <input type="checkbox" name="vehicle" id="option3" />
-                                    <label for="option3">task 3</label>
-                                  </div>
-                                  <div class="option">
-                                    <input type="checkbox" name="vehicle" id="option4" />
-                                    <label for="option4">task 4</label>
-                                  </div>
-                                </div>
-                              </div>
-                            </form>
-                          </div>
-          
-          
-          
-                        </div>
-                      </div>
-          
-          
-          
-                    </li>
-                    <li class="list-group-item">
-          
-                      <div class="container">
-                        <div class="row">
-                          <div class="col-md" style="padding: 0.5em;">
-                            Member 1
-                          </div>
-                          <div class="col-md">
-                            <form class="formclass">
-                              <div class="select-list">
-                                <div class="title">Task Assigned</div>
-                                <div class="select-options">
-                                  <div class="option">
-                                    <input type="checkbox" name="vehicle" id="option1" value="" />
-                                    <label for="option1">task 1</label>
-                                  </div>
-                                  <div class="option">
-                                    <input type="checkbox" name="vehicle" id="option2" />
-                                    <label for="option2">task 2</label>
-                                  </div>
-                                  <div class="option">
-                                    <input type="checkbox" name="vehicle" id="option3" />
-                                    <label for="option3">task 3</label>
-                                  </div>
-                                  <div class="option">
-                                    <input type="checkbox" name="vehicle" id="option4" />
-                                    <label for="option4">task 4</label>
-                                  </div>
-                                </div>
-                              </div>
-                            </form>
-                          </div>
-          
-          
-          
-                        </div>
-                      </div>
-          
-          
-          
-                    </li>
-                  </ol>
-          
-                </div>
-          
-                <div class="col-md">
-                  <img src="/images/memberTask.svg" class="img-fluid " style="height: 80%;" alt="..." />
-                </div>
-              </div>
-          
-          
-            </div>
-      
-      
-        </div>
-        <div class="tab-pane fade" id="profile0" role="tabpanel" aria-labelledby="profile-tab0">  
-      
-      
-      
-      
-      
-      
-          
-          <div class="containering">
-      
-              <div class="row">
-          
-                <div class="col-md" style="padding: 10%;">
-                  <button type="button" class="btn_save btn-success" data-mdb-dismiss="modal">
-                      save changes
-                    </button>
-          
-                  <ol class="list-group list-group-numbered">
-                    <li class="list-group-item">
-          
-                      <div class="container">
-                        <div class="row">
-                          <div class="col-md" style="padding: 0.5em;">
-                            Member 1
-                          </div>
-                          <div class="col-md">
-                            <form class="formclass">
-                              <div class="select-list">
-                                <div class="title">In groups</div>
-                                <div class="select-options">
-                                  <div class="option">
-                                    <input type="checkbox" name="vehicle" id="option1" value="" />
-                                    <label for="option1">Group 1</label>
-                                  </div>
-                                  <div class="option">
-                                    <input type="checkbox" name="vehicle" id="option2" />
-                                    <label for="option2">Group 2</label>
-                                  </div>
-                                  <div class="option">
-                                    <input type="checkbox" name="vehicle" id="option3" />
-                                    <label for="option3">Group 3</label>
-                                  </div>
-                                  <div class="option">
-                                    <input type="checkbox" name="vehicle" id="option4" />
-                                    <label for="option4">Group 4</label>
-                                  </div>
-                                </div>
-                              </div>
-                            </form>
-                          </div>
-                          
-                          <div class="col-md" style="padding: 0.5em;">
-                            <button type="button" class="btn_cust btn_close btn-danger" data-mdb-dismiss="modal">
-                              delete
-                            </button>
-                          </div>
-                        
-                        </div>
-                      </div>
-          
-          
-          
-                    </li>
-                    <li class="list-group-item">
-          
-                      <div class="container">
-                        <div class="row">
-                          <div class="col-md" style="padding: 0.5em;">
-                            Member 1
-                          </div>
-                          <div class="col-md">
-                            <form class="formclass">
-                              <div class="select-list">
-                                <div class="title">In groups</div>
-                                <div class="select-options">
-                                  <div class="option">
-                                    <input type="checkbox" name="vehicle" id="option1" value="" />
-                                    <label for="option1">Group 1</label>
-                                  </div>
-                                  <div class="option">
-                                    <input type="checkbox" name="vehicle" id="option2" />
-                                    <label for="option2">Group 2</label>
-                                  </div>
-                                  <div class="option">
-                                    <input type="checkbox" name="vehicle" id="option3" />
-                                    <label for="option3">Group 3</label>
-                                  </div>
-                                  <div class="option">
-                                    <input type="checkbox" name="vehicle" id="option4" />
-                                    <label for="option4">Group 4</label>
-                                  </div>
-                                </div>
-                              </div>
-                            </form>
-                          </div>
-                          
-                          <div class="col-md" style="padding: 0.5em;">
-                            <button type="button" class="btn_cust btn_close btn-danger" data-mdb-dismiss="modal">
-                              delete
-                            </button>
-                          </div>
-                        
-                        </div>
-                      </div>
-          
-          
-          
-                    </li>
-                    <li class="list-group-item">
-          
-                      <div class="container">
-                        <div class="row">
-                          <div class="col-md" style="padding: 0.5em;">
-                            Member 1
-                          </div>
-                          <div class="col-md">
-                            <form class="formclass">
-                              <div class="select-list">
-                                <div class="title">In groups</div>
-                                <div class="select-options">
-                                  <div class="option">
-                                    <input type="checkbox" name="vehicle" id="option1" value="" />
-                                    <label for="option1">Group 1</label>
-                                  </div>
-                                  <div class="option">
-                                    <input type="checkbox" name="vehicle" id="option2" />
-                                    <label for="option2">Group 2</label>
-                                  </div>
-                                  <div class="option">
-                                    <input type="checkbox" name="vehicle" id="option3" />
-                                    <label for="option3">Group 3</label>
-                                  </div>
-                                  <div class="option">
-                                    <input type="checkbox" name="vehicle" id="option4" />
-                                    <label for="option4">Group 4</label>
-                                  </div>
-                                </div>
-                              </div>
-                            </form>
-                          </div>
-                          
-                          <div class="col-md" style="padding: 0.5em;">
-                            <button type="button" class="btn_cust btn_close btn-danger" data-mdb-dismiss="modal">
-                              delete
-                            </button>
-                          </div>
-                        
-                        </div>
-                      </div>
-          
-          
-          
-                    </li>
-                  </ol>
-          
-                </div>
-          
-                <div class="col-md">
-                  <img src="/images/teammembers.svg" class="img-fluid " style="height: 80%;" alt="..." />
-                </div>
-              </div>
-          
-              <button type="button" class="myBtn" data-mdb-toggle="modal" data-mdb-target="#exampleModal"
-                style="background-color:#ff636b;color:white;font-size: 1.5em;; position: fixed; bottom: 6%;left: 4%; z-index:10; ">
-                <i class="fas fa-plus"></i>
-              </button>
-          
-          
-              <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div class="modal-dialog">
-                  <div class="modal-content">
-                    <div class="modal-header">
-                      <h5 class="modal-title" id="exampleModalLabel">Add Member</h5>
-          
-                    </div>
-                    <div class="modal-body">
-                      <form>
-          
-                        <!-- meeting title input -->
-                        <div class="form-outline mb-4">
-                          <label class="form-label" for="meetingTitle">Member name</label>
-                          <input type="text" id="meetingTitle" class="form-control" name="meetingTitle" />
-                          
-                        </div>
-          
-                        
-                        <div class="form-outline mb-4">
-                          <label class="form-label" for="meetingTitle">Assign groups</label>
+                        <div class="col-md">
                           <form class="formclass">
                             <div class="select-list">
-                              <div class="title">select groups</div>
+                              <div class="title">Task Assigned</div>
+                              <div class="select-options">
+                                <div class="option">
+                                  <input type="checkbox" name="vehicle" id="option1" value="" />
+                                  <label for="option1">task 1</label>
+                                </div>
+                                <div class="option">
+                                  <input type="checkbox" name="vehicle" id="option2" />
+                                  <label for="option2">task 2</label>
+                                </div>
+                                <div class="option">
+                                  <input type="checkbox" name="vehicle" id="option3" />
+                                  <label for="option3">task 3</label>
+                                </div>
+                                <div class="option">
+                                  <input type="checkbox" name="vehicle" id="option4" />
+                                  <label for="option4">task 4</label>
+                                </div>
+                              </div>
+                            </div>
+                          </form>
+                        </div>
+
+
+
+                      </div>
+                    </div>
+
+
+
+                  </li>
+                  <li class="list-group-item">
+
+                    <div class="container">
+                      <div class="row">
+                        <div class="col-md" style="padding: 0.5em;">
+                          Member 1
+                        </div>
+                        <div class="col-md">
+                          <form class="formclass">
+                            <div class="select-list">
+                              <div class="title">Task Assigned</div>
+                              <div class="select-options">
+                                <div class="option">
+                                  <input type="checkbox" name="vehicle" id="option1" value="" />
+                                  <label for="option1">task 1</label>
+                                </div>
+                                <div class="option">
+                                  <input type="checkbox" name="vehicle" id="option2" />
+                                  <label for="option2">task 2</label>
+                                </div>
+                                <div class="option">
+                                  <input type="checkbox" name="vehicle" id="option3" />
+                                  <label for="option3">task 3</label>
+                                </div>
+                                <div class="option">
+                                  <input type="checkbox" name="vehicle" id="option4" />
+                                  <label for="option4">task 4</label>
+                                </div>
+                              </div>
+                            </div>
+                          </form>
+                        </div>
+
+
+
+                      </div>
+                    </div>
+
+
+
+                  </li>
+                  <li class="list-group-item">
+
+                    <div class="container">
+                      <div class="row">
+                        <div class="col-md" style="padding: 0.5em;">
+                          Member 1
+                        </div>
+                        <div class="col-md">
+                          <form class="formclass">
+                            <div class="select-list">
+                              <div class="title">Task Assigned</div>
+                              <div class="select-options">
+                                <div class="option">
+                                  <input type="checkbox" name="vehicle" id="option1" value="" />
+                                  <label for="option1">task 1</label>
+                                </div>
+                                <div class="option">
+                                  <input type="checkbox" name="vehicle" id="option2" />
+                                  <label for="option2">task 2</label>
+                                </div>
+                                <div class="option">
+                                  <input type="checkbox" name="vehicle" id="option3" />
+                                  <label for="option3">task 3</label>
+                                </div>
+                                <div class="option">
+                                  <input type="checkbox" name="vehicle" id="option4" />
+                                  <label for="option4">task 4</label>
+                                </div>
+                              </div>
+                            </div>
+                          </form>
+                        </div>
+
+
+
+                      </div>
+                    </div>
+
+
+
+                  </li>
+                </ol>
+
+              </div>
+
+              <div class="col-md">
+                <img src="/images/memberTask.svg" class="img-fluid " style="height: 80%;" alt="..." />
+              </div>
+            </div>
+
+
+          </div>
+
+
+        </div>
+
+
+        <div class="tab-pane fade" id="profile0" role="tabpanel" aria-labelledby="profile-tab0">
+
+
+          <div class="containering">
+
+            <div class="row">
+
+              <div class="col-md" style="padding: 10%;">
+                <button type="button" class="btn_save btn-success" data-mdb-dismiss="modal">
+                  save changes
+                </button>
+
+                <ol class="list-group list-group-numbered">
+                  <li class="list-group-item">
+
+                    <div class="container">
+                      <div class="row">
+                        <div class="col-md" style="padding: 0.5em;">
+                          Member 1
+                        </div>
+                        <div class="col-md">
+                          <form class="formclass">
+                            <div class="select-list">
+                              <div class="title">In groups</div>
                               <div class="select-options">
                                 <div class="option">
                                   <input type="checkbox" name="vehicle" id="option1" value="" />
@@ -532,90 +391,288 @@
                             </div>
                           </form>
                         </div>
-          
-                        <!-- Submit button -->
-                        <button type="submit" class="btn_cust btn-primary btn-block mb-4">Add</button>
-          
-          
-                      </form>
+
+                        <div class="col-md" style="padding: 0.5em;">
+                          <button type="button" class="btn_cust btn_close btn-danger" data-mdb-dismiss="modal">
+                            delete
+                          </button>
+                        </div>
+
+                      </div>
                     </div>
-                    <div class="modal-footer">
-                      <button type="button" class="btn_cust btn_close btn-danger" data-mdb-dismiss="modal">
-                        Close
-                      </button>
-          
+
+
+
+                  </li>
+                  <li class="list-group-item">
+
+                    <div class="container">
+                      <div class="row">
+                        <div class="col-md" style="padding: 0.5em;">
+                          Member 1
+                        </div>
+                        <div class="col-md">
+
+                          <form class="formclass" method="post" >
+                            <div class="select-list">
+                              <div class="title">In groups</div>
+                              <div class="select-options">
+                                <div class="option">
+                                  <input type="checkbox" name="vehicle" id="option1" value="" />
+                                  <label for="option1">Group 1</label>
+                                </div>
+                                <div class="option">
+                                  <input type="checkbox" name="vehicle" id="option2" />
+                                  <label for="option2">Group 2</label>
+                                </div>
+                                <div class="option">
+                                  <input type="checkbox" name="vehicle" id="option3" />
+                                  <label for="option3">Group 3</label>
+                                </div>
+                                <div class="option">
+                                  <input type="checkbox" name="vehicle" id="option4" />
+                                  <label for="option4">Group 4</label>
+                                </div>
+                              </div>
+                            </div>
+                          </form>
+                        </div>
+
+                        <div class="col-md" style="padding: 0.5em;">
+                          <button type="button" class="btn_cust btn_close btn-danger" data-mdb-dismiss="modal">
+                            delete
+                          </button>
+                        </div>
+
+                      </div>
                     </div>
+
+
+
+                  </li>
+                  <li class="list-group-item">
+
+                    <div class="container">
+                      <div class="row">
+                        <div class="col-md" style="padding: 0.5em;">
+                          Member 1
+                        </div>
+                        <div class="col-md">
+                          <form class="formclass">
+                            <div class="select-list">
+                              <div class="title">In groups</div>
+                              <div class="select-options">
+                                <div class="option">
+                                  <input type="checkbox" name="vehicle" id="option1" value="" />
+                                  <label for="option1">Group 1</label>
+                                </div>
+                                <div class="option">
+                                  <input type="checkbox" name="vehicle" id="option2" />
+                                  <label for="option2">Group 2</label>
+                                </div>
+                                <div class="option">
+                                  <input type="checkbox" name="vehicle" id="option3" />
+                                  <label for="option3">Group 3</label>
+                                </div>
+                                <div class="option">
+                                  <input type="checkbox" name="vehicle" id="option4" />
+                                  <label for="option4">Group 4</label>
+                                </div>
+                              </div>
+                            </div>
+                          </form>
+                        </div>
+
+                        <div class="col-md" style="padding: 0.5em;">
+                          <button type="button" class="btn_cust btn_close btn-danger" data-mdb-dismiss="modal">
+                            delete
+                          </button>
+                        </div>
+
+                      </div>
+                    </div>
+
+
+
+                  </li>
+                </ol>
+
+              </div>
+
+              <div class="col-md">
+                <img src="/images/teammembers.svg" class="img-fluid " style="height: 80%;" alt="..." />
+              </div>
+            </div>
+
+            <button type="button" class="myBtn" data-mdb-toggle="modal" data-mdb-target="#exampleModal"
+              style="background-color:#ff636b;color:white;font-size: 1.5em;; position: fixed; bottom: 6%;left: 4%; z-index:10; ">
+              <i class="fas fa-plus"></i>
+            </button>
+
+
+            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+              aria-hidden="true">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Add Member</h5>
+
+                  </div>
+                  <div class="modal-body">
+                    <form>
+
+                      <!-- meeting title input -->
+                      <div class="form-outline mb-4">
+                        <label class="form-label" for="meetingTitle">Member name</label>
+                        <input type="text" id="meetingTitle" class="form-control" name="meetingTitle" />
+
+                      </div>
+
+
+                      <div class="form-outline mb-4">
+                        <label class="form-label" for="meetingTitle">Assign groups</label>
+                        <form class="formclass">
+                          <div class="select-list">
+                            <div class="title">select groups</div>
+                            <div class="select-options">
+                              <div class="option">
+                                <input type="checkbox" name="vehicle" id="option1" value="" />
+                                <label for="option1">Group 1</label>
+                              </div>
+                              <div class="option">
+                                <input type="checkbox" name="vehicle" id="option2" />
+                                <label for="option2">Group 2</label>
+                              </div>
+                              <div class="option">
+                                <input type="checkbox" name="vehicle" id="option3" />
+                                <label for="option3">Group 3</label>
+                              </div>
+                              <div class="option">
+                                <input type="checkbox" name="vehicle" id="option4" />
+                                <label for="option4">Group 4</label>
+                              </div>
+                            </div>
+                          </div>
+                        </form>
+                      </div>
+
+                      <!-- Submit button -->
+                      <button type="submit" class="btn_cust btn-primary btn-block mb-4">Add</button>
+
+
+                    </form>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn_cust btn_close btn-danger" data-mdb-dismiss="modal">
+                      Close
+                    </button>
+
                   </div>
                 </div>
               </div>
-      
-      
+            </div>
+
+
+          </div>
+
         </div>
-        
+
+        <div class="tab-pane fade" id="new1" role="tabpanel" aria-labelledby="new-tab1">
+
+
+          <div class="containering">
+            <div class="row">
+              <div class="col-md-6">
+                <form class="formclass" action="/accessControl" method="POST">
+                  <!-- Email input -->
+                  <div class="form-outline mb-4">
+                    <input type="text" id="form1Example1" class="form-control" name="groupName" required
+                      minlength="4" placeholder="enter the groupname"/>
+                    <label class="form-label" for="form1Example1">Group name</label>
+                  </div>
+                  <div class="form-outline mb-4">
+                    <input type="text" id="form1Example2" class="form-control" name="leader" required minlength="4" placeholder="enter the username"/>
+                    <label class="form-label" for="form1Example2">Leader</label>
+                  </div>
+                  <div style="text-align:center">
+                    <button type="submit" class="buttons">Create</button>
+                  </div>
+                </form>
+              </div>
+              <div class="col-md-6">
+                <img src="/images/group.svg" class="img-fluid myImage" alt="..." />
+              </div>
+            </div>
+
+
+
+
+          </div>
+
+        </div>
+
       </div>
-      
-      
-      
 
-    <%- include('common/footer'); %>
 
-    <script>
-        (function($){
-          $.fn.multiselect = function() {
-            
-            var selector = this;
-            var options = $.extend({
-                  onChange: function() {}
+      <%- include('common/footer'); %>
+
+        <script>
+          (function ($) {
+            $.fn.multiselect = function () {
+
+              var selector = this;
+              var options = $.extend({
+                onChange: function () { }
               }, arguments[0] || {});
-              
-            activate();
-        
-            /////////
-        
-            function activate() {
-                   
-              //events
-              $(selector).find('.title').on('click', function(e) {
-                $(this).parent().find('.select-options').toggle();
-              });
-              
-              $(selector).find('input[type="checkbox"]').change(function(e){
-                options.onChange.call(this);
-              });
-              
-            }
-          };
-          
-        }(jQuery));
-        
-        $(document).ready(function() {
-          $('.select-list').multiselect({
-            onChange: updateTable
-          });
-        });
-          
-        function updateTable() {
-          var checkboxValue = $(this).val();
-          var isChecked = $(this).is(':checked');
-          
-        }
-          </script>
-          <script>
-            $(document).ready(function () {
-                $('.stepper').mdbStepper();
-            })
 
-            var swiper = new Swiper('.swiper-container', {
-                slidesPerView: 3,
-                spaceBetween: 30,
-                pagination: {
-                    el: '.swiper-pagination',
-                    clickable: true,
-                },
-                loop: true
+              activate();
+
+              /////////
+
+              function activate() {
+
+                //events
+                $(selector).find('.title').on('click', function (e) {
+                  $(this).parent().find('.select-options').toggle();
+                });
+
+                $(selector).find('input[type="checkbox"]').change(function (e) {
+                  options.onChange.call(this);
+                });
+
+              }
+            };
+
+          }(jQuery));
+
+          $(document).ready(function () {
+            $('.select-list').multiselect({
+              onChange: updateTable
             });
+          });
+
+          function updateTable() {
+            var checkboxValue = $(this).val();
+            var isChecked = $(this).is(':checked');
+
+          }
+        </script>
+        <script>
+          $(document).ready(function () {
+            $('.stepper').mdbStepper();
+          })
+
+          var swiper = new Swiper('.swiper-container', {
+            slidesPerView: 3,
+            spaceBetween: 30,
+            pagination: {
+              el: '.swiper-pagination',
+              clickable: true,
+            },
+            loop: true
+          });
         </script>
         <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.css" />
-  </body>
-  </html>
+</body>
 
+</html>
