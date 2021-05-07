@@ -100,8 +100,11 @@ router.get("/forgotPassword",(req,res)=>{
 /*POST*/
  router.post("/createProject",checkuser,(req,res)=>{
  
-      // tanya do validation here
-        req.body.owner=req.session.user._id;      
+      
+      if(validator.isLength(req.body.name,{min:5,max:20})
+        &&
+        validator.isLength(req.body.description,{min:20,max:200})){
+          req.body.owner=req.session.user._id;      
       utility.pushProject(req.session.user._id,req.body).then((result)=>{
         req.session.user=result;
         res.redirect(`/dashboard/${req.session.user._id}`);
@@ -109,6 +112,13 @@ router.get("/forgotPassword",(req,res)=>{
         let {projects}=req.session.user;
         res.render('dashboard',{title:"dashboard",navbar:{user:true},err:true,msg:"Unable to create Project",type:"error",data:projects});
       })
+
+      }else{
+        res.render('dashboard',{title:"dashboard",navbar:{user:true},err:true,msg:"Validation failed",type:"error",data:projects});
+
+      }
+
+        
 
  });
 
