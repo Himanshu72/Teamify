@@ -6,7 +6,7 @@
         <%= title %>
     </title>
 
-    <%- include('common/links',{user:navbar.user}); %>
+    <%- include('common/links'); %>
         <style>
             body {
                 font-family: #555;
@@ -159,7 +159,7 @@
 </head>
 
 <body>
-    <%- include('common/navbar'); %>
+    <%- include('common/navbar',{user:navbar.user}); %>
         <%- include('common/sidenav'); %>
             <ul class="nav nav-tabs mb-3" id="myTab0" role="tablist">
                 <li class="nav-item" role="presentation">

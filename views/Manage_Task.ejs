@@ -3,7 +3,7 @@
   <head>
     <title><%= title %></title>
     
-    <%- include('common/links',{user:navbar.user}); %>
+    <%- include('common/links'); %>
     <link href="/stylesheets/reviewstyle.css" rel="stylesheet" />
     <style>
         .icon_btn {
@@ -180,7 +180,7 @@
 
   </head>
   <body>
-    <%- include('common/navbar'); %>
+    <%- include('common/navbar',{user:navbar.user}); %>
     <%- include('common/sidenav'); %>
  
     <ul class="nav nav-tabs mb-3" id="myTab0" role="tablist">
