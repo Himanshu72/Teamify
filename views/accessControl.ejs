@@ -365,7 +365,7 @@
 
                   </div>
                   <div class="modal-body">
-                    <form>
+                    <form action="/addmember/<%=navbar.projid%>" method="POST">
 
                       <!-- meeting title input -->
                       <div class="form-outline mb-4">
@@ -377,7 +377,7 @@
 
                       <div class="form-outline mb-4">
                         <label class="form-label" for="meetingTitle">Assign groups</label>
-                        <form class="formclass" action="/addmember/<%=navbar.projid%>" method="POST" >
+                       
                           <div class="select-list">
                             <div class="title">select groups</div>
                             <div class="select-options">
@@ -390,7 +390,7 @@
                             <%})%>
                             </div>
                           </div>
-                        </form>
+                        
                       </div>
 
                       <!-- Submit button -->
