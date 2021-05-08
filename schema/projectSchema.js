@@ -2,6 +2,7 @@ const mongoose = require("mongoose");
 const  Schema = mongoose.Schema;
 let project= new Schema({
     _id:{type:String,required:true,unique:true},
+    announcement:{type:String,required:true},
     meets:[
            {
             _id:{type:String,unique:true},
@@ -10,7 +11,6 @@ let project= new Schema({
           ],
     group:[
             {
-              _id:{type:String,required:true,unique:true},
               groupName:{type:String},
               leader:{type:String,required:true}
               ,
@@ -19,15 +19,13 @@ let project= new Schema({
               ],
               card:[
                 {
-                  cardName:{type:String},
+                  
                   task:[
                     {
-                      _id:{type:String,unique:true},
-                      taskName:{type:String},
+                      taskTitle:{type:String},
                       taskStatus:{type:Number},
                       workerID:[
                        {type:String}
-                        
                       ],
                       viewerID:[
                         {type:String}
@@ -39,9 +37,7 @@ let project= new Schema({
                           subtaskStatus:{type:Number}
                         }
                       ],
-                      taskIDs:[  
-                          {type:String} // taskID  
-                      ]
+    
                     }
                   ]
                 }
@@ -55,3 +51,16 @@ let project= new Schema({
   });
 
   module.exports=project;
+  /*
+      username
+      type (req,message)
+       message 
+       send  
+  */
+ /*
+ AcessContole
+ Mange task
+Workspace
+ meet 
+ communication
+  */

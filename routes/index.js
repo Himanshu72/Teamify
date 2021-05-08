@@ -86,7 +86,7 @@ router.get("/meeting/:projid",checkuser,checkproj,(req,res)=>{
   res.render('meeting',{title:"meeting",err:false,msg:"",type:"",navbar:{user:true,projid:req.params.projid}});
 });
 
-router.get("/accessControl/:projid",(req,res)=>{
+router.get("/accessControl/:projid",checkuser,checkproj,(req,res)=>{
 
   res.render('accessControl',{title:"accessControl",navbar:{user:true,projid:req.params.projid}});
 });
@@ -304,7 +304,10 @@ router.post("/meeting/:projid",(req,res)=>{
   
 });
 
-
+router.post("/createGroup/:projid",checkuser,checkproj,(req,res)=>{
+          console.log(req.body);
+          res.redirect(`/accessControl/${req.params.projid}`)            
+}); 
 
 router.post("/manageTask",(req,res)=>{
   
