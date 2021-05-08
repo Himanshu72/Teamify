@@ -1,5 +1,5 @@
 var express = require('express');
-var localStorage = require('localStorage')
+
 var router = express.Router();
 const env = require("../env");
 const mongoose = require('mongoose');
@@ -10,15 +10,15 @@ const { pushProject } = require('../utility/DB');
 /* G  ET home page. */
 
 
-async function getproj(id){
+async function getproj(id,req){
   return new Promise((resolve,reject)=>{
-      let result=localStorage.getItem(id)
+      let result=req.session.proj;
       if(result){
          return result;
       }else{
         try{
           let result= utility.getProjectById(id);
-             localStorage.setItem(id,JSON.stringify(result));
+             req.session.proj=result;
             resolve(result);
         }catch(error){
             
@@ -61,11 +61,8 @@ router.get('/logout', async function (req, res, next) {
 
 });
 
-router.get("/login",async(req,res)=>{
+router.get("/login",(req,res)=>{
   
-    let result= await getproj("60965f825fd64925f8d8c9b7");
-    console.log(result);
-
   if(req.session.user)
        res.redirect(`/dashboard/${req.session.user._id}`);
   else
