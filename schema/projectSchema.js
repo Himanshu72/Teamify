@@ -16,11 +16,11 @@ let project= new Schema({
               member:[
                 {type:String,required:true}   
               ],
-              card:[
-                {
-                  
-                  task:[
+                 
+              task:[
                     {
+                      taskDescription:{type:String,required:true},
+                      Deadline:{type:Date,required:true},
                       taskTitle:{type:String},
                       taskStatus:{type:Number},
                       workerID:[
@@ -31,7 +31,6 @@ let project= new Schema({
                       ],
                       subTask:[
                         {
-  
                           subtaskName:{type:String},
                           subtaskStatus:{type:Number}
                         }
@@ -39,8 +38,8 @@ let project= new Schema({
     
                     }
                   ]
-                }
-              ]
+                
+              
             }
     ],
     notifications:[

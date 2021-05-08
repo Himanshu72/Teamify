@@ -1,7 +1,6 @@
 const mongoose=require("mongoose");
 const env=require("../env");
 const user=require("../schema/userSchema");
-const task=require("../schema/taskSchema");
 const meet=require("../schema/meetSchema");
 const notification = require("../schema/notificationSchema");
 const project = require("../schema/projectSchema");
@@ -18,7 +17,7 @@ mongoose.connect(env.dbserver, {
 
   const userModel=  mongoose.model("users",user);
   // create model
-  const taskmodel= mongoose.model("tasks",task);
+  
   // preapre data
   // save entry
 
@@ -47,16 +46,6 @@ module.exports={
           
         
     
-    },
-    insertTask:(obj)=>{
-       const taskData= new taskmodel(obj);
-       taskData.save( (err,res)=>{
-          if(err) 
-              console.log(err);
-          else
-              console.log(res);    
-       } )  
-       
     },
     insertMeet:(obj)=>{
       const meetData = new meetModel(obj);
@@ -185,6 +174,16 @@ module.exports={
         })
       }) 
      
+     },getProjectById(id){
+          return new Promise((resolve,reject)=>{
+                 projectModel.findOne({_id:id},(err,res)=>{
+                      if(res)
+                          resolve(res);
+                      else 
+                          reject(err);    
+
+                 });
+          })
      }   
      
     

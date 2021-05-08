@@ -1,5 +1,5 @@
 var express = require('express');
-
+var localStorage = require('localStorage')
 var router = express.Router();
 const env = require("../env");
 const mongoose = require('mongoose');
@@ -8,6 +8,26 @@ const notify=require("../utility/notifications");
 var validator = require('validator');
 const { pushProject } = require('../utility/DB');
 /* G  ET home page. */
+
+
+async function getproj(id){
+  return new Promise((resolve,reject)=>{
+      let result=localStorage.getItem(id)
+      if(result){
+         return result;
+      }else{
+        try{
+          let result= utility.getProjectById(id);
+             localStorage.setItem(id,JSON.stringify(result));
+            resolve(result);
+        }catch(error){
+            
+          reject(error)
+        }
+      }
+  })
+  
+}
 
 
 function checkproj(req, res, next){
@@ -41,9 +61,10 @@ router.get('/logout', async function (req, res, next) {
 
 });
 
-router.get("/login",(req,res)=>{
+router.get("/login",async(req,res)=>{
   
-  
+    let result= await getproj("60965f825fd64925f8d8c9b7");
+    console.log(result);
 
   if(req.session.user)
        res.redirect(`/dashboard/${req.session.user._id}`);
@@ -148,7 +169,7 @@ router.post("/announcement/:projid",checkuser,async (req,res)=>{
           if( validator.isLength(req.body.announcement,{min:15,max:150}) ){
             try{
             let result= await utility.updateAnnounce(req.params.projid,req.body.announcement);
-                console.log(result);  
+               // console.log("date==>",result);  
                 res.render('project',{title:"project",err:true,mtitle:"Great",msg:"Announcement updated",type:"success",data:"",navbar:{user:true,projid:req.params.projid}});
             }catch(err){
               console.log(err);
