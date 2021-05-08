@@ -162,18 +162,6 @@ insertTask:(obj)=>{
     });
 
 
-  },
-  getGroupsByids(ids){
-    return new Promise((resolve,reject)=>{
-         groupModel.find({
-           _id:{$in:ids}
-         },(err,res)=>{
-           if(res)
-                resolve(res)
-             else
-                reject(err)
-         })
-    })       
   }
   ,
   addGroup: (projid, groupid) => {
@@ -208,22 +196,28 @@ insertTask:(obj)=>{
 
       });
     })
-  }, addMember(projid, groupid, username) {
+  },
+  getGroupsByids:async(id)=>{
+
+       let result=await getProjectById(id);
+    return new Promise((resolve,reject)=>{
+         groupModel.find({
+           _id:{$in:result.group}
+         },(err,res)=>{
+           if(res)
+                resolve(res)
+             else
+                reject(err)
+         })
+    })       
+  }, addMember(groupids, username) {
     return new Promise((resolve, reject) => {
-      // projectModel.aggregate
-      /*projectModel.findOne({ _id: projid }, { group: [{ _id: groupid, leader: leader }] }, (err, res) => {
-        if (res)
-          resolve(res);
-        else
-          reject(err);
+      groupModel.updateMany({_id:{ $in:groupids }},{$addToSet:{ member:username }},(err,res)=>{
+         if(res)
+            resolve(res)
+          else
+            reject(err);  
       })
-    })*/
-    projectModel.findOne({ _id: projid },{group: {$elemMatch: {_id: groupid}}}, (err, res) => {
-      if (res)
-        resolve(res);
-      else
-        reject(err);
-    })
 
   })
 }

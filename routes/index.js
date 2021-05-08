@@ -105,7 +105,7 @@ router.get("/meeting/:projid",checkuser,checkproj,(req,res)=>{
 router.get("/accessControl/:projid",checkuser,getproj,async (req,res)=>{
   let result;
   try{  
-   result= await utility.getGroupsByids(req.session.proj.group);
+   result= await utility.getGroupsByids(req.params._id);
   }catch(err){
       console.log(err);   
   }
@@ -413,8 +413,43 @@ router.post("/manageTask",(req,res)=>{
   res.redirect("/manageTask");
 });
 
-router.post("/addmember/:projid",(req,res)=>{
-    console.log(req.body);
+router.post("/addmember/:projid",checkuser,checkproj,async (req,res)=>{
+  //tanya do validaiton here 
+  let users = await utility.getAllusers();
+  let data= utility.getGroupsByids(req.params.projid); 
+  let flag=0;
+  users.every((ele)=>{
+        if(ele._id == req.body.member){
+          flag=1;
+          return false;
+        }else{
+          return true;
+        }
+
+  })
+
+  if(flag){
+        try{
+          await utility.addMember(req.body.groupname,req.body.member)
+          let cur ;
+          for(let ele of req.session.user.projects){
+                 if(ele._id== req.params.projid){
+                  cur=ele; 
+                  break;
+                 }
+          }
+          console.log(cur);
+          await utility.pushProject(req.body.member,cur)
+          res.render('accessControl',{data:data,title:"accessControl",err:true,msg:"Member Added to Group ",type:"success",mtitle:"GREAT" ,navbar:{user:true,projid:req.params.projid}});
+        } catch(err){
+            console.log(err);
+            res.render('accessControl',{data:data,title:"accessControl",err:true,msg:"Something Went wrong",type:"error",mtitle:"SORRY" ,navbar:{user:true,projid:req.params.projid}});
+        }    
+  }else{
+    res.render('accessControl',{data:data,title:"accessControl",err:true,msg:"Invalid username",type:"error",mtitle:"SORRY" ,navbar:{user:true,projid:req.params.projid}});
+  }
+
+  console.log(req.body);
 });
 
 module.exports = router;
