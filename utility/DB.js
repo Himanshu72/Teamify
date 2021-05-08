@@ -94,7 +94,7 @@ module.exports={
         const projectData = new projectModel(obj);
       projectData.save((err,res)=>{
         if(err)
-           rej(err)
+           reject(err)
         else
           resolve(res);
       })  
@@ -150,7 +150,21 @@ module.exports={
       
      
     },
-     getAllusers:()=>{
+      addGroup:(projid,obj)=>{
+        
+          return new Promise((resolve,reject)=>{
+              projectModel.updateOne({_id:projid},{
+                $push:{group:obj}
+              },(err,res)=>{
+                  if(res){
+                     resolve(res);
+                  }else{
+                    reject(err);
+                  }
+                })
+          });
+      }
+     ,getAllusers:()=>{
       return new Promise((resolve,reject)=>{
         userModel.find({},(err,res)=>{
             if(res)
@@ -161,5 +175,6 @@ module.exports={
       }) 
      
      }   
+     
     
 }

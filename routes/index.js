@@ -41,7 +41,8 @@ router.get('/logout', async function (req, res, next) {
 });
 
 router.get("/login",(req,res)=>{
-   
+  
+  
 
   if(req.session.user)
        res.redirect(`/dashboard/${req.session.user._id}`);
@@ -88,7 +89,7 @@ router.get("/meeting/:projid",checkuser,checkproj,(req,res)=>{
 
 router.get("/accessControl/:projid",checkuser,checkproj,(req,res)=>{
 
-  res.render('accessControl',{title:"accessControl",navbar:{user:true,projid:req.params.projid}});
+  res.render('accessControl',{title:"accessControl",err:false,msg:"",type:"",mtitle:"" ,navbar:{user:true,projid:req.params.projid}});
 });
 router.get("/notification/:projid",(req,res)=>{
 
@@ -155,7 +156,8 @@ router.post("/forgotpassword",(req,res)=>{
         
         utility.insertProject({_id:result.projects[result.projects.length -1]._id }).then(()=>{
           res.redirect(`/dashboard/${req.session.user._id}`);
-        }).catch(()=>{
+        }).catch((err)=>{
+          console.log(err);
           res.render('dashboard',{title:"dashboard",navbar:{user:true},err:true,msg:"Unable to create Project",type:"error",data:projects})
         })
         
@@ -304,10 +306,23 @@ router.post("/meeting/:projid",(req,res)=>{
   
 });
 
-router.post("/createGroup/:projid",checkuser,checkproj,(req,res)=>{
-          console.log(req.body);
-          res.redirect(`/accessControl/${req.params.projid}`)            
-}); 
+router.post("/createGroup/:projid",checkuser,(req,res)=>{
+          //validate here
+          utility.addGroup(req.params.projid,req.body).then((result)=>{
+            console.log(result);
+            if(result.nModified > 0){
+               console.log("here"); 
+              res.render('accessControl',{title:"accessControl",err:true,msg:"Group Created",type:"success",mtitle:"GREAT!" ,navbar:{user:true,projid:req.params.projid}});
+            }else{
+              res.render('accessControl',{title:"accessControl",err:true,msg:"Group Not Created",type:"error",mtitle:"ERROR" ,navbar:{user:true,projid:req.params.projid}});
+            }
+          }).catch((err)=>{
+            console.log(err);
+            res.render('accessControl',{title:"accessControl",err:true,msg:"Group Not Created",type:"error",mtitle:"ERROR" ,navbar:{user:true,projid:req.params.projid}});
+
+          })
+        
+        });
 
 router.post("/manageTask",(req,res)=>{
   
