@@ -101,6 +101,17 @@ module.exports={
       })
       
       
+    },
+    updateAnnounce:(id,data)=>{
+      return new Promise((resolve,reject)=>{
+           projectModel.updateOne({_id:id},{announcement:data},(err,res)=>{
+                if(res){
+                      resolve(res);
+                }else{
+                    reject(err);
+                }
+           });
+      })
     }
    ,pushProject: (username,obj)=>{
     

@@ -74,7 +74,7 @@ router.get("/dashboard/:id",checkuser,(req,res)=>{
 
 router.get("/project/:projid",checkuser,checkproj,(req,res)=>{
 
-  res.render('project',{title:"project",navbar:{user:true,projid:req.params.projid}});
+  res.render('project',{title:"project",err:false,mtitle:"",msg:"",type:"",data:"",navbar:{user:true,projid:req.params.projid}});
 });
 
 
@@ -144,7 +144,21 @@ router.post("/forgotpassword",(req,res)=>{
         }
 });
 
-
+router.post("/announcement/:projid",checkuser,async (req,res)=>{
+          if( validator.isLength(req.body.announcement,{min:15,max:150}) ){
+            try{
+            let result= await utility.updateAnnounce(req.params.projid,req.body.announcement);
+                console.log(result);  
+                res.render('project',{title:"project",err:true,mtitle:"Great",msg:"Announcement updated",type:"success",data:"",navbar:{user:true,projid:req.params.projid}});
+            }catch(err){
+              console.log(err);
+              res.render('project',{title:"project",err:true,mtitle:"ERROR",msg:"something went wrong",type:"error",data:"",navbar:{user:true,projid:req.params.projid}});
+            }
+                //res.render('project',{title:"project",err:false,mtitle:"",msg:"",type:"",data:"",navbar:{user:true,projid:req.params.projid}});
+          }else{
+            res.render('project',{title:"project",err:true,mtitle:"ERROR",msg:"validation failed",type:"error",data:"",navbar:{user:true,projid:req.params.projid}});
+          }
+});
  router.post("/createProject",checkuser,(req,res)=>{
  
       let {projects}= req.session.user;
