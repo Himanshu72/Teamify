@@ -1,8 +1,6 @@
 const mongoose = require("mongoose");
 const  Schema = mongoose.Schema;
 let notification= new Schema({
-    _id:{type:String,required:true,unique:true},
-
     senderUsername:{type:String,required:true},
 	receiverUsername:[ {type:String,required:true} ],
 	title:{type:String,required:true},
