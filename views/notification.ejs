@@ -203,7 +203,7 @@
         </li>
         <li class="nav-item" role="presentation">
           <button class="nav-link" id="profile-tab0" data-mdb-toggle="tab" data-mdb-target="#profile0" type="button"
-            role="tab" aria-controls="profile" aria-selected="false">Recieve Notifications</button>
+            role="tab" aria-controls="profile" aria-selected="false">Receive Notifications</button>
         </li>
 
       </ul>
@@ -225,7 +225,7 @@
 
             <!--Button and modal-->
             <button type="button" class="myBtn" data-mdb-toggle="modal" data-mdb-target="#exampleModal"
-              style="background-color:#ff636b; border-radius: 4px; color:white;font-size: 1.5em;; position: fixed; bottom: 7%;left: 4%; z-index:10; width:1.7em;height: 1.7em;">
+              style="background-color:#ff636b; border-radius: 4px; cursor: pointer; color:white;font-size: 1.5em;; position: fixed; bottom: 7%;left: 4%; z-index:10; width:1.7em;height: 1.7em;">
               <i class="fas fa-plus"></i>
             </button>
 
@@ -242,22 +242,12 @@
                     <form action="/meeting" method="post">
                       <!--title-->
                       <!--
-                      <div class="form-outline mb-2">
-                        
-                        
-                        <select class="mdb-select md-form form-control" name="name">
-                          <option value="" disabled selected>Choose your meeting title</option>
-                          <option value="1">title 1</option>
-                          <option value="2">Option 2</option>
-                          <option value="3">Option 3</option>
-                        </select>
-                        <label class="form-label" for="meetingTitle">Meeting title</label>
-                      </div>-->
+                     
 
                       <!-- send to input -->
                       <div class="form-outline mb-4">
                         <input type="textarea" id="meetingDescription" class="form-control textArea"
-                          name="description" />
+                          name="to" minlength="5" />
                         <label class="form-label" for="meetingDescription">Send to
                         </label>
                       </div>
@@ -312,9 +302,9 @@
 
                       <!-- text input -->
                       <div class="form-outline mb-4">
-                        <input type="textarea" id="meetingDescription" class="form-control textArea"
-                          name="description" />
-                        <label class="form-label" for="meetingDescription">Text
+                        <input type="textarea" id="textDescription" class="form-control textArea"
+                          name="description" minlength="8"  />
+                        <label class="form-label" for="textDescription">Text
                         </label>
                       </div>
 
