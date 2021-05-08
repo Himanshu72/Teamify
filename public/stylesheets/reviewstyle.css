@@ -118,7 +118,7 @@ border-color: #4e333b;
 .myBtn{
     height: 2em;
     width: 2em;
-    border-radius: 1px;
+    border-radius: 50%;
     outline: none;
 }
 .btn_cust{
