@@ -410,4 +410,9 @@ router.post("/manageTask",(req,res)=>{
   //utility.insertUser(req.body);
   res.redirect("/manageTask");
 });
+
+router.post("/addmember/:projid",(req,res)=>{
+    console.log(req.body);
+});
+
 module.exports = router;
