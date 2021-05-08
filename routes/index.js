@@ -58,12 +58,7 @@ router.get('/logout', async function (req, res, next) {
 });
 
 router.get("/login",async (req,res)=>{
-  try{
-  let result=await utility.addMember("6096becc405b0e3abc1f50ed","6096bf0a405b0e3abc1f50f0","ramesh");
-   console.log(result);
-  }catch(err){
-    console.log(err);
-  }
+  
   if(req.session.user)
        res.redirect(`/dashboard/${req.session.user._id}`);
   else
@@ -108,9 +103,14 @@ router.get("/meeting/:projid",checkuser,checkproj,(req,res)=>{
 });
 
 router.get("/accessControl/:projid",checkuser,getproj,async (req,res)=>{
-    let data= req.session.proj;
+  let result;
+  try{  
+   result= await utility.getGroupsByids(req.session.proj.group);
+  }catch(err){
+      console.log(err);   
+  }
         
-  res.render('accessControl',{title:"accessControl",data:data,err:false,msg:"",type:"",mtitle:"" ,navbar:{user:true,projid:req.params.projid}});
+  res.render('accessControl',{title:"accessControl",data:result,err:false,msg:"",type:"",mtitle:"" ,navbar:{user:true,projid:req.params.projid}});
 });
 router.get("/notification/:projid",(req,res)=>{
 
@@ -350,8 +350,10 @@ router.post("/createGroup/:projid",checkuser,getproj,async (req,res)=>{
           //req.body.leader;      
           let flag=0;      
           // user
-          let data=req.session.proj;
-              utility.getAllusers().then((result)=>{
+          
+          let data=utility.getGroupsByids(req.session.proj.group); 
+           
+          utility.getAllusers().then((result)=>{
                 result.every((element)=>{
                       if(element._id==req.body.leader){
                             flag=1;
@@ -374,16 +376,18 @@ router.post("/createGroup/:projid",checkuser,getproj,async (req,res)=>{
                        } 
                     })
                     
-                  utility.pushProject(req.body.leader,proj ).then((result)=>{
+                  utility.pushProject(req.body.leader,proj ).then(async (result)=>{
                     
-
-                    utility.addGroup(req.params.projid,req.body).then(async (result)=>{
-                      req.session.proj=undefined;
-                      let data= await utility.getProjectById(req.params.projid);
-                      res.render('accessControl',{data:data,title:"accessControl",err:true,msg:"Group Created Successfully",type:"success",mtitle:"GREAT!" ,navbar:{user:true,projid:req.params.projid}});
-                    }).catch((err)=>{
+                     try{ 
+                    let result=await utility.insertGroup(req.body);
+                       await utility.addGroup(req.params.projid,result._id);
+                       req.session.proj=undefined;
+                      res.redirect(`/accessControl/${req.params.projid}`)
+                  }catch(err){
+                    console.log(err);
                       res.render('accessControl',{data:data,title:"accessControl",err:true,msg:"Something went wrong",type:"error",mtitle:"SORRY" ,navbar:{user:true,projid:req.params.projid}});
-                    });
+                     }
+                    
 
                    }).catch((err)=>{
                     res.render('accessControl',{data:data,title:"accessControl",err:true,msg:"Something went wrong",type:"error",mtitle:"SORRY" ,navbar:{user:true,projid:req.params.projid}});

@@ -4,7 +4,8 @@ const user = require("../schema/userSchema");
 const meet = require("../schema/meetSchema");
 const notification = require("../schema/notificationSchema");
 const project = require("../schema/projectSchema");
-
+const group= require("../schema/groupSchema")
+const task =require("../schema/tashSchema");
 mongoose.connect(env.dbserver, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
@@ -16,20 +17,32 @@ var db = mongoose.connection;
 db.on("error", console.error.bind(console, "connection error:"));
 
 const userModel = mongoose.model("users", user);
-// create model
-
-// preapre data
-// save entry
-
+const groupModel = mongoose.model("groups",group);
+const taskModel  = mongoose.model("tasks",task);
 const meetModel = mongoose.model("meets", meet);
 const notificationModel = mongoose.model("notifications", notification);
 const projectModel = mongoose.model("projects", project);
 
 module.exports = {
-
+insertGroup:(obj)=>{
+ const groupData= new groupModel(obj);
+ return new Promise((resolve,reject)=>{
+  groupData.save((err,res)=>{
+    if(res)
+      resolve(res)
+    else 
+       reject(err);  
+})
+ }) ;
+ 
+},
+insertTask:(obj)=>{
+  const taskData=new taskModel(obj);
+}
+,
   insertUser: (obj) => {
 
-    userdata = new userModel(obj);
+    let userdata = new userModel(obj);
 
     return new Promise((resolve, rej) => {
       userdata.save((err, res) => {
@@ -150,18 +163,29 @@ module.exports = {
 
 
   },
-  addGroup: (projid, obj) => {
+  getGroupsByids(ids){
+    return new Promise((resolve,reject)=>{
+         groupModel.find({
+           _id:{$in:ids}
+         },(err,res)=>{
+           if(res)
+                resolve(res)
+             else
+                reject(err)
+         })
+    })       
+  }
+  ,
+  addGroup: (projid, groupid) => {
 
     return new Promise((resolve, reject) => {
-      projectModel.updateOne({ _id: projid }, {
-        $addToSet: { group: obj }
-      }, (err, res) => {
-        if (res) {
-          resolve(res);
-        } else {
-          reject(err);
-        }
-      })
+          projectModel.updateOne({_id:projid},{
+            $addToSet:{ group:groupid }},(err,res)=>{
+              if(res)
+                  resolve(res)
+               else
+                  reject(err);   
+            })
     });
   }
   , getAllusers: () => {

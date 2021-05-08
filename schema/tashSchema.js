@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 const  Schema = mongoose.Schema;
 
-let task= {
+let task= new Schema( {
   taskDescription:{type:String,required:true},
   Deadline:{type:Date,required:true},
   taskTitle:{type:String},
@@ -19,4 +19,6 @@ let task= {
     }
   ],
 
-}
+});
+
+module.exports=task;

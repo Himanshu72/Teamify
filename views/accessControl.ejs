@@ -381,8 +381,8 @@
                           <div class="select-list">
                             <div class="title">select groups</div>
                             <div class="select-options">
-                              <%if(data.group){%>
-                              <% data.group.forEach(ele=>{ %>
+                              <%if(data){%>
+                              <% data.forEach(ele=>{ %>
                               <div class="option">
 
                                 <input type="checkbox" name="groupname" id="<%=ele._id%>" value="<%=ele._id%>" />
