@@ -223,34 +223,36 @@ router.post("/announcement/:projid",checkuser,async (req,res)=>{
           }
 });
 
- router.post("/createProject",checkuser,(req,res)=>{
+router.post("/createProject",checkuser,(req,res)=>{
  
       let {projects}= req.session.user;
       if(validator.isLength(req.body.name,{min:5,max:20})
         &&
-        validator.isLength(req.body.description,{min:20,max:200})){
+        validator.isLength(req.body.description,{min:20,max:200}))
+        {
           req.body.owner=req.session.user._id;      
-          
-
-      utility.pushProject(req.session.user._id,req.body).then((result)=>{
-        req.session.user=result;
-        console.log(result.projects[result.projects.length -1]._id)
-        utility.insertProject({_id:result.projects[result.projects.length -1]._id }).then(()=>{
+          utility.pushProject(req.session.user._id,req.body).then((result)=>{
+          req.session.user=result;
+          console.log(result.projects[result.projects.length -1]._id)
+          utility.insertProject({_id:result.projects[result.projects.length -1]._id }).then(()=>{
           res.redirect(`/dashboard/${req.session.user._id}`);
-        }).catch((err)=>{
-          console.log(err);
-          console.log(err);
-          res.render('dashboard',{title:"dashboard",navbar:{user:true},err:true,msg:"Unable to create Project",type:"error",data:projects})
-        })
-        
-      }).catch(()=>{
-        let {projects}=req.session.user;
-        res.render('dashboard',{title:"dashboard",navbar:{user:true},err:true,msg:"Unable to create Project",type:"error",data:projects});
-      })
 
-      }else{
+          }).catch((err)=>{
+            console.log(err);
+            console.log(err);
+            res.render('dashboard',{title:"dashboard",navbar:{user:true},err:true,msg:"Unable to create Project",type:"error",data:projects})
+          })
+          
+        }).catch(()=>{
+          let {projects}=req.session.user;
+          res.render('dashboard',{title:"dashboard",navbar:{user:true},err:true,msg:"Something went wrong, try agin",type:"error",data:projects});
+        })
+
+        }
+      else
+      {
          let {projects}=req.session.user;
-        res.render('dashboard',{title:"dashboard",navbar:{user:true},err:true,msg:"Validation failed",type:"error",data:projects});
+         res.render('dashboard',{title:"dashboard",navbar:{user:true},err:true,msg:"Validation failed",type:"error",data:projects});
 
       }
 
@@ -334,8 +336,7 @@ router.post("/changepassword",checkuser,(req,res)=>{
 });
 
 router.post("/profile",checkuser,(req,res)=>{
-  console.log(req.body);
-  
+ 
   if(validator.isLength(req.body.fname, {min:3,max:15}) &&
   validator.isLength(req.body.lname, {min:3,max:20}) &&
   validator.isLength(req.body.phone, {min:10,max:12}) && ( validator.equals(req.body.gender,"male") || validator.equals(req.body.gender,"female"))  )
@@ -355,7 +356,7 @@ router.post("/profile",checkuser,(req,res)=>{
        res.redirect("/profile")
     }).catch((err)=>{
       res.render('profile',{title:"profile",navbar:{user:true},data:req.session.user,err:true,msg:"SORRY,unable to update profile",type:"error"}); 
-      console.log(err);
+      
     })
 
   }

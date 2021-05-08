@@ -121,7 +121,6 @@ insertTask:(obj)=>{
       userModel.findOneAndUpdate(
         { _id: username }, { $addToSet: { projects: obj } }, { new: true }, (err, res) => {
           if (res) {
-
             resolve(res);
           } else {
             rej();
