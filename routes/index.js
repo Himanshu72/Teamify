@@ -312,20 +312,24 @@ router.post("/login",(req,res)=>{
 });
 
 router.post("/changepassword",checkuser,(req,res)=>{
-      if(validator.equals(req.body.n_password,req.body.c_password)){
+      if(validator.equals(req.body.n_password,req.body.c_password))
+      {
           utility.updatePassword(req.session.user._id,req.body.c_password).then((result)=>{
-            console.log(result);
-            if(result.nModified==1){
+            console.log(result); //what?
+            if(result.nModified==1)
+            {
               req.session.user.password=req.body.c_password;
               res.redirect("/profile");
             }
-              else  
-              res.render('profile',{title:"profile",navbar:{user:true},data:req.session.user,err:true,msg:"Something Went wrong",type:"error"});  
+            else 
+              res.render('profile',{title:"profile",navbar:{user:true},data:req.session.user,err:true,msg:"Something Went wrong,try again",type:"error"});  
           }).catch(()=>{
-            res.render('profile',{title:"profile",navbar:{user:true},data:req.session.user,err:true,msg:"Something Went wrong",type:"error"});
+            res.render('profile',{title:"profile",navbar:{user:true},data:req.session.user,err:true,msg:"Something Went wrong,try later",type:"error"});
           })
-      }else{
-        res.render('profile',{title:"profile",navbar:{user:true},data:req.session.user,err:true,msg:"Password and confirm password must be same..",type:"error"});
+      }
+      else
+      {
+        res.render('profile',{title:"profile",navbar:{user:true},data:req.session.user,err:true,msg:"New password and confirm password aren't same..",type:"error"});
       }
 });
 
@@ -334,7 +338,8 @@ router.post("/profile",checkuser,(req,res)=>{
   
   if(validator.isLength(req.body.fname, {min:3,max:15}) &&
   validator.isLength(req.body.lname, {min:3,max:20}) &&
-  validator.isLength(req.body.phone, {min:10,max:12}) && ( validator.equals(req.body.gender,"male") || validator.equals(req.body.gender,"female"))  ){
+  validator.isLength(req.body.phone, {min:10,max:12}) && ( validator.equals(req.body.gender,"male") || validator.equals(req.body.gender,"female"))  )
+  {
     let obj={};
     obj.name={
            fname:req.body.fname,
@@ -349,12 +354,14 @@ router.post("/profile",checkuser,(req,res)=>{
        req.session.user=result;
        res.redirect("/profile")
     }).catch((err)=>{
-      res.render('profile',{title:"profile",navbar:{user:true},data:req.session.user,err:true,msg:"unable to update profile",type:"error"}); 
+      res.render('profile',{title:"profile",navbar:{user:true},data:req.session.user,err:true,msg:"SORRY,unable to update profile",type:"error"}); 
       console.log(err);
     })
 
-  }else{
-    res.render('profile',{title:"profile",navbar:{user:true},data:req.session.user,err:true,msg:"validation failed in profile",type:"error"});
+  }
+  else
+  {
+    res.render('profile',{title:"profile",navbar:{user:true},data:req.session.user,err:true,msg:"validation failed !",type:"error"});
   }
 });
 

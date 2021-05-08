@@ -9,55 +9,11 @@
       font-family: #555;
     }
 
-    .select-list {
-      font-family: 'Open Sans', sans-serif;
-      color: #555;
-      background: #fff;
-    }
+    
 
-    .select-list .title {
-      display: inline-block;
-      cursor: pointer;
-      background: #fff;
-      border: 1px solid #eaeaec;
-      border-radius: 5px;
-      padding: 10px 15px 10px 15px;
-    }
-
-    .select-list .title::after {
-      display: inline-block;
-      content: '>';
-      margin-left: 15px;
-      font-size: 11px;
-      transform: rotate(90deg) scale(1, 2);
-    }
-
-    .select-list .title:hover {
-      background: #eaeaec;
-    }
-
-    .select-list .select-options {
-      margin-top: 5px;
-      display: none;
-      position: absolute;
-      z-index: 500;
-      border: 1px solid #eaeaec;
-      background: #fff;
-    }
-
-    .select-list .select-options .option label {
-      display: inline-block;
-      padding: 10px 30px 10px 10px;
-    }
-
-    .select-list .select-options .option:hover {
-      background: #eaeaec;
-    }
-
-    .select-list .select-options .option input {
-      margin: 10px 0 12px 15px;
-    }
-
+   
+    
+    
     .formclass {
       width: 80%;
       margin: auto;
@@ -164,20 +120,19 @@
                   </div>
                   <div class="content">
                     <form action="/profile" method="POST">
-                      
-    
+
                       <div class="row">
                         <div class="col-md-6">
                           <div class="form-group">
                             <label>First Name</label>
-                            <input type="text" name="fname" disabled class="form-control edit" placeholder="Company"
+                            <input type="text" name="fname" disabled class="form-control edit" minlength="3" placeholder="Company"
                               value="<%=data.name.fname%>">
                           </div>
                         </div>
                         <div class="col-md-6">
                           <div class="form-group">
                             <label>Last Name</label>
-                            <input type="text" name="lname" disabled class="form-control edit" placeholder="Last Name"
+                            <input type="text" name="lname" disabled class="form-control edit" minlength="3" placeholder="Last Name"
                               value="<%=data.name.lname%>">
                           </div>
                         </div>
@@ -208,12 +163,7 @@
                         </div>
                       </div>
     
-    
-    
-                   
-    
-                 
-                      
+  
                       <button class="buttons" id="edit" >Edit</button>
                        &nbsp;
                       <button class="buttons"  >Submit</button>
@@ -246,10 +196,7 @@
                   </div>
                   <div class="content" style="padding: 6%;" >
                     <form action="/changepassword" method="POST">
-    
-    
-    
-    
+  
                       <div class="row">
                         <div class="col-md-12">
                           <div class="form-group">

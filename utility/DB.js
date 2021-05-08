@@ -138,7 +138,6 @@ insertTask:(obj)=>{
         new: true
       }, (err, res) => {
         if (res) {
-          console.log(res);
           resolve(res);
         } else {
           reject(err);
