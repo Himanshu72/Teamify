@@ -106,7 +106,7 @@ module.exports={
     
     return new Promise(async (resolve,rej)=>{
          userModel.findOneAndUpdate(
-        {_id:username},{ $push:{projects:obj}},{new:true},(err,res)=>{
+        {_id:username},{ $addToSet:{projects:obj}},{new:true},(err,res)=>{
               if(res){
                 
                 resolve(res);
@@ -154,7 +154,7 @@ module.exports={
         
           return new Promise((resolve,reject)=>{
               projectModel.updateOne({_id:projid},{
-                $push:{group:obj}
+                $addToSet:{group:obj}
               },(err,res)=>{
                   if(res){
                      resolve(res);
@@ -184,7 +184,17 @@ module.exports={
 
                  });
           })
-     }   
+     },addMember(projid,groupid,username){
+          return new Promise((resolve,reject)=>{
+            projectModel.aggregate      
+            projectModel.findOne({_id:projid },{group:[{_id:groupid},{task:-1}] },(err,res)=>{
+                          if(res)
+                              resolve(res);
+                           else  
+                               reject(err);   
+                  })
+          })      
      
+    }
     
 }
