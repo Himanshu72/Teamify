@@ -377,26 +377,17 @@
 
                       <div class="form-outline mb-4">
                         <label class="form-label" for="meetingTitle">Assign groups</label>
-                        <form class="formclass">
+                        <form class="formclass" action="/addmember/<%=navbar.projid%>" method="POST" >
                           <div class="select-list">
                             <div class="title">select groups</div>
                             <div class="select-options">
+                             <% data.group.forEach(ele=>{ %>
                               <div class="option">
-                                <input type="checkbox" name="vehicle" id="option1" value="" />
-                                <label for="option1">Group 1</label>
+
+                                <input type="checkbox" name="groupname" id="<%=ele._id%>" value="<%=ele._id%>" />
+                                <label for="<%=ele._id%>"> <%=ele.groupname%> </label>
                               </div>
-                              <div class="option">
-                                <input type="checkbox" name="vehicle" id="option2" />
-                                <label for="option2">Group 2</label>
-                              </div>
-                              <div class="option">
-                                <input type="checkbox" name="vehicle" id="option3" />
-                                <label for="option3">Group 3</label>
-                              </div>
-                              <div class="option">
-                                <input type="checkbox" name="vehicle" id="option4" />
-                                <label for="option4">Group 4</label>
-                              </div>
+                            <%})%>
                             </div>
                           </div>
                         </form>
@@ -463,7 +454,7 @@
       <%- include('common/footer'); %>
       <script>
          <% if (err) { %>
-        swal("ERROR", "<%=msg%>", "<%=type%>");
+        swal("<%=mtitle%>", "<%=msg%>", "<%=type%>");
          <% } %>
         </script>
         <script>
