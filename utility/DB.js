@@ -22,7 +22,7 @@ const taskModel  = mongoose.model("tasks",task);
 const meetModel = mongoose.model("meets", meet);
 const notificationModel = mongoose.model("notifications", notification);
 const projectModel = mongoose.model("projects", project);
-
+  //why do we use it?
 module.exports = {
 insertGroup:(obj)=>{
  const groupData= new groupModel(obj);
@@ -154,7 +154,7 @@ insertTask:(obj)=>{
         if (res != null) {
           resolve(res)
         } else {
-          rej(res);
+          rej(err); //changed here
         }
       });
 

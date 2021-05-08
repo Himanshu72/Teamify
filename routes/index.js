@@ -15,18 +15,23 @@ router.get("/test",(req,res)=>{
 });
 
 async function getproj(req, res, next){
-        if(req.session.proj){
-          next();
-        }else{
-          try{
+        if(req.session.proj) //project exists in session
+        {
+          next(); //continue
+        }
+        else
+        {
+          try //find the project from database
+          {
             req.session.proj=await utility.getProjectById(req.params.projid);
             next();        
-          }catch{
+          }
+          catch //throw error
+          {
             req.session.proj=undefined;
             next();
           }
         }
-
 }
 
 
@@ -106,47 +111,70 @@ router.get("/dashboard/:id",checkuser,(req,res)=>{
  
 });
 
+
+/*Going to Project page */
 router.get("/project/:projid",checkuser,checkproj,(req,res)=>{
 
   res.render('project',{title:"project",err:false,mtitle:"",msg:"",type:"",data:"",navbar:{user:true,projid:req.params.projid}});
 });
 
 
+
+/*Going to Meeting page */
 router.get("/meeting/:projid",checkuser,checkproj,(req,res)=>{
 
   res.render('meeting',{title:"meeting",err:false,msg:"",type:"",navbar:{user:true,projid:req.params.projid}});
 });
 
+
+
+/*Going to Access Control page */
 router.get("/accessControl/:projid",checkuser,getproj,async (req,res)=>{
   let result;
-  try{  
+  try
+  {  
    result= await utility.getGroupsByids(req.params._id);
-  }catch(err){
-      console.log(err);   
+  }
+  catch(err)
+  {
+      console.log(err);  //what? 
   }
         
   res.render('accessControl',{title:"accessControl",data:result,err:false,msg:"",type:"",mtitle:"" ,navbar:{user:true,projid:req.params.projid}});
 });
+
+
+/*Going to Notification page */
 router.get("/notification/:projid",(req,res)=>{
 
   res.render('notification',{title:"notification",navbar:{user:true,projid:req.params.projid}});
 });
+
+
+/*Going to Manage Task page */
 router.get("/manageTask/:projid",(req,res)=>{
 
   res.render('Manage_Task',{title:"manageTask",navbar:{user:true,projid:req.params.projid}});
 });
+
+
+/*Going to Forgot Password page */
 router.get("/forgotPassword",(req,res)=>{
   
   res.render('forgotPassword',{title:"Forgot Password",navbar:{user:false},err:false,msg:"",type:"",mtitle:""  });
 });
 
+
+
+/*Going to Access Control page */
 router.get("/videocall/:room",checkuser,(req,res)=>{
     res.render("videocall",{title:"videocall",navbar:{user:false}});
 });
 
+
+
+
 /*POST*/
-
-
 
 router.post("/forgotpassword",(req,res)=>{
         if(validator.isEmail(req.body.email)){
@@ -168,7 +196,7 @@ router.post("/forgotpassword",(req,res)=>{
                       }
               });
                   if(!flag)
-                  res.render('forgotPassword',{title:"Forgot Password",navbar:{user:false},err:true,msg:"Email not exists",type:"error",mtitle:"ERROR"  });
+                    res.render('forgotPassword',{title:"Forgot Password",navbar:{user:false},err:true,msg:"Email not exists",type:"error",mtitle:"ERROR"  });
            
           }).catch(()=>{
             res.render('forgotPassword',{title:"Forgot Password",navbar:{user:false},err:true,msg:"Something Went Wrong",type:"error",mtitle:"ERROR"  });
@@ -232,35 +260,25 @@ router.post("/announcement/:projid",checkuser,async (req,res)=>{
 
 router.post("/signup",async (req,res)=>{
 
- 
-
-
-
-if(
-  validator.isEmail(req.body.email) &&
+if( validator.isEmail(req.body.email) &&
   validator.isLength(req.body.username, {min:3,max:15}) &&
   validator.isLength(req.body.fname, {min:3,max:15}) &&
   validator.isLength(req.body.lname, {min:3,max:20}) &&
   validator.isLength(req.body.phone, {min:10,max:12})&&
   validator.isLength(req.body.password, {min:8,max:20}) &&
-  validator.equals(req.body.confirm_password,req.body.password) 
-){
- 
-
- req.body.name={ fname:req.body.fname,lname:req.body.lname };
- req.body._id=req.body.username;
-
-  
- utility.insertUser(req.body).then(()=>{
-  res.redirect("/login");
- }).catch(()=>{
-  res.render('signup',{title:"signup",err:true,msg:"Something went wrong...",type:"error",navbar:{user:false}})
- })
-
- 
+  validator.equals(req.body.confirm_password,req.body.password) )
+{
+  req.body.name={ fname:req.body.fname,lname:req.body.lname };
+  req.body._id=req.body.username; 
+  utility.insertUser(req.body).then(()=>{
+    res.redirect("/login");
+  }).catch(()=>{
+    res.render('signup',{title:"signup",err:true,msg:"Something went wrong...",type:"error",navbar:{user:false}})
+  })
 
 }
-else{
+else
+{
      res.render('signup',{title:"signup",err:true,msg:"Validation failed",type:"error",navbar:{user:false}});
 }
 
@@ -269,14 +287,15 @@ else{
 
 router.post("/login",(req,res)=>{
   
-  if( validator.isLength(req.body.username,{min:3,max:15}) && validator.isLength(req.body.password,{min:8,max:20}) ){
-   
+  if( validator.isLength(req.body.username,{min:3,max:15}) && validator.isLength(req.body.password,{min:8,max:20}) )
+  {
     utility.finduserByusername(req.body.username).then((result)=>{
       if(validator.equals(req.body.password,result.password)){  
         req.session.user=result;
-        res.redirect(`/dashboard/${req.body.username}`);
-       
-      }else{
+        res.redirect(`/dashboard/${req.body.username}`); 
+      }
+      else
+      {
         res.render('login',{title:"login",err:true,msg:"Invalid password",type:"error",navbar:{user:false}});
       }
     }).catch(()=>{
@@ -284,14 +303,12 @@ router.post("/login",(req,res)=>{
     });
     
   }
-  else{
-
+  else
+  {
     res.render('login',{title:"login",err:true,msg:"Email or Password validation failed",type:"error",navbar:{user:false}});
   }
-  console.log(req.body);
-  //req.body._id=req.body.username;
-  //utility.insertUser(req.body);
-  //res.redirect("/dashboard");
+ // console.log(req.body);
+  
 });
 
 router.post("/changepassword",checkuser,(req,res)=>{
