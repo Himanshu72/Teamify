@@ -124,8 +124,10 @@
     
 
     <%- include('common/footer'); %>
-    <script>
-        <% if (err) { %>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js" crossorigin="anonymous" ></script>
+   <script>
+        
+       <% if (err) { %>
         swal("ERROR", "<%=msg%>", "<%=type%>");
          <% } %>
       </script>

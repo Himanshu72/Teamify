@@ -1,21 +1,20 @@
 const mongoose = require("mongoose");
 const  Schema = mongoose.Schema;
 let project= new Schema({
-    _id:{type:String,required:true,unique:true},
+ 
     announcement:{type:String},
     meets:[
            {
-            _id:{type:String,unique:true},
             meetingName:{type:String}
            }
           ],
     group:[
             {
               groupname:{type:String},
-              leader:{type:String,required:true}
+              leader:{type:String,required:true,unique:true}
               ,
               member:[
-                {type:String,required:true} 
+                {type:String,required:true}   
               ],
               card:[
                 {
@@ -32,7 +31,7 @@ let project= new Schema({
                       ],
                       subTask:[
                         {
-                          _id:{type:String},
+  
                           subtaskName:{type:String},
                           subtaskStatus:{type:Number}
                         }

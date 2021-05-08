@@ -6,6 +6,7 @@ const mongoose = require('mongoose');
 const utility = require("../utility/DB");
 const notify=require("../utility/notifications");
 var validator = require('validator');
+const { pushProject } = require('../utility/DB');
 /* G  ET home page. */
 
 
@@ -146,17 +147,20 @@ router.post("/forgotpassword",(req,res)=>{
 
  router.post("/createProject",checkuser,(req,res)=>{
  
-      
+      let {projects}= req.session.user;
       if(validator.isLength(req.body.name,{min:5,max:20})
         &&
         validator.isLength(req.body.description,{min:20,max:200})){
           req.body.owner=req.session.user._id;      
+          
+
       utility.pushProject(req.session.user._id,req.body).then((result)=>{
         req.session.user=result;
-        
+        console.log(result.projects[result.projects.length -1]._id)
         utility.insertProject({_id:result.projects[result.projects.length -1]._id }).then(()=>{
           res.redirect(`/dashboard/${req.session.user._id}`);
         }).catch((err)=>{
+          console.log(err);
           console.log(err);
           res.render('dashboard',{title:"dashboard",navbar:{user:true},err:true,msg:"Unable to create Project",type:"error",data:projects})
         })
@@ -167,6 +171,7 @@ router.post("/forgotpassword",(req,res)=>{
       })
 
       }else{
+         let {projects}=req.session.user;
         res.render('dashboard',{title:"dashboard",navbar:{user:true},err:true,msg:"Validation failed",type:"error",data:projects});
 
       }
@@ -308,19 +313,106 @@ router.post("/meeting/:projid",(req,res)=>{
 
 router.post("/createGroup/:projid",checkuser,(req,res)=>{
           //validate here
-          utility.addGroup(req.params.projid,req.body).then((result)=>{
-            console.log(result);
-            if(result.nModified > 0){
-               console.log("here"); 
-              res.render('accessControl',{title:"accessControl",err:true,msg:"Group Created",type:"success",mtitle:"GREAT!" ,navbar:{user:true,projid:req.params.projid}});
-            }else{
-              res.render('accessControl',{title:"accessControl",err:true,msg:"Group Not Created",type:"error",mtitle:"ERROR" ,navbar:{user:true,projid:req.params.projid}});
-            }
-          }).catch((err)=>{
-            console.log(err);
-            res.render('accessControl',{title:"accessControl",err:true,msg:"Group Not Created",type:"error",mtitle:"ERROR" ,navbar:{user:true,projid:req.params.projid}});
+          //req.body.leader;
+          let flag=0;      
+          // user
+              utility.getAllusers().then((result)=>{
+                result.every((element)=>{
+                      if(element._id==req.body.leader){
+                            flag=1;
+                            return false;
+                      }else{
+                          return true;
+                      }
 
-          })
+                })
+                if(flag==1){
+                  console.log("Leader found");
+                   let {projects}= req.session.user; 
+                   let proj; 
+                   projects.every((ele)=>{
+                       if(ele._id==req.params.projid){
+                        proj=ele;
+                        return false;
+                       }else{
+                         return true;
+                       } 
+                    })
+
+                  utility.pushProject(req.body.leader,proj ).then((result)=>{
+                    
+                    utility.addGroup(req.params.projid,req.body).then((result)=>{
+                      res.render('accessControl',{title:"accessControl",err:true,msg:"Group Created Successfully",type:"success",mtitle:"GREAT!" ,navbar:{user:true,projid:req.params.projid}});
+                    }).catch((err)=>{
+                      res.render('accessControl',{title:"accessControl",err:true,msg:"Something went wrong",type:"error",mtitle:"SORRY" ,navbar:{user:true,projid:req.params.projid}});
+                    });
+
+                   }).catch((err)=>{
+                    res.render('accessControl',{title:"accessControl",err:true,msg:"Something went wrong",type:"error",mtitle:"SORRY" ,navbar:{user:true,projid:req.params.projid}});
+                   });
+                }else{
+                  res.render('accessControl',{title:"accessControl",err:true,msg:"Leader Not found",type:"error",mtitle:"SORRY" ,navbar:{user:true,projid:req.params.projid}});
+                }
+              }).catch((error)=>{
+                res.render('accessControl',{title:"accessControl",err:true,msg:"Something went wrong",type:"error",mtitle:"SORRY" ,navbar:{user:true,projid:req.params.projid}});
+         
+              });
+          
+          // project
+
+          //create
+          
+          //  utility.getAllusers().then((result)=>{
+          //       result.every((element)=>{
+          //             if(element._id==req.body.leader){
+          //                   flag=1;
+          //                   return false;
+          //             }else{
+          //                 return true;
+          //             }
+
+          //       })
+          //       if(flag==1){
+          //         utility.addGroup(req.params.projid,req.body).then((result)=>{
+          //           console.log(result);
+          //           if(result.nModified > 0){
+                       
+          //             let {projects}=req.session.user;
+          //             let flag2=0;
+          //             projects.every((ele)=>{
+          //                   if(ele._id==req.params.projid){
+                              
+          //                     pushProject(req.body.leader,ele ).then((res)=>{                
+          //                   res.render('accessControl',{title:"accessControl",err:true,msg:"Group Created",type:"success",mtitle:"GREAT!" ,navbar:{user:true,projid:req.params.projid}});
+          //                     }).catch(()=>{
+                                    
+          //                   res.render('accessControl',{title:"accessControl",err:true,msg:"Something went wrong",type:"error",mtitle:"SORRY" ,navbar:{user:true,projid:req.params.projid}});
+          //                     })
+
+          //                     return false;
+          //                   }else{
+          //                     return true;
+          //                   }
+          //             });
+                      
+                  
+                        
+          //           }else{
+          //             res.render('accessControl',{title:"accessControl",err:true,msg:"Group Not Created",type:"error",mtitle:"ERROR" ,navbar:{user:true,projid:req.params.projid}});
+          //           }
+          //         }).catch((err)=>{
+          //           console.log(err);
+          //           res.render('accessControl',{title:"accessControl",err:true,msg:"Group Not Created",type:"error",mtitle:"ERROR" ,navbar:{user:true,projid:req.params.projid}});
+        
+          //         })
+          //       }else{
+          //         res.render('accessControl',{title:"accessControl",err:true,msg:"Invalid leader userneme",type:"error",mtitle:"ERROR" ,navbar:{user:true,projid:req.params.projid}});
+          //       }
+          //    }).catch((err)=>{
+          //     res.render('accessControl',{title:"accessControl",err:true,msg:"Something went wrong",type:"error",mtitle:"ERROR" ,navbar:{user:true,projid:req.params.projid}});
+          //  }); 
+          
+        
         
         });
 
