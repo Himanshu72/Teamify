@@ -7,8 +7,12 @@ const utility = require("../utility/DB");
 const notify=require("../utility/notifications");
 var validator = require('validator');
 const { pushProject } = require('../utility/DB');
-/* G  ET home page. */
 
+//for testing only
+router.get("/test",(req,res)=>{
+
+  res.render('test',{title:"test",navbar:{user:false}});
+});
 
 async function getproj(req, res, next){
         if(req.session.proj){
@@ -42,14 +46,18 @@ function checkuser(req, res, next) {
   
 }
 
+/* GET home page. */
 router.get('/',async function (req, res, next) {
- if(req.session.user)
+ if(req.session.user)//if logged in
  {
   res.redirect(`/dashboard/${req.session.user._id}`);
- }else{
+ }
+ else//not logged in
+ {
   res.render('index',{title:"Home",navbar:{user:false}});
  }
 });
+
 
 router.get('/logout', async function (req, res, next) {
   req.session.destroy();
@@ -92,10 +100,7 @@ router.get("/project/:projid",checkuser,checkproj,(req,res)=>{
 });
 
 
-router.get("/test",(req,res)=>{
 
-  res.render('test',{title:"test",navbar:{user:false}});
-});
 
 router.get("/meeting/:projid",checkuser,checkproj,(req,res)=>{
 

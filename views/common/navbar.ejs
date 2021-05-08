@@ -1,64 +1,54 @@
-
 <!-- Navbar -->
-<div class="main" >
-    <nav class=" navbar navbar-expand-lg "> 
-      <!-- Container wrapper -->
-      <div class="container-fluid" >
-        <!-- Navbar brand -->
-        <a class="navbar-brand home" style="color: white;" href="/">Teamify   </a>
+<div class="main">
+  <nav class=" navbar navbar-expand-lg ">
+    
+    <div class="container-fluid">
 
-        <!-- Toggle button -->
-        <button class="navbar-toggler" type="button" data-mdb-toggle="collapse"
-          data-mdb-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
-          aria-label="Toggle navigation">
-          <i class="fas fa-bars"></i>
-        </button>
+      <a class="navbar-brand home" style="color: white;" href="/">Teamify </a>
 
-        <!-- Collapsible wrapper -->
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <!-- Left links -->
-          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+    
+      <button class="navbar-toggler" type="button" data-mdb-toggle="collapse" data-mdb-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <i class="fas fa-bars"></i>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link " aria-current="page" href="#about" style="color: white;">About us</a>
+          </li>
+
+          <%if(user){%>
             <li class="nav-item">
-              <a class="nav-link " aria-current="page" href="#about" style="color: white;">About us</a>
-            </li>
-
-            <%if(user){%>
-            <li class="nav-item">
-              <a class="nav-link " aria-current="page" style="color: white;"href="/profile">Profile</a>
+              <a class="nav-link " aria-current="page" style="color: white;" href="/profile">Profile</a>
             </li>
             <%}%>
-
-            <!-- Navbar dropdown -->
-            
-
         </ul>
 
-          <!-- Search form -->
-
-          <span style="position: absolute; right: 10px; ">
-           <%if(!user){%>
+       
+        <span style="position: absolute; right: 10px; ">
+          <%if(!user){%>
             <a href="/login" style="color: black; text-decoration: none;">
-            <button class=" btn-lg " type="button" data-mdb-ripple-color="dark" style="background-color:#d7d8de; cursor: pointer; border-radius: 20px;">
-              
-              Log In 
-            </button></a>
+              <button class=" btn-lg " type="button" data-mdb-ripple-color="dark"
+                style="background-color:#d7d8de; cursor: pointer; border-radius: 20px;">
+                Log In
+              </button></a>
             <%}%>
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            <%if(user){%>
-            <a href="/logout" style="color: black; text-decoration: none;">
-            <button class=" btn-lg" type="button" data-mdb-ripple-color="dark" style="background-color:#d7d8de; cursor: pointer; border-radius: 20px;">
-               Log Out 
-            </button>
-          </a>
-          <%}%>
-            </span>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              <%if(user){%>
+                <a href="/logout" style="color: black; text-decoration: none;">
+                  <button class=" btn-lg" type="button" data-mdb-ripple-color="dark"
+                    style="background-color:#d7d8de; cursor: pointer; border-radius: 20px;">
+                    Log Out
+                  </button>
+                </a>
+                <%}%>
+        </span>
 
-
-
-        </div>
-        <!-- Collapsible wrapper -->
       </div>
-      <!-- Container wrapper -->
-    </nav>
-  </div>
-  <!-- Navbar -->
+     
+    </div>
+  
+  </nav>
+</div>
+<!-- Navbar -->
