@@ -179,6 +179,7 @@ router.post("/announcement/:projid",checkuser,async (req,res)=>{
             res.render('project',{title:"project",err:true,mtitle:"ERROR",msg:"validation failed",type:"error",data:"",navbar:{user:true,projid:req.params.projid}});
           }
 });
+
  router.post("/createProject",checkuser,(req,res)=>{
  
       let {projects}= req.session.user;
@@ -253,7 +254,6 @@ else{
 
 router.post("/login",(req,res)=>{
   
-  
   if( validator.isLength(req.body.username,{min:3,max:15}) && validator.isLength(req.body.password,{min:8,max:20}) ){
    
     utility.finduserByusername(req.body.username).then((result)=>{
@@ -325,8 +325,6 @@ router.post("/profile",checkuser,(req,res)=>{
     res.render('profile',{title:"profile",navbar:{user:true},data:req.session.user,err:true,msg:"validation failed in profile",type:"error"});
   }
 });
-
-
 
 router.post("/meeting/:projid",(req,res)=>{
   console.log(req.body);
