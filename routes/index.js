@@ -39,10 +39,15 @@ function checkproj(req, res, next){
     res.redirect(`/dashboard/${req.session.user._id }`);
 }
 function checkuser(req, res, next) {
- if(!req.session.user){
+ if(!req.session.user) //if not logged then redirect to login page , i.e going to the page directly from url
+ {
   res.render('login',{title:"login",err:false,msg:"",type:"",navbar:{user:false}});
- }else
-       next();
+ }
+ else //continue
+ {
+  next();
+ }
+      
   
 }
 
@@ -59,38 +64,45 @@ router.get('/',async function (req, res, next) {
 });
 
 
+/*For logging out*/ 
 router.get('/logout', async function (req, res, next) {
   req.session.destroy();
   res.redirect("/login");
 
 });
 
+
+/*For logging in*/ 
 router.get("/login",async (req,res)=>{
   
-  if(req.session.user)
+  if(req.session.user) //if user is logged in then redirect to dashboard page
        res.redirect(`/dashboard/${req.session.user._id}`);
-  else
+    
+  else  //else redirect to login page
     res.render('login',{title:"login",err:false,msg:"",type:"",navbar:{user:false}});
-  
- 
 });
 
+
+/*For signing up */
 router.get("/signup",async(req,res)=>{
  
   res.render('signup',{title:"signup" ,err:false,msg:"",type:"",navbar:{user:false}});
 });
 
+
+/* Going to profile page for editing the profile */
 router.get("/profile",checkuser,(req,res)=>{
 
   res.render('profile',{title:"profile",navbar:{user:true},data:req.session.user,err:false,msg:"",type:""});
 });
 
 
+/*Going to Dashboard */
 router.get("/dashboard/:id",checkuser,(req,res)=>{
   let {projects}=req.session.user;
   if(req.params.id!=req.session.user._id)
         res.redirect(`/dashboard/${req.session.user._id}`);
-  res.render('dashboard',{title:"dashboard",navbar:{user:true},err:false,msg:"",type:"error",data:projects});
+  res.render('dashboard',{title:"dashboard",navbar:{user:true},err:false,msg:"",type:"",data:projects});
  
 });
 
@@ -98,8 +110,6 @@ router.get("/project/:projid",checkuser,checkproj,(req,res)=>{
 
   res.render('project',{title:"project",err:false,mtitle:"",msg:"",type:"",data:"",navbar:{user:true,projid:req.params.projid}});
 });
-
-
 
 
 router.get("/meeting/:projid",checkuser,checkproj,(req,res)=>{
