@@ -16,6 +16,7 @@
         font-family: 'Open Sans', sans-serif;
         color: #555;
         background: #fff;
+        width: 100%;
       }
 
       .select-list .title {
@@ -62,13 +63,13 @@
       }
 
       .formclass {
-        width: 70%;
+        width: 100%;
         margin: auto;
         padding: 10%;
       }
 
       .formc {
-        width: 57%;
+        width: 100%;
 
       }
 
@@ -181,7 +182,7 @@
       <ul class="nav nav-tabs mb-3" id="myTab0" role="tablist">
 
         <li class="nav-item" role="presentation">
-          <button class="nav-link" id="profile-tab0" data-mdb-toggle="tab" data-mdb-target="#profile0" type="button"
+          <button class="nav-link active" id="profile-tab0" data-mdb-toggle="tab" data-mdb-target="#profile0" type="button"
             role="tab" aria-controls="profile" aria-selected="false">Team members</button>
         </li>
         <li class="nav-item" role="presentation">
@@ -201,130 +202,62 @@
             <div class="row">
 
               <div class="col-md-7">
-                <button type="button" class="btn_save btn-success" style="width: 10%;">
-                  save
-                </button><br>
-                <br>
+              
                 <table class="table" style="width:80%; margin:auto">
                   <tbody>
+                  
+                   
+                  
+                  
                     <tr>
-                      <td>Member1</td>
+                      <td>
+                        <select name="username" class="browser-default custom-select">
+                          <option value="-1" selected >Select Group</option>
+                          <option value="">Front end </option>
+                          <option value="">Backend</option>
+                          
+                        </select>
+                      </td>
                       <td>
 
-                        <form class="formc">
-                          <div class="select-list">
-                            <div class="title">Assign Task</div>
-                            <div class="select-options">
+                        
+                          <div class="select-list" style="width: 100%; text-align: center;">
+                            <div class="title" style="width: 100%;">Assign Task</div>
+                            <div class="select-options" style="width:auto;">
                               <div class="option">
                                 <input type="checkbox" name="vehicle" id="option1" value="" />
                                 <label for="option1">task 1</label>
                               </div>
-                              <div class="option">
-                                <input type="checkbox" name="vehicle" id="option2" />
-                                <label for="option2">task 2</label>
-                              </div>
-                              <div class="option">
-                                <input type="checkbox" name="vehicle" id="option3" />
-                                <label for="option3">task 3</label>
-                              </div>
-                              <div class="option">
-                                <input type="checkbox" name="vehicle" id="option4" />
-                                <label for="option4">task 4</label>
-                              </div>
+                             
                             </div>
                           </div>
-                        </form>
+                        
 
                       </td>
 
-                      <td>Group 1</td>
                       <td>
-                        <button type="button" class="dele btn-danger btn-sm px-3" style="cursor: pointer;">
-                          <i class="fas fa-times"></i>
+                        <select name="username" class="browser-default custom-select">
+                          <option value="-1" selected >Select Member</option>
+                          <option value="">Front end </option>
+                         
+                          
+                        </select>
+                      </td>
+                      <td>
+                        <button type="button" class=" btn-info btn-sm px-3" style="cursor: pointer;">
+                          Change
                         </button>
                       </td>
                     </tr>
-                    <tr>
-                      <td>Member1</td>
-                      <td>
+                   
 
-                        <form class="formc">
-                          <div class="select-list">
-                            <div class="title">Assign Task</div>
-                            <div class="select-options">
-                              <div class="option">
-                                <input type="checkbox" name="vehicle" id="option1" value="" />
-                                <label for="option1">task 1</label>
-                              </div>
-                              <div class="option">
-                                <input type="checkbox" name="vehicle" id="option2" />
-                                <label for="option2">task 2</label>
-                              </div>
-                              <div class="option">
-                                <input type="checkbox" name="vehicle" id="option3" />
-                                <label for="option3">task 3</label>
-                              </div>
-                              <div class="option">
-                                <input type="checkbox" name="vehicle" id="option4" />
-                                <label for="option4">task 4</label>
-                              </div>
-                            </div>
-                          </div>
-                        </form>
-
-                      </td>
-
-                      <td>Group 1</td>
-                      <td>
-                        <button type="button" class="dele btn-danger btn-sm px-3" style="cursor: pointer;">
-                          <i class="fas fa-times"></i>
-                        </button>
-                      </td>
-                    </tr><tr>
-                      <td>Member1</td>
-                      <td>
-
-                        <form class="formc">
-                          <div class="select-list">
-                            <div class="title">Assign Task</div>
-                            <div class="select-options">
-                              <div class="option">
-                                <input type="checkbox" name="vehicle" id="option1" value="" />
-                                <label for="option1">task 1</label>
-                              </div>
-                              <div class="option">
-                                <input type="checkbox" name="vehicle" id="option2" />
-                                <label for="option2">task 2</label>
-                              </div>
-                              <div class="option">
-                                <input type="checkbox" name="vehicle" id="option3" />
-                                <label for="option3">task 3</label>
-                              </div>
-                              <div class="option">
-                                <input type="checkbox" name="vehicle" id="option4" />
-                                <label for="option4">task 4</label>
-                              </div>
-                            </div>
-                          </div>
-                        </form>
-
-                      </td>
-
-                      <td>Group 1</td>
-                      <td>
-                        <button type="button" class="dele btn-danger btn-sm px-3" style="cursor: pointer;">
-                          <i class="fas fa-times"></i>
-                        </button>
-                      </td>
-                    </tr>
                   </tbody>
-                 
-                
                 </table>
+              
               </div>
 
-              <div class="col-md-5">
-                <img src="/images/teammembers.svg" class="img-fluid " style="height: 80%;" alt="..." />
+              <div class="col-md-5" style="position: relative;">
+                <img src="/images/teammembers.svg" class="img-fluid " style="height: 80%; " alt="..." />
               </div>
             </div>
 
@@ -348,13 +281,13 @@
                       <!-- meeting title input -->
                       <div class="form-outline mb-4">
                         <label class="form-label" for="meetingTitle">Member name</label>
-                        <input type="text" id="meetingTitle" class="form-control" name="member" required/>
+                        <input type="text" id="meetingTitle" class="form-control" name="member" />
 
                       </div>
 
 
                       <div class="form-outline mb-4">
-                        <label class="form-label" for="meetingTitle">Assign groups</label>
+                        <label class="form-label" for="meetingTitle" >Assign groups</label>
 
                         <div class="select-list">
                           <div class="title">select groups</div>
@@ -405,7 +338,7 @@
                 <form class="formclass" action="/createGroup/<%=navbar.projid%>" method="POST">
                   <!-- Email input -->
                   <div class="form-outline mb-4">
-                    <input type="text" id="form1Example1" class="form-control" name="groupname" required
+                    <input type="text" id="form1Example1" class="form-control" name="groupname" required minlength="4"
                       placeholder="enter the groupname" />
                     <label class="form-label" for="form1Example1">Group name</label>
                   </div>
@@ -435,6 +368,25 @@
 
 
       <%- include('common/footer'); %>
+      <script>
+        let groups=[ {
+    member: [ 'khush', 'qwerf' ],
+    task: ["task1","task2"],
+    _id: "6096e2b28ff21a1a18097914",
+    groupname: 'mindend',
+    leader: 'mishri',
+    __v: 0
+  },{
+    member: [ 'k', 'qrf' ],
+    task: ["task6","task5"],
+    _id: "609628ff21a1a18097914",
+    groupname: 'backend',
+    leader: 'john',
+    __v: 0
+  } ];
+
+      </script>  
+
         <script>
          <% if (err) { %>
             swal("<%=mtitle%>", "<%=msg%>", "<%=type%>");
@@ -481,6 +433,11 @@
 
           }
         </script>
+        <script>
+         let obj=<%-JSON.stringify(data)%>;
+          console.log(obj);
+          </script>
+
         <script>
           $(document).ready(function () {
             $('.stepper').mdbStepper();
