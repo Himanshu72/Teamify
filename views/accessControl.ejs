@@ -223,11 +223,12 @@
 
 
                           <div class="select-list" style="width: 100%; text-align: center;">
-                            <div class="title" style="width: 100%;"id="selectTask">Assign Task</div>
-                            <div class="select-options" style="width:auto;">
-                              <!--<div class="option">
+                            <div class="title" style="width: 100%;" >Assign Task</div>
+                            <div class="select-options" style="width:12em; text-align: left;" id="selectTask" >
+                              <!--<div class="option" >
                               <input type="checkbox" name="vehicle" id="option1" value="" />
                               <label for="option1">task 1</label>
+                              
                             </div>-->
 
                             </div>
@@ -387,29 +388,63 @@
             __v: 0
           }];
 
-          
-          function populateList(){
+
+          function populateList() {
             console.log("hua bro?");
 
             let select = document.getElementById("selectGroup");
             groups.forEach(element => {
 
               var opt = document.createElement('option');
-              opt.value=element.groupname;
-              opt.innerHTML=element.groupname;
+              opt.value = element.groupname;
+              opt.innerHTML = element.groupname;
               select.appendChild(opt);
             });
-              
-            
+
+
           }
-          
+
           function getThings() {
 
             let groupSelected = document.getElementById("selectGroup");
             let groupName = groupSelected.value;
-            console.log(groupName);
+
 
             let taskSelected = document.getElementById("selectTask");
+
+            //assign task ke child khali
+            //member taks ke child khali
+
+            groups.forEach(gp => {
+              
+              if (gp.groupname == groupName) {
+               // console.log("group pakda : "+gp.groupname);
+
+                gp.task.forEach(element => {
+
+                  /*
+                    <!--<div class="option" >
+                              <input type="checkbox" name="vehicle" id="option1" value="" />
+                              <label for="option1">task 1</label>-->
+                    */
+                  
+                  var div = document.createElement('div');
+                  div.class = "option"
+
+                  var opt = document.createElement('input');
+                  opt.type="checkbox";
+                  opt.value = element;
+                  div.appendChild(opt);
+
+                  var lab = document.createElement('label');
+                  lab.innerHTML = element;
+                  div.appendChild(lab);
+
+                  taskSelected.appendChild(div);
+                });
+                //break;
+              }
+            });
 
           }
 
