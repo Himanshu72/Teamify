@@ -117,7 +117,7 @@
 <body>
     <%- include('common/navbar',{user:navbar.user}); %>
 
-    <%- include('common/sidenav',{id:navbar.projid}); %>
+    <%- include('common/sidenav',{id:navbar.projid,access:navbar.access}); %>
         <br >
         <div class="container-fluid">
             <div class="row">
@@ -132,7 +132,7 @@
                             
 
                             <div class="form-group green-border-focus">
-                                <textarea required minlength="15" placeholder="Write your annoucement here" class="form-control" name="announcement" ; id="exampleFormControlTextarea5" rows="3"><% if(data.proj.announcement ){ %><%=data.proj.announcement%><%}%></textarea>
+                                <textarea required minlength="15" <% if(!navbar.access){%> disabled <%}%>  placeholder="Write your annoucement here" class="form-control" name="announcement" ; id="exampleFormControlTextarea5" rows="3"><% if(data.proj.announcement ){ %><%=data.proj.announcement%><%}%></textarea>
                             </div>
 
 

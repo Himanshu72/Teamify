@@ -235,6 +235,23 @@ insertTask:(obj)=>{
      }catch(err){
           throw err;
      }
-}
+},
+ access:(username,owner,groups)=>{
+        if(username==owner){
+          return true;
+        }else{
+           let flag=0;
+              groups.every((ele) =>{
+                  if(ele.leader==username){
+                     flag=1;
+                     return false; 
+                  }else{
+                     return true;
+                  }
+              });    
+              
+              return (flag==1) ? true : false ;
+        }
+ }
 
 }
