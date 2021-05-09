@@ -182,8 +182,8 @@
       <ul class="nav nav-tabs mb-3" id="myTab0" role="tablist">
 
         <li class="nav-item" role="presentation">
-          <button class="nav-link active" id="profile-tab0" data-mdb-toggle="tab" data-mdb-target="#profile0" type="button"
-            role="tab" aria-controls="profile" aria-selected="false">Team members</button>
+          <button class="nav-link active" id="profile-tab0" data-mdb-toggle="tab" data-mdb-target="#profile0"
+            type="button" role="tab" aria-controls="profile" aria-selected="false">Team members</button>
         </li>
         <li class="nav-item" role="presentation">
           <button class="nav-link" id="new-tab1" data-mdb-toggle="tab" data-mdb-target="#new1" type="button" role="tab"
@@ -202,58 +202,58 @@
             <div class="row">
 
               <div class="col-md-7">
-              
+
                 <table class="table" style="width:80%; margin:auto">
                   <tbody>
-                  
-                   
-                  
-                  
-                    <tr>
-                      <td>
-                        <select name="username" class="browser-default custom-select">
-                          <option value="-1" selected >Select Group</option>
-                          <option value="">Front end </option>
-                          <option value="">Backend</option>
-                          
-                        </select>
-                      </td>
-                      <td>
 
-                        
+                    <form action="/" method="POST">
+
+
+                      <tr>
+                        <td>
+                          <select name="username" class="browser-default custom-select">
+                            <option value="-1" selected>Select Group</option>
+                            <!-- <option value="">Front end </option>
+                          <option value="">Backend</option>-->
+
+                          </select>
+                        </td>
+                        <td>
+
+
                           <div class="select-list" style="width: 100%; text-align: center;">
                             <div class="title" style="width: 100%;">Assign Task</div>
                             <div class="select-options" style="width:auto;">
-                              <div class="option">
-                                <input type="checkbox" name="vehicle" id="option1" value="" />
-                                <label for="option1">task 1</label>
-                              </div>
-                             
+                              <!--<div class="option">
+                              <input type="checkbox" name="vehicle" id="option1" value="" />
+                              <label for="option1">task 1</label>
+                            </div>-->
+
                             </div>
                           </div>
-                        
 
-                      </td>
 
-                      <td>
-                        <select name="username" class="browser-default custom-select">
-                          <option value="-1" selected >Select Member</option>
-                          <option value="">Front end </option>
-                         
-                          
-                        </select>
-                      </td>
-                      <td>
-                        <button type="button" class=" btn-info btn-sm px-3" style="cursor: pointer;">
-                          Change
-                        </button>
-                      </td>
-                    </tr>
-                   
+                        </td>
 
+                        <td>
+                          <select name="username" class="browser-default custom-select">
+                            <option value="-1" selected>Select Member</option>
+                            <!--<option value="">Front end </option>-->
+
+
+                          </select>
+                        </td>
+                        <td>
+                          <button type="submit" class=" btn-info btn-sm px-3" style="cursor: pointer;">
+                            Change
+                          </button>
+                        </td>
+                      </tr>
+
+                    </form>
                   </tbody>
                 </table>
-              
+
               </div>
 
               <div class="col-md-5" style="position: relative;">
@@ -287,7 +287,7 @@
 
 
                       <div class="form-outline mb-4">
-                        <label class="form-label" for="meetingTitle" >Assign groups</label>
+                        <label class="form-label" for="meetingTitle">Assign groups</label>
 
                         <div class="select-list">
                           <div class="title">select groups</div>
@@ -368,24 +368,28 @@
 
 
       <%- include('common/footer'); %>
-      <script>
-        let groups=[ {
-    member: [ 'khush', 'qwerf' ],
-    task: ["task1","task2"],
-    _id: "6096e2b28ff21a1a18097914",
-    groupname: 'mindend',
-    leader: 'mishri',
-    __v: 0
-  },{
-    member: [ 'k', 'qrf' ],
-    task: ["task6","task5"],
-    _id: "609628ff21a1a18097914",
-    groupname: 'backend',
-    leader: 'john',
-    __v: 0
-  } ];
+        <script>
 
-      </script>  
+          let groups = [{
+            member: ['khush', 'qwerf'],
+            task: ["task1", "task2"],
+            _id: "6096e2b28ff21a1a18097914",
+            groupname: 'frontend',
+            leader: 'mishri',
+            __v: 0
+          }, {
+            member: ['k', 'qrf'],
+            task: ["task6", "task5"],
+            _id: "609628ff21a1a18097914",
+            groupname: 'backend',
+            leader: 'john',
+            __v: 0
+          }];
+
+
+
+
+        </script>
 
         <script>
          <% if (err) { %>
@@ -434,9 +438,9 @@
           }
         </script>
         <script>
-         let obj=<%-JSON.stringify(data)%>;
+          let obj =<% -JSON.stringify(data) %>;
           console.log(obj);
-          </script>
+        </script>
 
         <script>
           $(document).ready(function () {
