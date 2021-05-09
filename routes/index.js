@@ -6,7 +6,7 @@ const mongoose = require('mongoose');
 const utility = require("../utility/DB");
 const notify = require("../utility/notifications");
 var validator = require('validator');
-const { pushProject, getProjectById } = require('../utility/DB');
+const { pushProject, getProjectById, insertMeet } = require('../utility/DB');
 
 //for testing only
 router.get("/test", (req, res) => {
@@ -147,9 +147,33 @@ router.get("/project/:projid",checkuser,async (req,res)=>{
 
 
 /*Going to Meeting page */
-router.get("/meeting/:projid", checkuser, checkproj, (req, res) => {
+router.get("/meeting/:projid", checkuser,async (req, res) => {
+  let result=await utility.getGroupsByids(req.session.proj.group);
+  let members=[];
+  try{     
+  
+   
+   result.forEach(ele=>{
 
-  res.render('meeting',{title:"meeting",err:false,msg:"",type:"",navbar:{user:true,projid:req.params.projid,access:req.session.access}});
+    if(members.indexOf(ele.leader) === -1) 
+          members.push(ele.leader);
+     ele.member.forEach(name=>{
+      if(members.indexOf(name) === -1) 
+             members.push(name);
+     });
+        
+   });
+   console.log(req.query);
+   if(req.query.err)
+          throw 1;
+   if(req.query.scc) 
+   res.render('meeting',{data:{members:members},title:"meeting",mtitle:"GREAT!",err:true,msg:"Meet created",type:"success",navbar:{user:true,projid:req.params.projid,access:req.session.access}});      
+   //console.log(members)
+  res.render('meeting',{data:{members:members},title:"meeting",mtitle:"",err:false,msg:"",type:"",navbar:{user:true,projid:req.params.projid,access:req.session.access}});
+  }catch(err){
+    console.log(err);
+    res.render('meeting',{data:{members:members},title:"meeting",mtitle:"ERROR",err:true,msg:"Something Went Wrong",type:"error",navbar:{user:true,projid:req.params.projid,access:req.session.access}});
+  } 
 });
 
 
@@ -198,8 +222,8 @@ router.get("/forgotPassword", (req, res) => {
 
 
 /*Going to Access Control page */
-router.get("/videocall/:room", checkuser, (req, res) => {
-  res.render("videocall", { title: "videocall", navbar: { user: false } });
+router.get("/videocall/:room",checkuser, (req, res) => {
+  res.render("videocall", { title: "videocall",room:req.params.room, navbar: { user: false } });
 });
 
 
@@ -399,17 +423,23 @@ router.post("/profile", checkuser, (req, res) => {
   }
 });
 
-router.post("/meeting/:projid", (req, res) => {
-  console.log(req.body);
+router.post("/meeting/:projid",checkuser, async (req, res) => {
+  
   if (validator.isLength(req.body.name, { min: 3, max: 15 })) {
-
-    console.log(req.body);
-    res.redirect("/project/1");
+    try{
+    req.body.creatorID=req.session.user._id;
+    
+    await insertMeet(req.params.projid,req.body);
+    res.redirect(`/meeting/${req.session.projid}/?scc=true`)
+   }catch(err){
+     console.log(err);
+     res.redirect(`/meeting/${req.session.projid}/?err=true`)
+   }
   }
   //req.body.minutesOfMeeting={ name:req.body.name,description:req.body.description, date:req.body.date , author:req.body.author};
 
   else {
-    res.render('meeting', { title: "meeting", err: true, msg: "Failed to create meet link", type: "error", navbar: { user: true } });
+    res.redirect(`/meeting/${req.session.projid}/?err=true`)
   }
   // req.body._id=req.body.username;
   //  utility.insertMeet(req.body);

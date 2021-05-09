@@ -183,33 +183,28 @@
                             <form class="formclass" action="/meeting/<%=navbar.projid%>" method="POST" >
                                 <!-- Email input -->
                                 <div class="form-outline mb-4">
-                                    <input type="text" id="form1Example1" class="form-control" name="name" pattern="[0-9a-zA-Z \b]+$" required minlength="5"/>
+                                    <input type="text" id="form1Example1" placeholder="Enter Meet Name" class="form-control" name="name"  required minlength="3"  pattern="^(\d|\w)+$" />
                                     <label class="form-label" for="form1Example1">Meeting name</label>
                                 </div>
 
-                                
+                                <div class="form-outline mb-4">
+                                    <input type="datetime-local" id="form1Example1" class="form-control" name="dateTime"  required  />
+                                    <label class="form-label" for="form1Example1">Date</label>
+                                </div>
 
                                 <!-- 2 column grid layout for inline styling -->
 
                                 <div class="select-list" >
-                                    <div class="title">Invite members</div>
+                                    <div class="title"  style="width: 100%;">Invite members</div>
                                     <div class="select-options">
+                                        <%if(data){%>
+                                        <%data.members.forEach(ele=>{%>
                                         <div class="option">
-                                            <input type="checkbox" name="attendes" id="option1" value="option1" />
-                                            <label for="option1">Platform</label>
+                                            <input type="checkbox" name="attendes" id="<%=ele%>" value="<%=ele%>" />
+                                            <label for="<%=ele%>"><%=ele%></label>
                                         </div>
-                                        <div class="option">
-                                            <input type="checkbox" name="attendes" id="option2" value="option2" />
-                                            <label for="option2">Device ID</label>
-                                        </div>
-                                        <div class="option">
-                                            <input type="checkbox" name="attendes" id="option3" value="option2" />
-                                            <label for="option3">Token</label>
-                                        </div>
-                                        <div class="option">
-                                            <input type="checkbox" name="attendes" id="option4" value="option2" />
-                                            <label for="option4">Option 1</label>
-                                        </div>
+                                        <%})%>
+                                        <%}%>
                                     </div>
                                 
                         </div>
@@ -242,6 +237,7 @@
                         <div class="col-md" style="padding: 10%;">
 
                             <div class="list-group">
+                                <!--
                                 <a href="#" class="list-group-item">Meeting 1</a>
                                 <div class="list-group">
                                     <div class="content">
@@ -281,84 +277,10 @@
                                     </div>
                                 </div>
 
-                                <a href="#" class="list-group-item">Meeting 2</a>
-                                <div class="list-group">
-                                    <div class="content">
-                                        <br><br>
-                                        <h2>This is the meeting heading</h2>
-
-                                        <br><br>
-
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi neque
-                                            orci,
-                                            convallis a malesuada sit amet, scelerisque eget dui. Proin sapien
-                                            magna,
-                                            tincidunt quis luctus vitae, vestibulum in velit. Duis vel bibendum
-                                            tellus,
-                                            id pharetra ex. Nam eget cursus quam. Maecenas eget leo ac quam
-                                            consequat
-                                            venenatis eu ut sem. Cras quis est sit amet leo malesuada consectetur.
-                                            Pellentesque gravida eget lacus id condimentum.</p>
-
-                                        <p>
-                                            Etiam luctus massa risus, sed posuere magna accumsan ac. In velit magna,
-                                            finibus eu suscipit sed, placerat a enim. Vivamus imperdiet ipsum a
-                                            magna
-                                            interdum feugiat. Nunc turpis lorem, ultrices ac imperdiet sed,
-                                            dignissim et
-                                            urna. Integer fermentum, erat ut mollis ultricies, neque erat pretium
-                                            ipsum,
-                                            ac aliquet sem justo vel ante. Cras ultrices ipsum sit amet consequat
-                                            facilisis. Aenean consequat nunc leo, at ultricies risus venenatis nec.
-                                            Sed
-                                            gravida mauris vel eros porttitor, vel tristique nisl hendrerit. Donec
-                                            ultrices mauris et elit aliquet gravid.
-                                        </p>
-
-                                        <span style="margin-right:0"> - by vishwam pandya</span>
-
-                                    </div>
-                                </div>
+                                -->
 
 
-                                <a href="#" class="list-group-item">Meeting 3</a>
-                                <div class="list-group">
-                                    <div class="content">
-                                        <br><br>
-                                        <h2>This is the meeting heading</h2>
-
-                                        <br><br>
-
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi neque
-                                            orci,
-                                            convallis a malesuada sit amet, scelerisque eget dui. Proin sapien
-                                            magna,
-                                            tincidunt quis luctus vitae, vestibulum in velit. Duis vel bibendum
-                                            tellus,
-                                            id pharetra ex. Nam eget cursus quam. Maecenas eget leo ac quam
-                                            consequat
-                                            venenatis eu ut sem. Cras quis est sit amet leo malesuada consectetur.
-                                            Pellentesque gravida eget lacus id condimentum.</p>
-
-                                        <p>
-                                            Etiam luctus massa risus, sed posuere magna accumsan ac. In velit magna,
-                                            finibus eu suscipit sed, placerat a enim. Vivamus imperdiet ipsum a
-                                            magna
-                                            interdum feugiat. Nunc turpis lorem, ultrices ac imperdiet sed,
-                                            dignissim et
-                                            urna. Integer fermentum, erat ut mollis ultricies, neque erat pretium
-                                            ipsum,
-                                            ac aliquet sem justo vel ante. Cras ultrices ipsum sit amet consequat
-                                            facilisis. Aenean consequat nunc leo, at ultricies risus venenatis nec.
-                                            Sed
-                                            gravida mauris vel eros porttitor, vel tristique nisl hendrerit. Donec
-                                            ultrices mauris et elit aliquet gravid.
-                                        </p>
-
-                                        <span style="margin-right:0"> - by vishwam pandya</span>
-
-                                    </div>
-                                </div>
+                                
                             </div>
 
 

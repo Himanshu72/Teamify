@@ -76,14 +76,16 @@ insertTask: (obj)=>{
 
 
   },
-  insertMeet: (obj) => {
+  insertMeet: async(projid,obj) => {
+   try{
     const meetData = new meetModel(obj);
-    meetData.save((err, res) => {
-      if (err)
-        console.log(err);
-      else
-        console.log(res);
+    let result= await meetData.save();
+    await projectModel.updateOne({_id:projid},{
+      $addToSet:{ meets:result._id }
     })
+   }catch(err){
+     throw err;
+   }
   },
   insertNotification: (obj) => {
     const notificationData = new notificationModel(obj);
@@ -284,6 +286,7 @@ getTasksBygroup:(groups)=>{
               return (flag==1) ? true : false ;
         }
  },
+ 
  
 
 }
