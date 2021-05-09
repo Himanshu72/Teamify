@@ -237,48 +237,31 @@
                         <div class="col-md" style="padding: 10%;">
 
                             <div class="list-group">
-                                <!--
+                              <%if(data && data.meets){%>
+                                <% data.meets.forEach(ele=>{%>
+                                <%if(ele.minutesOfMeeting){%>
+                                 
                                 <a href="#" class="list-group-item">Meeting 1</a>
                                 <div class="list-group">
                                     <div class="content">
                                         <br><br>
-                                        <h2>This is the meeting heading</h2>
+                                        <h2><%=ele.minutesOfMeeting.title%></h2>
 
                                         <br><br>
 
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi neque
-                                            orci,
-                                            convallis a malesuada sit amet, scelerisque eget dui. Proin sapien
-                                            magna,
-                                            tincidunt quis luctus vitae, vestibulum in velit. Duis vel bibendum
-                                            tellus,
-                                            id pharetra ex. Nam eget cursus quam. Maecenas eget leo ac quam
-                                            consequat
-                                            venenatis eu ut sem. Cras quis est sit amet leo malesuada consectetur.
-                                            Pellentesque gravida eget lacus id condimentum.</p>
-
                                         <p>
-                                            Etiam luctus massa risus, sed posuere magna accumsan ac. In velit magna,
-                                            finibus eu suscipit sed, placerat a enim. Vivamus imperdiet ipsum a
-                                            magna
-                                            interdum feugiat. Nunc turpis lorem, ultrices ac imperdiet sed,
-                                            dignissim et
-                                            urna. Integer fermentum, erat ut mollis ultricies, neque erat pretium
-                                            ipsum,
-                                            ac aliquet sem justo vel ante. Cras ultrices ipsum sit amet consequat
-                                            facilisis. Aenean consequat nunc leo, at ultricies risus venenatis nec.
-                                            Sed
-                                            gravida mauris vel eros porttitor, vel tristique nisl hendrerit. Donec
-                                            ultrices mauris et elit aliquet gravid.
+                                            <%=ele.minutesOfMeeting.description%>
                                         </p>
 
-                                        <span style="margin-right:0"> - by vishwam pandya</span>
+                                        <span style="margin-right:0"> - by <%=ele.minutesOfMeeting.author%></span>
 
                                     </div>
                                 </div>
 
-                                -->
-
+                                
+                                <%}%>
+                            <%})%>
+                                <%}%>
 
                                 
                             </div>
@@ -307,37 +290,34 @@
 
                                 </div>
                                 <div class="modal-body">
-                                    <form action="/meeting" method="post">
+                                    <form action="/mmeet/<%=navbar.projid%>" method="POST">
                                         <div class="form-outline mb-2">
-                                            <select class="mdb-select md-form form-control" name="name">
-                                                <option value="" disabled selected>Choose your meeting title</option>
-                                                <option value="1">title 1</option>
-                                                <option value="2">Option 2</option>
-                                                <option value="3">Option 3</option>
+                                            <select class="mdb-select md-form form-control" name="id">
+                                                <option value="-1" disabled selected>Choose your meeting title</option>
+                                                <%if(data && data.meets){%>
+                                                <%data.meets.forEach(ele=>{%>
+                                                    <option value="<%=ele._id%>"><%=ele.name%>(<%=ele.dateTime%>)</option>
+                                                <%})%>
+                                                   <%}%> 
                                             </select>
-                                            <label class="form-label" for="meetingTitle">Meeting title</label>
+                                            <label class="form-label" for="meetingTitle">Select Meet</label>
                                         </div>
 
                                         <!-- meeting description input -->
                                         <div class="form-outline mb-4">
-                                            <input type="textarea" id="meetingDescription" class="form-control textArea"
-                                                name="description" />
+                                            <input type="text" id="author" required class="form-control textArea"
+                                                name="title" />
+                                            <label class="form-label" for="author">Meet title </label>
+                                        </div>
+
+                                        <div class="form-outline mb-4">
+                                            <textarea class="form-control"
+                                                name="description" row=5 required ></textarea>
                                             <label class="form-label" for="meetingDescription">Meeting Description
                                             </label>
                                         </div>
 
-                                        <!-- author input -->
-                                        <div class="form-outline mb-4">
-                                            <input type="text" id="author" class="form-control textArea"
-                                                name="author" />
-                                            <label class="form-label" for="author">Author </label>
-                                        </div>
-
-                                        <!-- date input -->
-                                        <div class="form-outline mb-4">
-                                            <input type="date" id="date" class="form-control textArea" name="date" />
-                                            <label class="form-label" for="date">Meeting date </label>
-                                        </div>
+                                        
 
 
                                         <!-- Submit button -->
@@ -431,7 +411,7 @@
                 </script>
                 <script>
                     <% if (err) { %>
-                      swal("ERROR", "<%=msg%>", "<%=type%>");
+                      swal("<%=mtitle%>", "<%=msg%>", "<%=type%>");
                     <% } %>
               
                   </script>

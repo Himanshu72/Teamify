@@ -6,7 +6,7 @@ const mongoose = require('mongoose');
 const utility = require("../utility/DB");
 const notify = require("../utility/notifications");
 var validator = require('validator');
-const { pushProject, getProjectById, insertMeet } = require('../utility/DB');
+const { pushProject, getProjectById, insertMeet, addMeet } = require('../utility/DB');
 
 //for testing only
 router.get("/test", (req, res) => {
@@ -148,11 +148,18 @@ router.get("/project/:projid",checkuser,async (req,res)=>{
 
 /*Going to Meeting page */
 router.get("/meeting/:projid", checkuser,async (req, res) => {
-  let result=await utility.getGroupsByids(req.session.proj.group);
+  let result;
+
   let members=[];
+  let meets;
   try{     
-  
-   
+
+    console.log(req.params.projid);
+    req.session.proj=await getProjectById(req.params.projid);
+    
+    meets = await utility.getMeetByids(req.session.proj.meets);
+    result=await utility.getGroupsByids(req.session.proj.group);
+   console.log("here==>",meets)
    result.forEach(ele=>{
 
     if(members.indexOf(ele.leader) === -1) 
@@ -167,12 +174,12 @@ router.get("/meeting/:projid", checkuser,async (req, res) => {
    if(req.query.err)
           throw 1;
    if(req.query.scc) 
-   res.render('meeting',{data:{members:members},title:"meeting",mtitle:"GREAT!",err:true,msg:"Meet created",type:"success",navbar:{user:true,projid:req.params.projid,access:req.session.access}});      
+   res.render('meeting',{data:{members:members,meets:meets},title:"meeting",mtitle:"GREAT!",err:true,msg:"Meet created",type:"success",navbar:{user:true,projid:req.params.projid,access:req.session.access}});      
    //console.log(members)
-  res.render('meeting',{data:{members:members},title:"meeting",mtitle:"",err:false,msg:"",type:"",navbar:{user:true,projid:req.params.projid,access:req.session.access}});
+  res.render('meeting',{data:{members:members,meets:meets},title:"meeting",mtitle:"",err:false,msg:"",type:"",navbar:{user:true,projid:req.params.projid,access:req.session.access}});
   }catch(err){
     console.log(err);
-    res.render('meeting',{data:{members:members},title:"meeting",mtitle:"ERROR",err:true,msg:"Something Went Wrong",type:"error",navbar:{user:true,projid:req.params.projid,access:req.session.access}});
+    res.render('meeting',{data:{members:members,meets:meets},title:"meeting",mtitle:"ERROR",err:true,msg:"Something Went Wrong",type:"error",navbar:{user:true,projid:req.params.projid,access:req.session.access}});
   } 
 });
 
@@ -423,17 +430,19 @@ router.post("/profile", checkuser, (req, res) => {
   }
 });
 
-router.post("/meeting/:projid",checkuser, async (req, res) => {
+router.post("/meeting/:projid",checkuser,getproj, async (req, res) => {
   
   if (validator.isLength(req.body.name, { min: 3, max: 15 })) {
     try{
     req.body.creatorID=req.session.user._id;
     
-    await insertMeet(req.params.projid,req.body);
-    res.redirect(`/meeting/${req.session.projid}/?scc=true`)
+    let result=await insertMeet(req.body);
+      await addMeet(req.params.projid,result._id);
+      req.session.proj=undefined;
+    res.redirect(`/meeting/${req.params.projid}/?scc=true`)
    }catch(err){
      console.log(err);
-     res.redirect(`/meeting/${req.session.projid}/?err=true`)
+     res.redirect(`/meeting/${req.params.projid}/?err=true`)
    }
   }
   //req.body.minutesOfMeeting={ name:req.body.name,description:req.body.description, date:req.body.date , author:req.body.author};
@@ -533,6 +542,19 @@ router.post("/manageTask/:projid",checkuser ,async (req, res) => {
 
 });
 
+router.post("/mmeet/:projid",checkuser,async (req,res)=>{
+    try{
+      //validate here
+      req.body.author=req.session.user._id;
+      console.log(req.body);
+      await utility.addMMeet(req.body.id,req.body);
+      res.redirect(`/meeting/${req.params.projid}/?scc=true`)
+    }catch(err){
+      console.log(err);
+      res.redirect(`/meeting/${req.params.projid}/?err=true`)
+    }
+})
+
 router.post("/addmember/:projid", checkuser, checkproj, async (req, res) => {
 if(validator.isLength(req.body.member, { min: 5, max: 20 })){
   let users = await utility.getAllusers();
@@ -579,5 +601,7 @@ else{
 
   
 });
+
+
 
 module.exports = router;

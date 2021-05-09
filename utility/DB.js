@@ -76,14 +76,28 @@ insertTask: (obj)=>{
 
 
   },
-  insertMeet: async(projid,obj) => {
-   try{
-    const meetData = new meetModel(obj);
-    let result= await meetData.save();
-    await projectModel.updateOne({_id:projid},{
-      $addToSet:{ meets:result._id }
+  addMeet:async(projid,id)=>{
+      try{
+     
+     let res= await projectModel.updateOne({_id:projid},{
+      $addToSet:{ meets:id }
     })
-   }catch(err){
+    return res;
+      }catch(err){
+          throw err;
+      }
+  }
+  ,
+  insertMeet: async(obj) => {
+   try{
+  
+    const meetData = new meetModel(obj);
+  
+    let result= await meetData.save();
+  
+    return result;   
+   
+  }catch(err){
      throw err;
    }
   },
@@ -287,6 +301,25 @@ getTasksBygroup:(groups)=>{
         }
  },
  
- 
+ getMeetByids(ids){
+   return new Promise((resolve,reject)=>{
+      meetModel.find({_id:{$in:ids}},(err,res)=>{
+        if(res)
+            resolve(res)
+        else
+            reject(err)    
+      })
+    });
+  },
+  addMMeet:(meetid,obj)=>{
+      return new Promise((resolve,reject)=>{
+            meetModel.updateOne({_id:meetid},{minutesOfMeeting:obj},(err,res)=>{
+              if(err)
+                  reject(err)
+               else 
+                  resolve(res)   
+            });
+      })
+  }
 
 }
