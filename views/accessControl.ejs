@@ -406,39 +406,30 @@
 
           function getThings() {
 
-            //assign task ke child khali
+            let groupSelected = document.getElementById("selectGroup");
+            let groupName = groupSelected.value;
 
+            //assign task all childs should be empty
             let taskSelected = document.getElementById("selectTask");
             while (taskSelected.firstChild) {
               taskSelected.removeChild(taskSelected.lastChild);
             }
-            //member taks ke child khali
+
+
+            //member task all childs should be empty
             let memberSelected = document.getElementById("selectMember");
             while (memberSelected.firstChild) {
               memberSelected.removeChild(memberSelected.lastChild);
             }
-            
-
-            let groupSelected = document.getElementById("selectGroup");
-            let groupName = groupSelected.value;
 
 
-
-
-
-
+      
             groups.forEach(gp => {
 
               if (gp.groupname == groupName) {
-                // console.log("group pakda : "+gp.groupname);
+               
 
                 gp.task.forEach(element => {
-
-                  /*
-                    <!--<div class="option" >
-                              <input type="checkbox" name="vehicle" id="option1" value="" />
-                              <label for="option1">task 1</label>-->
-                    */
 
                   var div = document.createElement('div');
                   div.class = "option"
@@ -454,30 +445,22 @@
 
                   taskSelected.appendChild(div);
                 });
-                //break;
+                
               }
             });
 
             groups.forEach(gp => {
 
               if (gp.groupname == groupName) {
-                // console.log("group pakda : "+gp.groupname);
 
                 gp.member.forEach(element => {
-
-                  /*
-                    <option value="">Front end </option>
-                    */
-
-                  
-
                   var opt = document.createElement('option');
                   opt.value = element;
                   opt.innerHTML = element;
 
                   memberSelected.appendChild(opt);
                 });
-                //break;
+               
               }
             });
 
