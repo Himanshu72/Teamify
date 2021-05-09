@@ -390,7 +390,7 @@
 
 
           function populateList() {
-            console.log("hua bro?");
+            
 
             let select = document.getElementById("selectGroup");
             groups.forEach(element => {
@@ -414,16 +414,12 @@
             while (taskSelected.firstChild) {
               taskSelected.removeChild(taskSelected.lastChild);
             }
-
-
+            
             //member task all childs should be empty
             let memberSelected = document.getElementById("selectMember");
             while (memberSelected.firstChild) {
               memberSelected.removeChild(memberSelected.lastChild);
             }
-
-
-      
             groups.forEach(gp => {
 
               if (gp.groupname == groupName) {
