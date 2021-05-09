@@ -483,8 +483,9 @@ router.post("/createGroup/:projid", checkuser, getproj, async (req, res) => {
 
 router.post("/manageTask/:projid",checkuser ,async (req, res) => {
 
- //tanya validation
-try{
+ if( validator.isLength(req.body.taskTitle, { min: 5, max: 20 }) && validator.isLength(req.body.taskDescription, { min: 4, max: 20 }) )
+ {
+  try{
     let result=await utility.insertTask(req.body);
 
     console.log(result);
@@ -493,10 +494,17 @@ try{
   res.render('Manage_Task',{data:undefined,title:"manageTask",err:true,msg:"Something went wrong",type:"error",mtitle:"ERROR" ,navbar:{user:true,projid:req.params.projid,access:req.session.access}});
   console.log(err);
 }
+
+ }
+ else
+ {
+  res.render('Manage_Task',{data:undefined,title:"manageTask",err:true,msg:"Something went wrong",type:"error",mtitle:"ERROR" ,navbar:{user:true,projid:req.params.projid,access:req.session.access}});
+ }
+
 });
 
 router.post("/addmember/:projid", checkuser, checkproj, async (req, res) => {
-  //tanya do validaiton here 
+if(validator.isLength(req.body.member, { min: 5, max: 20 })){
   let users = await utility.getAllusers();
   let data = utility.getGroupsByids(req.session.proj.group);
   let flag = 0;
@@ -530,8 +538,16 @@ router.post("/addmember/:projid", checkuser, checkproj, async (req, res) => {
   }else{
     res.render('accessControl',{data:data,title:"accessControl",err:true,msg:"Invalid username",type:"error",mtitle:"SORRY" ,navbar:{user:true,projid:req.params.projid,access:req.session.access}});
   }
+}
+else{
+  let data = utility.getGroupsByids(req.session.proj.group);
+  res.render('accessControl',{data:data,title:"accessControl",err:true,msg:"Invalid username",type:"error",mtitle:"SORRY" ,navbar:{user:true,projid:req.params.projid,access:req.session.access}});
+ 
 
-  console.log(req.body);
+}
+
+
+  
 });
 
 module.exports = router;
