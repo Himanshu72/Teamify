@@ -223,8 +223,8 @@
 
 
                           <div class="select-list" style="width: 100%; text-align: center;">
-                            <div class="title" style="width: 100%;" >Assign Task</div>
-                            <div class="select-options" style="width:12em; text-align: left;" id="selectTask" >
+                            <div class="title" style="width: 100%;">Assign Task</div>
+                            <div class="select-options" style="width:12em; text-align: left;" id="selectTask">
                               <!--<div class="option" >
                               <input type="checkbox" name="vehicle" id="option1" value="" />
                               <label for="option1">task 1</label>
@@ -406,19 +406,26 @@
 
           function getThings() {
 
+            //assign task ke child khali
+            
+            let taskSelected = document.getElementById("selectTask");
+            while (taskSelected.firstChild) {
+              taskSelected.removeChild(taskSelected.lastChild);
+            }
+            //member taks ke child khali
+
             let groupSelected = document.getElementById("selectGroup");
             let groupName = groupSelected.value;
 
 
-            let taskSelected = document.getElementById("selectTask");
+            
 
-            //assign task ke child khali
-            //member taks ke child khali
+            
 
             groups.forEach(gp => {
-              
+
               if (gp.groupname == groupName) {
-               // console.log("group pakda : "+gp.groupname);
+                // console.log("group pakda : "+gp.groupname);
 
                 gp.task.forEach(element => {
 
@@ -427,12 +434,12 @@
                               <input type="checkbox" name="vehicle" id="option1" value="" />
                               <label for="option1">task 1</label>-->
                     */
-                  
+
                   var div = document.createElement('div');
                   div.class = "option"
 
                   var opt = document.createElement('input');
-                  opt.type="checkbox";
+                  opt.type = "checkbox";
                   opt.value = element;
                   div.appendChild(opt);
 
