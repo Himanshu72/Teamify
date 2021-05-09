@@ -211,10 +211,10 @@
 
                       <tr>
                         <td>
-                          <select name="username" class="browser-default custom-select">
+                          <select name="username" class="browser-default custom-select" id="selectGroup" onchange="getThings()">
                             <option value="-1" selected>Select Group</option>
-                            <!-- <option value="">Front end </option>
-                          <option value="">Backend</option>-->
+                          <option value="FrontEnd">FrontEnd </option>
+                          <option value="BackEnd">BackEnd</option>
 
                           </select>
                         </td>
@@ -387,6 +387,13 @@
           }];
 
 
+          function getThings(){
+            let groupSelected = document.getElementById("selectGroup");
+            let groupName = groupSelected.value;
+            
+          }
+          
+          
 
 
         </script>
