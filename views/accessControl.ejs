@@ -175,7 +175,7 @@
     </style>
 </head>
 
-<body>
+<body onload="populateList()">
   <%- include('common/navbar',{user:navbar.user}); %>
     <%- include('common/sidenav',{id:navbar.projid,access:navbar.access}); %>
 
@@ -211,10 +211,11 @@
 
                       <tr>
                         <td>
-                          <select name="username" class="browser-default custom-select" id="selectGroup" onchange="getThings()">
+                          <select name="username" class="browser-default custom-select" id="selectGroup"
+                            onchange="getThings()">
                             <option value="-1" selected>Select Group</option>
-                          <option value="FrontEnd">FrontEnd </option>
-                          <option value="BackEnd">BackEnd</option>
+                            <!--<option value="FrontEnd">FrontEnd </option>
+                            <option value="BackEnd">BackEnd</option>-->
 
                           </select>
                         </td>
@@ -222,7 +223,7 @@
 
 
                           <div class="select-list" style="width: 100%; text-align: center;">
-                            <div class="title" style="width: 100%;">Assign Task</div>
+                            <div class="title" style="width: 100%;"id="selectTask">Assign Task</div>
                             <div class="select-options" style="width:auto;">
                               <!--<div class="option">
                               <input type="checkbox" name="vehicle" id="option1" value="" />
@@ -386,14 +387,33 @@
             __v: 0
           }];
 
+          
+          function populateList(){
+            console.log("hua bro?");
 
-          function getThings(){
-            let groupSelected = document.getElementById("selectGroup");
-            let groupName = groupSelected.value;
+            let select = document.getElementById("selectGroup");
+            groups.forEach(element => {
+
+              var opt = document.createElement('option');
+              opt.value=element.groupname;
+              opt.innerHTML=element.groupname;
+              select.appendChild(opt);
+            });
+              
             
           }
           
-          
+          function getThings() {
+
+            let groupSelected = document.getElementById("selectGroup");
+            let groupName = groupSelected.value;
+            console.log(groupName);
+
+            let taskSelected = document.getElementById("selectTask");
+
+          }
+
+
 
 
         </script>
