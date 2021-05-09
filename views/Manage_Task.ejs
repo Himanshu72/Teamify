@@ -380,7 +380,7 @@
 
                             </div>
                             <div class="modal-body">
-                                <form method="post" action="/manageTask">
+                                <form method="post" action="/manageTask/<%=navbar.projid%>">
 
                                     <!-- meeting title input -->
                                     <div class="form-outline mb-4">
@@ -394,8 +394,24 @@
                                             name="taskDescription" />
                                         <label class="form-label" for="meetingDescription">Task Description </label>
                                     </div>
+                                    <div class="form-outline mb-4">
+                                        <input type="date" id="meetingDescription" class="form-control textArea"
+                                            name="Deadline" />
+                                        <label class="form-label" for="meetingDescription">Deadline </label>
+                                    </div>
 
-
+                                    <div class="form-outline mb-4">
+                                        <select name="groupid" class="browser-default custom-select">
+                                            <option selected>Select Group</option>
+                                            <%if(data && data.groups){%>
+                                                <% data.groups.forEach((ele)=>{ %>
+                                            
+                                            <option value="<%=ele._id%>"><%=ele.groupname%></option>
+                                            
+                                            <%})%>                                           
+                                            <%}%>
+                                        </select>
+                                    </div>
 
 
 
@@ -429,7 +445,7 @@
 
                             </div>
                             <div class="modal-body">
-                                <form method="post" action="/manageTask">
+                                <form method="post" action="/Task/<%=navbar.projid%>">
 
                                     <!-- meeting title input -->
                                     <div class="form-outline mb-4">
@@ -486,7 +502,17 @@
     </div>
 
     <%- include('common/footer'); %>
+   
+
     <script>
+       
+        <% if (err) { %>
+            swal("<%=mtitle%>", "<%=msg%>", "<%=type%>");
+         <% } %>
+       
+    </script>
+   
+   <script>
         (function ($) {
             $.fn.multiselect = function () {
 
@@ -527,6 +553,7 @@
 
         }
     </script>
+
  <script>
     $(document).ready(function () {
         $('.stepper').mdbStepper();

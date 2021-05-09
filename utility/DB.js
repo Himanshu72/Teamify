@@ -36,8 +36,24 @@ insertGroup:(obj)=>{
  }) ;
  
 },
-insertTask:(obj)=>{
+insertTask: (obj)=>{
   const taskData=new taskModel(obj);
+  return new Promise((resolve,reject)=>{
+        taskData.save(async (err,res)=>{
+              if(res){
+                try{
+                  
+                  await groupModel.updateOne({_id:obj.groupid},{$addToSet:{task:res._id} })
+                  resolve(res);
+                }catch(err){
+                  console.log(err);
+                  throw err;
+                }
+              }else{
+                   reject(err)
+                 } 
+        });
+  });
 }
 ,
   insertUser: (obj) => {
@@ -252,6 +268,7 @@ insertTask:(obj)=>{
               
               return (flag==1) ? true : false ;
         }
- }
+ },
+ 
 
 }
