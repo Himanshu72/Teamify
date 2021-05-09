@@ -6,9 +6,9 @@ let notification= new Schema({
 	title:{type:String,required:true},
 	message:{type:String,required:true},
 	type:{type:Number,required:true},
-	link:{type:String},
-	task:{type:String}
+	room:{type:String},
+	task:[{type:String}]
 
   });
-// 0 message  , 1 meet link , 2 request task acess  
+// 0 message  , 2 meet link , 1 request task acess  
   module.exports=notification;

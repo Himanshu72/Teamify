@@ -101,14 +101,14 @@ insertTask: (obj)=>{
      throw err;
    }
   },
-  insertNotification: (obj) => {
+  insertNotification: async (id,obj) => {
+    try{
     const notificationData = new notificationModel(obj);
-    notificationData.save((err, res) => {
-      if (err)
-        console.log(err);
-      else
-        console.log(res);
-    })
+    let result=await notificationData.save();
+      await projectModel.updateOne({_id:id},{$addToSet:{notifications:result._id}})
+    }catch(err){
+      throw err;
+    }
   },
   updatePassword: (id, pass) => {
     return new Promise((resolve, reject) => {
@@ -281,6 +281,17 @@ getTasksBygroup:(groups)=>{
             reject(res);   
       })
  })
+},
+sendInvites: async (projid,datas)=>{
+  console.log("==>".datas) 
+  try{
+
+       
+        result =await notificationModel.insertMany(datas);
+        console.log("===>",result);
+     }catch(err){
+       throw err;
+     }
 }
 ,
  access:(username,owner,groups)=>{

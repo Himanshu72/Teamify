@@ -6,7 +6,8 @@ const mongoose = require('mongoose');
 const utility = require("../utility/DB");
 const notify = require("../utility/notifications");
 var validator = require('validator');
-const { pushProject, getProjectById, insertMeet, addMeet } = require('../utility/DB');
+const { pushProject, getProjectById, insertMeet, addMeet, getAllusers } = require('../utility/DB');
+const task = require('../schema/tashSchema');
 
 //for testing only
 router.get("/test", (req, res) => {
@@ -200,9 +201,36 @@ router.get("/accessControl/:projid", checkuser, getproj, async (req, res) => {
 
 
 /*Going to Notification page */
-router.get("/notification/:projid", (req, res) => {
+router.get("/notification/:projid",checkuser, async (req, res) => {
+  let tasks;
+  try{
+     tasks=await utility.getTasksBygroup(req.session.groups)
 
-  res.render('notification',{title:"notification",navbar:{user:true,projid:req.params.projid,access:req.session.access}});
+     console.log(req.session.groups,"-------",tasks);
+   let err=true,type,mtitle,msg;
+     switch(req.query.code){
+        case "0":
+              throw 0;
+              
+        case "1":
+            mtitle="Great!"
+            type="success"
+            msg="Message Sent sucessfully"
+             break; 
+        case "2":
+          mtitle="ERROR!"
+          type="error"
+          msg="Invalid Username"
+          break     
+        default:
+            err=false;
+
+      }
+      res.render('notification',{data:{tasks:tasks},title:"notification",err:err,msg:msg,type:type,mtitle:mtitle  ,navbar:{user:true,projid:req.params.projid,access:req.session.access}});
+  }catch(err){
+    console.log(err);
+    res.render('notification',{data:{tasks:tasks},title:"notification",err:true ,msg:"Something went wrong",type:"error",mtitle:"ERROR",navbar:{user:true,projid:req.params.projid,access:req.session.access}});
+  }
 });
 
 
@@ -435,9 +463,21 @@ router.post("/meeting/:projid",checkuser,getproj, async (req, res) => {
   if (validator.isLength(req.body.name, { min: 3, max: 15 })) {
     try{
     req.body.creatorID=req.session.user._id;
-    
+    let datas=[];
     let result=await insertMeet(req.body);
+      for(let ele in req.body.attendes){
+        datas.push({
+          senderUsername:req.session.user._id,
+          receiverUsername:ele,
+          title:"Meet Request",
+          message:"Please Join Meet at "+req.body.dateTime,
+          type:2,
+          room:req.body.name  
+        });
+      } 
+
       await addMeet(req.params.projid,result._id);
+      await utility.sendInvites(req.params.projid,datas)
       req.session.proj=undefined;
     res.redirect(`/meeting/${req.params.projid}/?scc=true`)
    }catch(err){
@@ -541,13 +581,39 @@ router.post("/manageTask/:projid",checkuser ,async (req, res) => {
  }
 
 });
+router.post("/notify/:projid",checkuser,async (req,res)=>{
+  //validate here  
+  try{
+    req.body.senderUsername=req.session.user._id;
+    let users=await getAllusers();
+    let got=users.find(ele=>ele._id==req.body.receiverUsername)
+    console.log("got=>",got)  
+    if(!got)
+      res.redirect(`/notification/${req.params.projid}/?code=2`)
+    if(req.body.type==0)
+        req.body.title="Normal Message"
+    else if(req.body.type==1)  
+    req.body.title="Need Access"
+    else
+    req.body.title="Meet Invite"
+    //console.log(req.body);
+     let result=await utility.insertNotification(req.params.projid,req.body); 
+    res.redirect(`/notification/${req.params.projid}/?code=1`)
+    }catch(err){
+      console.log(err);
+         res.redirect(`/notification/${req.params.projid}/?code=0`)
+    }
+});
 
 router.post("/mmeet/:projid",checkuser,async (req,res)=>{
     try{
       //validate here
+      let datas=[]
       req.body.author=req.session.user._id;
-      console.log(req.body);
+      
       await utility.addMMeet(req.body.id,req.body);
+        
+
       res.redirect(`/meeting/${req.params.projid}/?scc=true`)
     }catch(err){
       console.log(err);

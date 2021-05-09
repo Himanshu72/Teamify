@@ -10,7 +10,7 @@ let project= new Schema({
           ],
     group:[{type:String}],
     notifications:[
-        {type:String,required:true}
+        {type:String}
     ]
 
   });
