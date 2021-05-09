@@ -252,6 +252,21 @@ insertTask: (obj)=>{
           throw err;
      }
 },
+getTasksBygroup:(groups)=>{
+  let ids=[];
+ groups.forEach((ele)=>{
+   ids.push(ele.task);
+ }) 
+ return new Promise((resolve,reject)=>{
+      taskModel.find({_id:{$in:ids}},(err,res)=>{
+        if(res)
+            resolve(res);
+         else 
+            reject(res);   
+      })
+ })
+}
+,
  access:(username,owner,groups)=>{
         if(username==owner){
           return true;

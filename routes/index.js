@@ -178,10 +178,13 @@ router.get("/notification/:projid", (req, res) => {
 /*Going to Manage Task page */
 router.get("/manageTask/:projid",checkuser ,async (req, res) => {
 try{
+  let tasks=await utility.getTasksBygroup(req.session.groups)
+  
   result = await utility.getGroupsByids(req.session.proj.group);
-  res.render('Manage_Task',{ data:{groups:result},title:"manageTask",err:false,msg:"",type:"",mtitle:"" ,navbar:{user:true,projid:req.params.projid,access:req.session.access}});
+  res.render('Manage_Task',{ data:{groups:result,tasks:tasks},title:"manageTask",err:false,msg:"",type:"",mtitle:"" ,navbar:{user:true,projid:req.params.projid,access:req.session.access}});
 }catch(err){
-  res.render('Manage_Task',{data:undefined,title:"manageTask",err:true,msg:"Something went wrong",type:"error",mtitle:"ERROR" ,navbar:{user:true,projid:req.params.projid,access:req.session.access}});
+  console.log(err);
+  res.render('Manage_Task',{data:undefined,task:undefined,title:"manageTask",err:true,msg:"Something went wrong",type:"error",mtitle:"ERROR" ,navbar:{user:true,projid:req.params.projid,access:req.session.access}});
 }
 });
 
