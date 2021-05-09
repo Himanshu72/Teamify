@@ -219,6 +219,22 @@ insertTask:(obj)=>{
       })
 
   })
+},getMygroups:async (groupids,username,owner)=>{
+     try{
+       
+       let allgroup=await groupModel.find({ _id:{$in:groupids} });
+       if(username==owner)
+              return allgroup;
+       else{
+      
+      let result=  allgroup.filter((ele)=>{
+              return (ele.member.includes(username) || ele.leader==username );
+       });
+       return result;
+      }
+     }catch(err){
+          throw err;
+     }
 }
 
 }

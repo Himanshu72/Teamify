@@ -126,13 +126,13 @@
                 <div class="col-md-3">
                     <div class="card text-center">
                         <form action="/announcement/<%=navbar.projid%>" method="POST">
-                        <div class="card-header" style="background-color:#4e333b; color: white; font-size:22px"><i
+                        <div class="card-header"   style="background-color:#4e333b; color: white; font-size:22px"><i
                                 class="fas fa-bullhorn"></i> &nbsp;Announcement</div>
                         <div class="card-body">
                             
 
                             <div class="form-group green-border-focus">
-                                <textarea required minlength="15" class="form-control" name="announcement" value=""; id="exampleFormControlTextarea5" rows="3"></textarea>
+                                <textarea required minlength="15" placeholder="Write your annoucement here" class="form-control" name="announcement" ; id="exampleFormControlTextarea5" rows="3"><% if(data.proj.announcement ){ %><%=data.proj.announcement%><%}%></textarea>
                             </div>
 
 
@@ -145,11 +145,12 @@
                     
                     </div>
                 </div>
-
-                <div class="col-md-3">
+                <% if(data && data.groups) {%>
+                <% data.groups.forEach((ele)=>{ %>
+                    <div class="col-md-3">
                     <div class="card text-center">
                         <div class="card-header" style="background-color:#4e333b; color: white; font-size:22px"><i
-                                class="fas fa-tasks"></i> &nbsp;Group</div>
+                                class="fas fa-tasks"></i> &nbsp;<%=ele.groupname%></div>
                         <div class="card-body">
 
                             <p class="card-text">
@@ -206,6 +207,8 @@
 
                     </div>
                 </div>
+                <%})%>
+                <%}%>
 
 
 

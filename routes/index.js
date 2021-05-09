@@ -116,10 +116,27 @@ router.get("/dashboard/:id",checkuser,(req,res)=>{
 router.get("/project/:projid",checkuser,async (req,res)=>{
  
  try{ 
-  
+
+    
+   
    req.session.proj=await getProjectById(req.params.projid);
-   console.log(req.session.proj);
-  res.render('project',{title:"project",err:false,mtitle:"",msg:"",type:"",data:"",navbar:{user:true,projid:req.params.projid}});
+   //console.log(req.session.proj);
+  let owner;
+       req.session.user.projects.every((ele)=>{
+               if(ele._id==req.params.projid)
+                  {
+                    owner=ele.owner;
+                    return false;
+
+                  } else{
+                     return true;
+                  } 
+       });
+   let groups=await utility.getMygroups(req.session.proj.group,req.session.user._id,owner);
+   req.session.groups=groups; 
+   //console.log(groups);
+
+  res.render('project',{title:"project",data:{ proj:req.session.proj,groups:groups },err:false,mtitle:"",msg:"",type:"",navbar:{user:true,projid:req.params.projid}});
  } 
  catch(err){
     console.log(err);
@@ -216,19 +233,20 @@ router.post("/forgotpassword",(req,res)=>{
         }
 });
 
-router.post("/announcement/:projid",checkuser,async (req,res)=>{
+router.post("/announcement/:projid",checkuser,getproj,async (req,res)=>{
           if( validator.isLength(req.body.announcement,{min:15,max:150}) ){
             try{
             let result= await utility.updateAnnounce(req.params.projid,req.body.announcement);
                // console.log("date==>",result);  
-                res.render('project',{title:"project",err:true,mtitle:"Great",msg:"Announcement updated",type:"success",data:"",navbar:{user:true,projid:req.params.projid}});
+                req.session.proj=await utility.getProjectById(req.params.projid) ;
+                res.render( 'project',{data:{proj:req.session.proj,groups:req.session.groups} ,title:"project",err:true,mtitle:"Great",msg:"Announcement updated",type:"success",data:{proj:req.session.proj},navbar:{user:true,projid:req.params.projid}});
             }catch(err){
               console.log(err);
-              res.render('project',{title:"project",err:true,mtitle:"ERROR",msg:"something went wrong",type:"error",data:"",navbar:{user:true,projid:req.params.projid}});
+              res.render( 'project',{data:{proj:req.session.proj,groups:req.session.groups} ,title:"project",err:true,mtitle:"ERROR",msg:"Something went wrong",type:"error",data:{proj:req.session.proj},navbar:{user:true,projid:req.params.projid}});
             }
                 //res.render('project',{title:"project",err:false,mtitle:"",msg:"",type:"",data:"",navbar:{user:true,projid:req.params.projid}});
           }else{
-            res.render('project',{title:"project",err:true,mtitle:"ERROR",msg:"validation failed",type:"error",data:"",navbar:{user:true,projid:req.params.projid}});
+            res.render('project',{title:"project", data:{proj:req.session.proj,groups:req.session.groups},err:true,mtitle:"ERROR",msg:"validation failed",type:"error",navbar:{user:true,projid:req.params.projid}});
           }
 });
 
