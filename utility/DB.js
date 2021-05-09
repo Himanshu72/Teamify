@@ -195,12 +195,13 @@ insertTask:(obj)=>{
       });
     })
   },
-  getGroupsByids:async(id)=>{
+  getGroupsByids:async(ids)=>{
 
-       let result=await getProjectById(id);
+       
     return new Promise((resolve,reject)=>{
-         groupModel.find({
-           _id:{$in:result.group}
+      console.log(ids);   
+      groupModel.find({
+           _id:{$in:ids}
          },(err,res)=>{
            if(res)
                 resolve(res)

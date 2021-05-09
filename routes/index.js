@@ -6,7 +6,7 @@ const mongoose = require('mongoose');
 const utility = require("../utility/DB");
 const notify=require("../utility/notifications");
 var validator = require('validator');
-const { pushProject } = require('../utility/DB');
+const { pushProject, getProjectById } = require('../utility/DB');
 
 //for testing only
 router.get("/test",(req,res)=>{
@@ -113,9 +113,18 @@ router.get("/dashboard/:id",checkuser,(req,res)=>{
 
 
 /*Going to Project page */
-router.get("/project/:projid",checkuser,checkproj,(req,res)=>{
-
+router.get("/project/:projid",checkuser,async (req,res)=>{
+ 
+ try{ 
+  
+   req.session.proj=await getProjectById(req.params.projid);
+   console.log(req.session.proj);
   res.render('project',{title:"project",err:false,mtitle:"",msg:"",type:"",data:"",navbar:{user:true,projid:req.params.projid}});
+ } 
+ catch(err){
+    console.log(err);
+  res.redirect(`/dashboard/${req.session.user._id}`);
+ }
 });
 
 
@@ -133,7 +142,7 @@ router.get("/accessControl/:projid",checkuser,getproj,async (req,res)=>{
   let result;
   try
   {  
-   result= await utility.getGroupsByids(req.params._id);
+   result= await utility.getGroupsByids(req.session.proj.group);
   }
   catch(err)
   {
@@ -454,7 +463,7 @@ router.post("/manageTask",(req,res)=>{
 router.post("/addmember/:projid",checkuser,checkproj,async (req,res)=>{
   //tanya do validaiton here 
   let users = await utility.getAllusers();
-  let data= utility.getGroupsByids(req.params.projid); 
+  let data= utility.getGroupsByids(req.session.proj.group); 
   let flag=0;
   users.every((ele)=>{
         if(ele._id == req.body.member){
