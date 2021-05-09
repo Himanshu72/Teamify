@@ -414,6 +414,9 @@
             }
             //member taks ke child khali
             let memberSelected = document.getElementById("selectMember");
+            while (memberSelected.firstChild) {
+              memberSelected.removeChild(memberSelected.lastChild);
+            }
             
 
             let groupSelected = document.getElementById("selectGroup");
