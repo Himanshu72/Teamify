@@ -238,7 +238,7 @@
                         </td>
 
                         <td>
-                          <select name="username" class="browser-default custom-select">
+                          <select name="username" class="browser-default custom-select" id="selectMember">
                             <option value="-1" selected>Select Member</option>
                             <!--<option value="">Front end </option>-->
 
@@ -407,20 +407,22 @@
           function getThings() {
 
             //assign task ke child khali
-            
+
             let taskSelected = document.getElementById("selectTask");
             while (taskSelected.firstChild) {
               taskSelected.removeChild(taskSelected.lastChild);
             }
             //member taks ke child khali
+            let memberSelected = document.getElementById("selectMember");
+            
 
             let groupSelected = document.getElementById("selectGroup");
             let groupName = groupSelected.value;
 
 
-            
 
-            
+
+
 
             groups.forEach(gp => {
 
@@ -448,6 +450,29 @@
                   div.appendChild(lab);
 
                   taskSelected.appendChild(div);
+                });
+                //break;
+              }
+            });
+
+            groups.forEach(gp => {
+
+              if (gp.groupname == groupName) {
+                // console.log("group pakda : "+gp.groupname);
+
+                gp.member.forEach(element => {
+
+                  /*
+                    <option value="">Front end </option>
+                    */
+
+                  
+
+                  var opt = document.createElement('option');
+                  opt.value = element;
+                  opt.innerHTML = element;
+
+                  memberSelected.appendChild(opt);
                 });
                 //break;
               }
