@@ -269,6 +269,7 @@ insertTask: (obj)=>{
      }
 },
 getTasksBygroup:(groups)=>{
+  try{
   let ids=[];
  groups.forEach((ele)=>{
    ids.push(ele.task);
@@ -281,6 +282,9 @@ getTasksBygroup:(groups)=>{
             reject(res);   
       })
  })
+}catch(err){
+  throw err;
+}
 },
 sendInvites: async (projid,datas)=>{
   console.log("==>".datas) 

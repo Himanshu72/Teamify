@@ -9,6 +9,7 @@ var validator = require('validator');
 const { pushProject, getProjectById, insertMeet, addMeet, getAllusers } = require('../utility/DB');
 const task = require('../schema/tashSchema');
 
+
 //for testing only
 router.get("/test", (req, res) => {
 
@@ -117,10 +118,9 @@ router.get("/project/:projid",checkuser,async (req,res)=>{
  
  try{ 
 
-    
-   
    req.session.proj=await getProjectById(req.params.projid);
-   //console.log(req.session.proj);
+   
+     console.log(req.session.proj);
   let owner;
        req.session.user.projects.every((ele)=>{
                if(ele._id==req.params.projid)
@@ -134,6 +134,7 @@ router.get("/project/:projid",checkuser,async (req,res)=>{
        });
    let groups=await utility.getMygroups(req.session.proj.group,req.session.user._id,owner);
    req.session.groups=groups; 
+   
    //console.log(groups);
      req.session.access = utility.access(req.session.user._id,owner,groups);
      console.log(req.session.access);
@@ -189,11 +190,16 @@ router.get("/meeting/:projid", checkuser,async (req, res) => {
 /*Going to Access Control page */
 router.get("/accessControl/:projid", checkuser, getproj, async (req, res) => {
   let result;
+  let tasks; 
+  let datas=[];
   try {
+    
+    //console.log(tasks);
     result = await utility.getGroupsByids(req.session.proj.group);
+
   }
   catch (err) {
-    console.log(err);  //what? 
+    console.log("Error",err);  //what? 
   }
         
   res.render('accessControl',{title:"accessControl",data:result,err:false,msg:"",type:"",mtitle:"" ,navbar:{user:true,projid:req.params.projid,access:req.session.access}});
