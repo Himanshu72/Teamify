@@ -5,7 +5,7 @@ const meet = require("../schema/meetSchema");
 const notification = require("../schema/notificationSchema");
 const project = require("../schema/projectSchema");
 const group= require("../schema/groupSchema")
-const task =require("../schema/tashSchema");
+const task =require("../schema/taskSchema");
 mongoose.connect(env.dbserver, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
@@ -272,17 +272,19 @@ getTasksBygroup:(groups)=>{
   try{
   let ids=[];
  groups.forEach((ele)=>{
-   ids.push(ele.task);
+   ids.push(...ele.task);
  }) 
+ console.log("datas====>",ids);
  return new Promise((resolve,reject)=>{
       taskModel.find({_id:{$in:ids}},(err,res)=>{
         if(res)
             resolve(res);
          else 
-            reject(res);   
+            reject(err);   
       })
  })
 }catch(err){
+  
   throw err;
 }
 },
@@ -358,6 +360,26 @@ sendInvites: async (projid,datas)=>{
         console.log(err);
         throw err;
       }
+  },
+  changeStatus:async (obj)=>{
+    
+    
+    return new Promise((resolve,reject)=>{
+      obj.forEach(async ele=>{
+       try{
+
+       
+        await taskModel.updateOne({_id:ele.tid.substring(1,ele.tid.length)},{taskStatus:ele.status});
+       }
+       catch(err){
+         reject(err);
+         throw err;
+       }
+        resolve(1);
+      })
+
+    })
+     
   }
   
 

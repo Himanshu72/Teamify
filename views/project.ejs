@@ -107,6 +107,10 @@
                 -webkit-align-items: center;
                 align-items: center;
             }
+            .overflow {
+        max-height: 10em;
+        overflow-y: scroll;
+      }
 
             /* @media only screen and (max-width: 600px) {
           
@@ -147,7 +151,56 @@
                 </div>
                 <% if(data && data.groups) {%>
                 <% data.groups.forEach((ele)=>{ %>
-                    <div class="col-md-3">
+                   
+        <div class="col-md-3">
+
+            <div class="card text-center">
+  
+              <div class="card-header" style="background-color:#4e333b; color: white; font-size:22px"><i
+                  class="fas fa-tasks"></i> &nbsp;<%=ele.groupname%></div>
+              <div class="card-body">
+  
+                <p class="card-text">
+  
+                <div class="row" style="text-align: left; font-size: 1.3em;">
+                  <div class="col col-12 overflow">
+  
+                    <ul class="list-group list-group-flush">
+  
+                      <%if(data && data.tasks){%>
+                       <%data.tasks.forEach((e)=>{%> 
+                        <%if(e.workerID){%>
+                            <% if ( navbar.access    || e.workerID.find(f=>f==data.cur) ){%>  
+                                <%if(ele.task.find(d=>d==e._id)){%>
+                        <li class="list-group-item"> <i class="fas  toggle" data-gp="g<%=ele._id%>" data-id="I<%=e._id%>" id="I<%=e._id%>"
+                          data-status="<%=e.taskStatus%>"></i> <%=e.taskTitle%></li>
+                          <%}%>  
+                          <%}%>
+                          <%}%>
+                      <%})%>
+                          <%}%>
+                         
+                          
+                    </ul>
+                  </div>
+  
+  
+                </div>
+                </p>
+  
+  
+  
+              </div>
+              <div class="card-footer">
+                <button class="btn_cust sendstatus" id="g<%=ele._id%>"> <i class="fas fa-envelope-open-text"></i> Notify
+                  Status</button>
+              </div>
+  
+            </div>
+  
+          </div>
+                   
+                    <!-- <div class="col-md-3">
                     <div class="card text-center">
                         <div class="card-header" style="background-color:#4e333b; color: white; font-size:22px"><i
                                 class="fas fa-tasks"></i> &nbsp;<%=ele.groupname%></div>
@@ -206,7 +259,7 @@
                         </div>
 
                     </div>
-                </div>
+                </div> -->
                 <%})%>
                 <%}%>
 
@@ -249,12 +302,84 @@
             </script>
             <script>
 
-
-
+                let data = document.querySelectorAll(".toggle");
+                function load(data) {
+                  data.forEach(ele => {
+        
+                    if (ele.dataset.status == 1) {
+                      ele.style.color = "green"
+                      ele.classList.add("fa-check");
+                      ele.classList.remove("fa-spinner");
+                    } else {
+                      ele.style.color = "red"
+                      ele.classList.add("fa-spinner");
+                      ele.classList.remove("fa-check");
+                    }
+        
+        
+        
+                  })
+                }
+        
+                window.addEventListener("load", load(data));
+                data.forEach((ele) => {
+                  ele.addEventListener("click", (e) => {
+        
+                    let cur = document.querySelector(`#${e.target.dataset.id}`);
+                    cur.dataset.status = (cur.dataset.status == 0) ? 1 : 0;
+        
+                    load(data);
+                  })
+                })
+        
+                document.querySelectorAll(".sendstatus").forEach((ele) => {
+                  ele.addEventListener("click", (e) => {
+                    let obj = [
+        
+                    ];
+                    let tasks = document.querySelectorAll(`[data-gp=${e.target.id}]`)
+                    //console.log(tasks);
+                    
+                    tasks.forEach(t => {
+                      obj.push({ tid: t.dataset.id, gid: e.target.id, status: t.dataset.status })
+                     
+                       
+                  })
+                //   $.post("/test",
+                // {
+                //   contentType: "application/json",
+                //   data:JSON.stringify(obj)
+                // },
+                // function(data,status){
+                //   window.location.reload();
+                // });
+                
+                $.ajax({
+                type: 'POST',
+                url: '/assignTask',
+                contentType: 'application/json',
+                data: JSON.stringify({obj})
+            }).done(function () {
+               window.location.reload();
+            }).fail(function () {
+              window.location.reload();
+            });
+              
+              
+              
+              
+              
+              })
+                
+               
+                })
+         
+        
+              </script>
+               <script>
                 $(document).ready(function () {
                     $('.stepper').mdbStepper();
                 })
-
                 var swiper = new Swiper('.swiper-container', {
                     slidesPerView: 3,
                     spaceBetween: 30,
@@ -264,52 +389,10 @@
                     },
                     loop: true
                 });
-
-                document.querySelectorAll(".toggle").forEach((ele) => {
-                    ele.addEventListener("click", (e) => {
-
-                        let target = document.getElementById(e.target.id)
-                        if (e.target.dataset.status == 0) {
-                            e.target.dataset = 1;
-                            target.classList.remove("fa-spinner");
-                            target.classList.add("fa-check")
-                            target.style.color = "green";
-                            target.dataset.status = 1;
-                        } else {
-                            target.dataset = 0;
-                            target.classList.remove("fa-check");
-                            target.classList.add("fa-spinner");
-                            target.style.color = "#cc3300";
-                            target.dataset.status = 0;
-                        }
-                        let childs = document.querySelectorAll(`*[data-parent='${target.dataset.parent}']`);
-
-                        if (hander(childs)) {
-                            document.getElementById(target.dataset.parent).style.background = "#4BB543";
-                        } else {
-                            document.getElementById(target.dataset.parent).style.background = "#cc3300";
-                        }
-
-                    });
-                })
-
-                function hander(childs) {
-
-                    for (let child of childs) {
-                        console.log(child.dataset.status)
-                        if (child.dataset.status == 0) {
-
-                            return false;
-                        }
-
-                    }
-                    return true;
-                }
-
                
-
+               
             </script>
              <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.css" />
 </body>
 
-</html>
+</html> 

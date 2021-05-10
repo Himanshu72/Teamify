@@ -1,19 +1,29 @@
 var express = require('express');
 
 var router = express.Router();
-const env = require("../env");
-const mongoose = require('mongoose');
+
 const utility = require("../utility/DB");
 const notify = require("../utility/notifications");
 var validator = require('validator');
 const { pushProject, getProjectById, insertMeet, addMeet, getAllusers } = require('../utility/DB');
-const task = require('../schema/tashSchema');
+
 
 
 //for testing only
 router.get("/test", (req, res) => {
-
+   
   res.render('test', { title: "test", navbar: { user: false } });
+});
+router.post("/assignTask", async (req, res) => {
+  
+  try{
+    console.log(req.body);
+    await utility.changeStatus(req.body);
+  }catch(err){
+    console.log(err);
+  }
+  res.redirect("/")
+   
 });
 
 async function getproj(req, res, next) {
@@ -120,26 +130,27 @@ router.get("/project/:projid",checkuser,async (req,res)=>{
 
    req.session.proj=await getProjectById(req.params.projid);
    
-     console.log(req.session.proj);
-  let owner;
-       req.session.user.projects.every((ele)=>{
-               if(ele._id==req.params.projid)
-                  {
-                    owner=ele.owner;
-                    return false;
+    console.log(req.session.proj);
+   let owner;
+        req.session.user.projects.every((ele)=>{
+                if(ele._id==req.params.projid)
+                   {
+                     owner=ele.owner;
+                     return false;
 
-                  } else{
-                     return true;
-                  } 
-       });
+                   } else{
+                      return true;
+                   } 
+        });
    let groups=await utility.getMygroups(req.session.proj.group,req.session.user._id,owner);
    req.session.groups=groups; 
-   
-   //console.log(groups);
+    let tasks= await utility.getTasksBygroup(req.session.groups);
+   console.log(groups);
      req.session.access = utility.access(req.session.user._id,owner,groups);
-     console.log(req.session.access);
-  res.render('project',{title:"project",data:{ proj:req.session.proj,groups:groups },err:false,mtitle:"",msg:"",type:"",navbar:{user:true,projid:req.params.projid,access:req.session.access}});
- } 
+    console.log(req.session.access);
+ res.render('project',{title:"project",data:{ proj:req.session.proj,groups:groups,tasks:tasks,cur:req.session.user._id},err:false,mtitle:"",msg:"",type:"",navbar:{user:true,projid:req.params.projid,access:req.session.access}});
+    res.redirect("/profile");
+} 
  catch(err){
     console.log(err);
     res.redirect(`/dashboard/${req.session.user._id}`);
@@ -671,7 +682,7 @@ router.post("/mmeet/:projid",checkuser,async (req,res)=>{
 router.post("/addmember/:projid", checkuser, async (req, res) => {
 if(validator.isLength(req.body.member, { min: 5, max: 20 })){
   let users = await utility.getAllusers();
-  let data = utility.getGroupsByids(req.session.proj.group);
+  let data = await utility.getGroupsByids(req.session.proj.group);
   let flag = 0;
   let tasks;
   users.every((ele) => {
@@ -707,7 +718,7 @@ if(validator.isLength(req.body.member, { min: 5, max: 20 })){
   }
 }
 else{
-  let data = utility.getGroupsByids(req.session.proj.group);
+  let data = await utility.getGroupsByids(req.session.proj.group);
   res.render('accessControl',{tasks:tasks,data:data,title:"accessControl",err:true,msg:"Invalid username",type:"error",mtitle:"SORRY" ,navbar:{user:true,projid:req.params.projid,access:req.session.access}});
  
 
