@@ -274,9 +274,20 @@ router.get("/videocall/:room",checkuser, (req, res) => {
 
 
 /*POST*/
-router.post("/assignTask/:projid",(req,res)=>{
- 
+router.post("/assignTask/:projid",checkuser,async (req,res)=>{
+ //do validation
     console.log(req.body);
+    let tasks;
+    let data;
+  try{
+    tasks=await utility.getTasksBygroup(req.session.groups);
+    data= await utility.getGroupsByids(req.session.proj.group);
+    await utility.assignTask(req.body.tasks,req.body.username);
+    res.redirect(`/accessControl/${req.params.projid}`)
+  }catch(err){
+        console.log(err);  
+        res.render('accessControl', { tasks:tasks,data: data, title: "accessControl", err: true, msg: "Something went wrong", type: "error", mtitle: "SORRY", navbar: { user: true, projid: req.params.projid,access:req.session.access } });
+  }
 });
 
 router.post("/forgotpassword", (req, res) => {

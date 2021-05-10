@@ -350,6 +350,14 @@ sendInvites: async (projid,datas)=>{
   getSubtaskByID:async (id)=>{
     await taskModel.findOne({"subTask._id":id}).select({subTask:{$eleMatch:{_id:id}}});
   //  User.findOne({id: req.body.myId}).select({ Friends: {$elemMatch: {id: req.body.id}}})
+  },
+  assignTask : async(id,username)=>{
+      try{
+      await taskModel.updateOne({_id:id},{$addToSet:{workerID:username}})
+      }catch(err){
+        console.log(err);
+        throw err;
+      }
   }
   
 

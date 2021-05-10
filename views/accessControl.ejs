@@ -384,25 +384,29 @@
 
 
       <%- include('common/footer'); %>
+      
+        
+        
         <script>
-
-          let groups = [{
-            member: ['khush', 'qwerf'],
-           // task: ["task 1", "task 2"],
-            task:[{_id:"adfad",name:"asdf"}],
-            _id: "6096e2b28ff21a1a18097914",
-            groupname: 'frontend',
-            leader: 'mishri',
-            __v: 0
-          }, {
-            member: ['k', 'qrf'],
-           //task: ["task 6", "task 5"],
-           task:[{_id:"adfad",name:"asdf"},{_id:"ergfadsf",name:"yoyo"}],
-            _id: "609628ff21a1a18097914",
-            groupname: 'backend',
-            leader: 'john',
-            __v: 0
-          }];
+          let tasks=<%-JSON.stringify(tasks) %>
+          let groups=<%-JSON.stringify(data) %>
+          // let groups = [{
+          //   member: ['khush', 'qwerf'],
+          //  // task: ["task 1", "task 2"],
+          //   task:[{_id:"adfad",name:"asdf"}],
+          //   _id: "6096e2b28ff21a1a18097914",
+          //   groupname: 'frontend',
+          //   leader: 'mishri',
+          //   __v: 0
+          // }, {
+          //   member: ['k', 'qrf'],
+          //  //task: ["task 6", "task 5"],
+          //  task:[{_id:"adfad",name:"asdf"},{_id:"ergfadsf",name:"yoyo"}],
+          //   _id: "609628ff21a1a18097914",
+          //   groupname: 'backend',
+          //   leader: 'john',
+          //   __v: 0
+          // }];
 
 
           function populateList() {
@@ -456,8 +460,10 @@
                 gp.task.forEach(element => {
 
                   var opt = document.createElement('option');
-                  opt.value = element._id;
-                  opt.innerHTML = element.name;
+                  opt.value = element;
+                  let cur= tasks.find(ele=>ele._id==element);
+                  
+                  opt.innerHTML = cur.taskTitle;
 
                  /* var div = document.createElement('div');
                   div.class = "option"
@@ -546,11 +552,7 @@
 
           }
         </script>
-        <script>
-          let obj =<% -JSON.stringify(data) %>;
-          console.log(obj);
-        </script>
-
+        
         <script>
           $(document).ready(function () {
             $('.stepper').mdbStepper();
