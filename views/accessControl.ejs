@@ -1,0 +1,575 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>
+    <%= title %>
+  </title>
+
+  <%- include('common/links'); %>
+    <style>
+      body {
+        font-family: #555;
+      }
+
+      .select-list {
+        font-family: 'Open Sans', sans-serif;
+        color: #555;
+        background: #fff;
+        width: 100%;
+      }
+
+      .select-list .title {
+        display: inline-block;
+        cursor: pointer;
+        background: #fff;
+        border: 1px solid #eaeaec;
+        border-radius: 5px;
+        padding: 10px 15px 10px 15px;
+      }
+
+      .select-list .title::after {
+        display: inline-block;
+        content: '>';
+        margin-left: 15px;
+        font-size: 11px;
+        transform: rotate(90deg) scale(1, 2);
+      }
+
+      .select-list .title:hover {
+        background: #eaeaec;
+      }
+
+      .select-list .select-options {
+        margin-top: 5px;
+        display: none;
+        position: absolute;
+        z-index: 500;
+        border: 1px solid #eaeaec;
+        background: #fff;
+      }
+
+      .select-list .select-options .option label {
+        display: inline-block;
+        padding: 10px 30px 10px 10px;
+      }
+
+      .select-list .select-options .option:hover {
+        background: #eaeaec;
+      }
+
+      .select-list .select-options .option input {
+        margin: 10px 0 12px 15px;
+      }
+
+      .formclass {
+        width: 100%;
+        margin: auto;
+        padding: 10%;
+      }
+
+      .formc {
+        width: 100%;
+
+      }
+
+      .buttons {
+        width: 40%;
+        background-color: #4e333b;
+        border-radius: 4px;
+        outline: none;
+        border: none;
+        cursor: pointer;
+        color: white;
+        padding: 1%;
+        font-size: 1.2em;
+
+      }
+
+      .list-group>.list-group {
+        display: none;
+        margin-bottom: 0;
+
+      }
+
+      .list-group-item:focus-within+.list-group {
+        display: block;
+
+      }
+
+      .list-group>.list-group-item {
+        border-radius: 0;
+        border-width: 1px 0 0 0;
+        color: black;
+      }
+
+      .list-group>.list-group-item:first-child {
+        border-top-width: 0;
+      }
+
+      .list-group>.list-group>.list-group-item {
+        padding-left: 2.5rem;
+      }
+
+      .btn_cust {
+        padding: 1%;
+        background: rgb(81, 82, 96);
+        color: #fff;
+        width: 100%;
+        border-radius: 2px;
+        outline: none;
+        border: none;
+        cursor: pointer;
+        transition: all ease 0.3s;
+      }
+
+      .btn_cust:focus {
+        outline: none;
+        border: none;
+
+      }
+
+      .myBtn {
+        height: 2em;
+        width: 2em;
+      }
+
+      .btn_close {
+        background: red;
+        width: 40%;
+      }
+
+      .btn_save {
+        padding: 1%;
+        background: rgb(81, 82, 96);
+        color: #fff;
+        font-size: 0.9em;
+        border-radius: 2px;
+        outline: none;
+        border: none;
+        cursor: pointer;
+        transition: all ease 0.3s;
+      }
+
+      .swiper-slide {
+        text-align: center;
+        font-size: 1.3em;
+        background: rgb(81, 82, 96);
+        color: white;
+        border-radius: 2px;
+
+        /* Center slide text vertically */
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: -webkit-flex;
+        display: flex;
+        -webkit-box-pack: center;
+        -ms-flex-pack: center;
+        -webkit-justify-content: center;
+        justify-content: center;
+        -webkit-box-align: center;
+        -ms-flex-align: center;
+        -webkit-align-items: center;
+        align-items: center;
+      }
+    </style>
+</head>
+
+<body onload="populateList()">
+  <%- include('common/navbar',{user:navbar.user}); %>
+    <%- include('common/sidenav',{id:navbar.projid,access:navbar.access}); %>
+
+      <ul class="nav nav-tabs mb-3" id="myTab0" role="tablist">
+
+        <li class="nav-item" role="presentation">
+          <button class="nav-link active" id="profile-tab0" data-mdb-toggle="tab" data-mdb-target="#profile0"
+            type="button" role="tab" aria-controls="profile" aria-selected="false">Team members</button>
+        </li>
+        <li class="nav-item" role="presentation">
+          <button class="nav-link" id="new-tab1" data-mdb-toggle="tab" data-mdb-target="#new1" type="button" role="tab"
+            aria-controls="new1" aria-selected="false">Create Group</button>
+        </li>
+
+      </ul>
+
+
+      <div class="tab-content" id="myTabContent0" style="margin: 2%;">
+
+        <div class="tab-pane fade show active" id="profile0" role="tabpanel" aria-labelledby="profile-tab0">
+
+          <div class="containering">
+
+            <div class="row">
+
+              <div class="col-md-7">
+
+               
+
+
+                <div class="container" style="padding: 10em;">
+                  <form action="/assignTask/<%=navbar.projid%>" method="POST">
+                    <!-- Email input -->
+                    <div class="form-outline mb-4">
+
+                      <select name="group" class="browser-default custom-select" id="selectGroup"
+                        onchange="getThings()" style="text-align: center;">
+                        <option value="-1" selected>Select Group</option>
+                        
+                      </select>
+                      <label class="form-label" for="form1Example1">Group </label>
+
+                    </div>
+
+                    <!-- Email input -->
+                    <div class="form-outline mb-4">
+
+                      <!--<div class="select-list" style="width: 100%; text-align: center;">
+                        <div class="title" style="width: 100%;">Assign Task</div>
+                        <div class="select-options" style="width: 13em; text-align: left; text-align: left;" id="selectTask" name="tasksNames">
+
+                          <div class="option" >
+                              <input type="checkbox" name="vehicle" id="option1" value="" />
+                              <label for="option1">task 1</label>
+                              
+                            </div>
+
+                        </div>
+                      </div>-->
+
+                      <select name="tasks" class="browser-default custom-select" id="selectTask" style="text-align: center;">
+                        <option value="-1" selected>Select Group</option>
+                        
+                      </select>
+                      
+
+                      <label class="form-label" for="form1Example1">Task </label>
+
+                    </div>
+
+                    <!-- Email input -->
+                    <div class="form-outline mb-4">
+
+                      <select name="username" class="browser-default custom-select" id="selectMember"
+                        style="text-align: center;">
+                        <option value="-1" selected>Select Member</option>
+                      </select>
+
+                      <label class="form-label" for="form1Example1">Member</label>
+
+                    </div>
+
+                    <!-- Submit button -->
+                    <div style="text-align:center">
+                      <button type="submit" class=" btn-info btn-sm px-3" style="cursor: pointer;">
+                        Change
+                      </button>
+                    </div>
+                  </form>
+
+                  </form>
+                </div>
+
+
+              </div>
+
+              <div class="col-md-5" style="position: relative;">
+                <img src="/images/teammembers.svg" class="img-fluid " style="height: 80%; " alt="..." />
+              </div>
+            </div>
+
+            <button type="button" class="myBtn" data-mdb-toggle="modal" data-mdb-target="#exampleModal"
+              style="background-color:#515260;color:white;font-size: 1.5em;; position: fixed; bottom: 6%;left: 4%; z-index:10; cursor: pointer; ">
+              <i class="fas fa-plus"></i>
+            </button>
+
+
+            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+              aria-hidden="true">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Add Member</h5>
+
+                  </div>
+                  <div class="modal-body">
+                    <form action="/addmember/<%=navbar.projid%>" method="POST">
+
+                      <!-- meeting title input -->
+                      <div class="form-outline mb-4">
+                        <label class="form-label" for="meetingTitle">Member name</label>
+                        <input type="text" id="meetingTitle" class="form-control" name="member" />
+
+                      </div>
+
+
+                      <div class="form-outline mb-4">
+                        <label class="form-label" for="meetingTitle">Assign groups</label>
+
+                        <div class="select-list">
+                          <div class="title">select groups</div>
+                          <div class="select-options">
+                            <%if(data){%>
+                              <% data.forEach(ele=>{ %>
+                                <div class="option">
+
+                                  <input type="checkbox" name="groupname" id="<%=ele._id%>" value="<%=ele._id%>" />
+                                  <label for="<%=ele._id%>">
+                                    <%=ele.groupname%>
+                                  </label>
+                                </div>
+                                <%})%>
+                                  <%}%>
+                          </div>
+                        </div>
+
+                      </div>
+
+                      <!-- Submit button -->
+                      <button type="submit" class="btn_cust btn-primary btn-block mb-4">Add</button>
+
+
+                    </form>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn_cust btn_close btn-danger" data-mdb-dismiss="modal">
+                      Close
+                    </button>
+
+                  </div>
+                </div>
+              </div>
+            </div>
+
+
+          </div>
+
+        </div>
+
+        <div class="tab-pane fade" id="new1" role="tabpanel" aria-labelledby="new-tab1">
+
+
+          <div class="containering">
+            <div class="row">
+              <div class="col-md-6">
+                <form class="formclass" action="/createGroup/<%=navbar.projid%>" method="POST">
+                  <!-- Email input -->
+                  <div class="form-outline mb-4">
+                    <input type="text" id="form1Example1" class="form-control" name="groupname" required minlength="4"
+                      placeholder="enter the groupname" />
+                    <label class="form-label" for="form1Example1">Group name</label>
+                  </div>
+                  <div class="form-outline mb-4">
+                    <input type="text" id="form1Example2" class="form-control" name="leader" required minlength="4"
+                      placeholder="enter the username" />
+                    <label class="form-label" for="form1Example2">Leader</label>
+                  </div>
+                  <div style="text-align:center">
+                    <button type="submit" class="buttons">Create</button>
+                  </div>
+                </form>
+              </div>
+              <div class="col-md-5">
+                <img src="/images/group.svg" class="img-fluid myImage" alt="..." />
+              </div>
+            </div>
+
+
+
+
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <%- include('common/footer'); %>
+      
+        
+        
+        <script>
+          let tasks=<%-JSON.stringify(tasks) %>
+          let groups=<%-JSON.stringify(data) %>
+          // let groups = [{
+          //   member: ['khush', 'qwerf'],
+          //  // task: ["task 1", "task 2"],
+          //   task:[{_id:"adfad",name:"asdf"}],
+          //   _id: "6096e2b28ff21a1a18097914",
+          //   groupname: 'frontend',
+          //   leader: 'mishri',
+          //   __v: 0
+          // }, {
+          //   member: ['k', 'qrf'],
+          //  //task: ["task 6", "task 5"],
+          //  task:[{_id:"adfad",name:"asdf"},{_id:"ergfadsf",name:"yoyo"}],
+          //   _id: "609628ff21a1a18097914",
+          //   groupname: 'backend',
+          //   leader: 'john',
+          //   __v: 0
+          // }];
+
+
+          function populateList() {
+
+
+            let select = document.getElementById("selectGroup");
+            groups.forEach(element => {
+
+              var opt = document.createElement('option');
+              opt.value = element._id;
+              opt.innerHTML = element.groupname;
+             // opt.name=element.groupname;
+              select.appendChild(opt);
+            });
+
+
+          }
+
+          function getThings() {
+
+            let groupSelected = document.getElementById("selectGroup");
+            let groupId = groupSelected.value;
+            console.log(groupId);
+
+            //assign task all childs should be empty
+            let taskSelected = document.getElementById("selectTask");
+            while (taskSelected.firstChild) {
+              taskSelected.removeChild(taskSelected.lastChild);
+            }
+
+            //member task all childs should be empty
+            let memberSelected = document.getElementById("selectMember");
+            while (memberSelected.firstChild) {
+              memberSelected.removeChild(memberSelected.lastChild);
+            }
+            groups.forEach(gp => {
+
+              /*<div class="option" >
+                              <input type="checkbox" name="vehicle" id="option1" value="" />
+                              <label for="option1">task 1</label>
+                              
+                            </div>*/
+              
+              /*
+                            <option value="-1" selected>Select Group</option>
+              */
+
+              if (gp._id == groupId) {
+
+
+                gp.task.forEach(element => {
+
+                  var opt = document.createElement('option');
+                  opt.value = element;
+                  let cur= tasks.find(ele=>ele._id==element);
+                  
+                  opt.innerHTML = cur.taskTitle ;
+
+                 /* var div = document.createElement('div');
+                  div.class = "option"
+
+                  var opt = document.createElement('input');
+                  opt.type = "checkbox";
+                  opt.value = element;
+
+                  div.appendChild(opt);
+
+                  var lab = document.createElement('label');
+                  lab.innerHTML = element;
+                  div.appendChild(lab);*/
+
+                  taskSelected.appendChild(opt);
+                });
+
+              }
+            });
+
+            groups.forEach(gp => {
+
+              if (gp._id == groupId) {
+
+                gp.member.forEach(element => {
+                  var opt = document.createElement('option');
+                  opt.value = element;
+                  opt.innerHTML = element;
+
+                  memberSelected.appendChild(opt);
+                });
+
+              }
+            });
+
+          }
+
+
+
+
+        </script>
+
+        <script>
+         <% if (err) { %>
+            swal("<%=mtitle%>", "<%=msg%>", "<%=type%>");
+         <% } %>
+        </script>
+        <script>
+            (function ($) {
+              $.fn.multiselect = function () {
+
+                var selector = this;
+                var options = $.extend({
+                  onChange: function () { }
+                }, arguments[0] || {});
+
+                activate();
+
+                /////////
+
+                function activate() {
+
+                  //events
+                  $(selector).find('.title').on('click', function (e) {
+                    $(this).parent().find('.select-options').toggle();
+                  });
+
+                  $(selector).find('input[type="checkbox"]').change(function (e) {
+                    options.onChange.call(this);
+                  });
+
+                }
+              };
+
+            }(jQuery));
+
+          $(document).ready(function () {
+            $('.select-list').multiselect({
+              onChange: updateTable
+            });
+          });
+
+          function updateTable() {
+            var checkboxValue = $(this).val();
+            var isChecked = $(this).is(':checked');
+
+          }
+        </script>
+        
+        <script>
+          $(document).ready(function () {
+            $('.stepper').mdbStepper();
+          })
+
+          var swiper = new Swiper('.swiper-container', {
+            slidesPerView: 3,
+            spaceBetween: 30,
+            pagination: {
+              el: '.swiper-pagination',
+              clickable: true,
+            },
+            loop: true
+          });
+        </script>
+
+        <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.css" />
+</body>
+
+</html>
