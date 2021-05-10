@@ -199,6 +199,8 @@
     <div class="tab-content" id="myTabContent0">
         <div class="tab-pane fade show active" id="home0" role="tabpanel" aria-labelledby="home-tab0">
             <div class="myclass">
+               <%if(data && data.tasks && data.groups){%>
+             <%data.tasks.forEach((ele,index)=>{%>
                 <div class="mainclass">
                     <div class="row">
                         <div class="col-md-3">
@@ -208,34 +210,31 @@
                                         <div class="row btn_group" style="text-align: center; margin: auto;">
                                             <div class="col">
 
-
+<!-- 
                                                 <button type="button" class="icon_btn warn" data-mdb-toggle="modal"
                                                     data-mdb-target="#exampleModal" style="font-size: 0.8em; cursor: pointer;">
                                                     <i class="fas fa-edit"></i>
                                                 </button>
 
                                                 <button class="icon_btn danger" style="font-size: 0.8em; cursor: pointer;" ><i
-                                                        class="fas fa-trash-alt" ></i></button>
+                                                        class="fas fa-trash-alt" ></i></button> -->
                                             </div>
                                         </div> <br>
-                                        <h5 class="card-title">Task 1 heading </h5>
+                                    
+                                        <h5 class="card-title"><%=ele.taskTitle%> </h5>
 
 
 
 
                                     </div>
                                     <button class="mybutton" type="button" data-mdb-toggle="collapse"
-                                        data-mdb-target="#collapseExample" aria-expanded="false"
-                                        aria-controls="collapseExample">
+                                        data-mdb-target="#collapseExample<%=index%>" aria-expanded="false"
+                                        aria-controls="<%=index%>">
                                         Description
                                     </button> <br />
                                     <!-- Provides extra visual weight and identifies the primary action in a set of buttons -->
-                                    <p class="card-text collapse mt-3" id="collapseExample">
-                                        Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry
-                                        richardson ad
-                                        squid. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred
-                                        nesciunt
-                                        sapiente ea proident.
+                                    <p class="card-text collapse mt-3" id="collapseExample<%=index%>">
+                                        <%=ele.taskDescription%>
                                     </p>
                                 </div>
                             </div>
@@ -246,7 +245,18 @@
                                 <div class="card-body">
                                     <h5 class="card-title">Group Name </h5>
                                     <p class="card-text">
-                                        <button class="grpbtn" style="background-color: #4e333b; color: #fff;">Group 1</button>
+                                        <%
+                                        let name;
+                                        let taskid=ele._id;
+                                         data.groups.forEach(gp=>{
+                                             if(gp.task){
+                                                    if(gp.task.find(id=>id==taskid))
+                                                         name=gp.groupname;       
+                                             }
+                                         })
+
+                                        %>
+                                        <button class="grpbtn" style="background-color: #4e333b; color: #fff;"><%=name%></button>
                                     </p>
                                 </div>
 
@@ -260,14 +270,16 @@
                                     <h5 class="card-title">Members of the task</h5>
 
                                     <div class="dropdown">
-                                        <button class="mybutton dropdown-toggle" type="button" id="dropdownMenuButton"
+                                        <button class="mybutton dropdown-toggle" type="button" id="dropdownMenuButton<%=index%>"
                                             data-mdb-toggle="dropdown" aria-expanded="false">
                                             Members
                                         </button>
-                                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                            <li><a class="dropdown-item" href="#">Action</a></li>
-                                            <li><a class="dropdown-item" href="#">Another action</a></li>
-                                            <li><a class="dropdown-item" href="#">Something else here</a></li>
+                                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton<%=index%>">
+                                            <%if(ele.workerID){%>
+                                                <%ele.workerID.forEach(e=>{%>
+                                            <li class="dropdown-item" ><%=e%></li>
+                                            <%})%>
+                                              <%}%>      
                                         </ul>
                                     </div>
                                 </div>
@@ -280,18 +292,21 @@
                                     style="border-radius: 50px; border-left:5px solid rgb(202, 73, 73); ">
                                     <h5 class="card-title">Deadline</h5>
                                     <p class="card-text">
-                                        13 August 2021
+                                        <%=ele.Deadline%>
                                     </p>
                                 </div>
                             </div>
 
                         </div>
                     </div>
+                    
 
                     
                 </div>
+                <%})%>
+                <%}%>
                 
-
+                
                 
                 
                 
