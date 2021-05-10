@@ -205,6 +205,7 @@ router.get("/notification/:projid",checkuser, async (req, res) => {
   let tasks;
   let notify;
   try{
+    req.session.proj=await getProjectById(req.params.projid);
      tasks=await utility.getTasksBygroup(req.session.groups)
      notify=await utility.getNotifiByIds(req.session.proj.notifications);
      console.log(notify);
@@ -622,7 +623,7 @@ router.post("/notify/:projid",checkuser,async (req,res)=>{
     req.body.title="Meet Invite"
     //console.log(req.body);
      let result=await utility.insertNotification(req.params.projid,req.body); 
-     req.session.proj=await getProjectById(req.params.projid);
+
     res.redirect(`/notification/${req.params.projid}/?code=1`)
     }catch(err){
       console.log(err);
