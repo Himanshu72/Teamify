@@ -144,3 +144,8 @@ border-color: #4e333b;
   .closeB{
       display: block;
   }
+  .grpbtn{
+    width: 40%;
+margin: auto;
+border-radius: 3px;
+  }
