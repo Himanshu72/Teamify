@@ -6,9 +6,9 @@
     <%- include('common/links'); %>
 
   </head>
-  <body>
+  <body style="text-align: center;">
     <%- include('common/navbar',{user:navbar.user}); %>
- <span id="meet" style="margin: auto;" > </span>
+ <span id="meet" style="margin: auto; width: 100%;" > </span>
 
 
     <%- include('common/footer'); %>
@@ -18,7 +18,7 @@
 const options = {
     roomName: '<%=room%>',
     width: window.screen.width ,
-    height:window.screen.height- 279,
+    height:window.screen.height- 212,
     parentNode: document.querySelector('#meet'),
     interfaceConfigOverwrite:{
     SHOW_BRAND_WATERMARK: false,

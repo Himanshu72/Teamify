@@ -203,10 +203,11 @@ router.get("/accessControl/:projid", checkuser, getproj, async (req, res) => {
 /*Going to Notification page */
 router.get("/notification/:projid",checkuser, async (req, res) => {
   let tasks;
+  let notify;
   try{
      tasks=await utility.getTasksBygroup(req.session.groups)
-
-     console.log(req.session.groups,"-------",tasks);
+     notify=await utility.getNotifiByIds(req.session.proj.notifications);
+     console.log(notify);
    let err=true,type,mtitle,msg;
      switch(req.query.code){
         case "0":
@@ -226,10 +227,10 @@ router.get("/notification/:projid",checkuser, async (req, res) => {
             err=false;
 
       }
-      res.render('notification',{data:{tasks:tasks},title:"notification",err:err,msg:msg,type:type,mtitle:mtitle  ,navbar:{user:true,projid:req.params.projid,access:req.session.access}});
+      res.render('notification',{data:{tasks:tasks,notify:notify,cur:req.session.user._id},title:"notification",err:err,msg:msg,type:type,mtitle:mtitle  ,navbar:{user:true,projid:req.params.projid,access:req.session.access}});
   }catch(err){
     console.log(err);
-    res.render('notification',{data:{tasks:tasks},title:"notification",err:true ,msg:"Something went wrong",type:"error",mtitle:"ERROR",navbar:{user:true,projid:req.params.projid,access:req.session.access}});
+    res.render('notification',{data:{tasks:tasks,notify:notify,cur:req.session.user._id},title:"notification",err:true ,msg:"Something went wrong",type:"error",mtitle:"ERROR",navbar:{user:true,projid:req.params.projid,access:req.session.access}});
   }
 });
 
@@ -465,16 +466,35 @@ router.post("/meeting/:projid",checkuser,getproj, async (req, res) => {
     req.body.creatorID=req.session.user._id;
     let datas=[];
     let result=await insertMeet(req.body);
-      for(let ele in req.body.attendes){
-        datas.push({
-          senderUsername:req.session.user._id,
-          receiverUsername:ele,
-          title:"Meet Request",
-          message:"Please Join Meet at "+req.body.dateTime,
-          type:2,
-          room:req.body.name  
-        });
-      } 
+     
+    if(Array.isArray(req.body.attendes)){     
+    req.body.attendes.forEach((ele)=>{
+
+      datas.push({
+        senderUsername:req.session.user._id,
+        receiverUsername:ele,
+        title:"Meet Request",
+        message:"Please Join Meet at "+req.body.dateTime,
+        type:2,
+        room:req.body.name  
+      });
+
+    });
+    }else{
+
+      datas.push({
+        senderUsername:req.session.user._id,
+        receiverUsername:req.body.attendes,
+        title:"Meet Request",
+        message:"Please Join Meet at "+req.body.dateTime,
+        type:2,
+        room:req.body.name  
+      });
+
+    
+
+    }
+     
 
       await addMeet(req.params.projid,result._id);
       await utility.sendInvites(req.params.projid,datas)

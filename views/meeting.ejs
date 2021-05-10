@@ -239,7 +239,7 @@
                             <div class="list-group">
                               <%if(data && data.meets){%>
                                 <% data.meets.forEach(ele=>{%>
-                                <%if(ele.minutesOfMeeting){%>
+                                <%if(ele.minutesOfMeeting.title){%>
                                  
                                 <a href="#" class="list-group-item"><%=ele.name%>(<%=ele.dateTime%>)</a>
                                 <div class="list-group">

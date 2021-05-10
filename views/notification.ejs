@@ -215,13 +215,19 @@
             <br><br>
             <ul class="list-group">
               <li class="list-group-item active" aria-current="true">Notifications </li>
-              <li class="list-group-item" style="position: relative;">Requested for access control 
-              </li>
-              <li class="list-group-item" style="position: relative;">Work done status to be submitted to manager
-                
-              </li>
-              <li class="list-group-item">Maintask done in frontend , backend can futher go through it</li>
-             
+              <%if(data && data.notify){%>
+                <%data.notify.forEach(ele=>{%>
+                  <%if(ele.senderUsername==data.cur){%>
+              <li class="list-group-item" style="position: relative;"><strong><%=ele.title%> : </strong><em><%=ele.message%></em> 
+                <%if(ele.type==2){%>
+                <a class="Joinb "
+                  style=" position:absolute; text-align: center; right: 5%; bottom: 10%;" href="/videocall/<%=ele.room%>" type="button">Join</a>
+                  <%}%>
+                  
+                </li>
+                <%}%>
+              <%})%>
+                <%}%>
             </ul>
 
             <!--Button and modal-->
@@ -326,11 +332,28 @@
             <br><br>
             <ul class="list-group">
               <li class="list-group-item active" aria-current="true">Notifications </li>
-              <li class="list-group-item" style="position: relative;">Meet at 11 am for the group <button class="Joinb "
-                  style=" position:absolute; right: 5%; bottom: 10%;" type="button">Join</button> </li>
-              <li class="list-group-item" style="position: relative;">For collaboration we need to see the frontend , kindly give access <button class="acc "
-                  style=" position:absolute; right: 5%; bottom: 10%;" type="button">Give Access</button> </li>
-              <li class="list-group-item">New Task assigned to Ramesh, kindly see it</li>
+              <%if(data && data.notify){%>
+                <% data.notify.forEach((ele)=>{%>
+                  <%if(ele.senderUsername!=data.cur){%>
+              <li class="list-group-item" style="position: relative;"><strong><%=ele.title%>: </strong><em><%=ele.message%></em> 
+                <%if(ele.type==2){%>
+                <a class="Joinb "
+                  style=" position:absolute; text-align: center; right: 5%; bottom: 10%;" href="/videocall/<%=ele.room%>" type="button">Join</a>
+                  
+                  <%}%>
+                  <%if(ele.type==1){%>
+                  <form action="/giveAccess/<%=navbar.projid%>" method="post">
+                      <input style="display: none;"  name="taskid" value="id" />
+
+                  <button class="acc "
+                  style=" position:absolute; right: 5%; bottom: 10%;" type="submit">Give Access</button>
+                  </form>
+                  <%}%>
+                </li>
+                <%}%>
+                <%})%>
+                <%}%>
+              
               
             </ul>
 

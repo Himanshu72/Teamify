@@ -288,7 +288,8 @@ sendInvites: async (projid,datas)=>{
 
        
         result =await notificationModel.insertMany(datas);
-        console.log("===>",result);
+        let ids=result.map((ele)=>ele._id);
+        await projectModel.updateOne({_id:projid},{$addToSet:{notifications:ids}})
      }catch(err){
        throw err;
      }
@@ -331,6 +332,16 @@ sendInvites: async (projid,datas)=>{
                   resolve(res)   
             });
       })
+  },
+  getNotifiByIds(ids){
+    return new Promise((resolve,reject)=>{
+        notificationModel.find({_id:{$in:ids}},(err,res)=>{
+          if(res)
+          resolve(res);
+          else
+          reject(err);
+        })
+    });
   }
 
 }
