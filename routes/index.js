@@ -196,13 +196,14 @@ router.get("/accessControl/:projid", checkuser, getproj, async (req, res) => {
     
     //console.log(tasks);
     result = await utility.getGroupsByids(req.session.proj.group);
-
+    tasks=await utility.getTasksBygroup(req.session.groups);
+    console.log(tasks);
   }
   catch (err) {
-    console.log("Error",err);  //what? 
+    console.log(err);  //what? 
   }
         
-  res.render('accessControl',{title:"accessControl",data:result,err:false,msg:"",type:"",mtitle:"" ,navbar:{user:true,projid:req.params.projid,access:req.session.access}});
+  res.render('accessControl',{title:"accessControl",tasks:tasks,data:result,err:false,msg:"",type:"",mtitle:"" ,navbar:{user:true,projid:req.params.projid,access:req.session.access}});
 });
 
 
@@ -561,32 +562,35 @@ router.post("/createGroup/:projid", checkuser, getproj, async (req, res) => {
         })
 
         utility.pushProject(req.body.leader, proj).then(async (result) => {
-
+          let tasks;
           try {
+            tasks=await utility.getTasksBygroup(req.session.groups);
             let result = await utility.insertGroup(req.body);
+
             await utility.addGroup(req.params.projid, result._id);
             req.session.proj = undefined;
             res.redirect(`/accessControl/${req.params.projid}`)
           } catch (err) {
             console.log(err);
-            res.render('accessControl', { data: data, title: "accessControl", err: true, msg: "Something went wrong", type: "error", mtitle: "SORRY", navbar: { user: true, projid: req.params.projid,access:req.session.access } });
+            res.render('accessControl', { tasks:tasks,data: data, title: "accessControl", err: true, msg: "Something went wrong", type: "error", mtitle: "SORRY", navbar: { user: true, projid: req.params.projid,access:req.session.access } });
           }
 
 
         }).catch((err) => {
-          res.render('accessControl', { data: data, title: "accessControl", err: true, msg: "Something went wrong", type: "error", mtitle: "SORRY", navbar: { user: true, projid: req.params.projid,access:req.session.access } });
+          res.render('accessControl', {tasks:tasks ,tasksdata: data, title: "accessControl", err: true, msg: "Something went wrong", type: "error", mtitle: "SORRY", navbar: { user: true, projid: req.params.projid,access:req.session.access } });
         });
       } else {
-        res.render('accessControl', { data: data, title: "accessControl", err: true, msg: "Leader Not found", type: "error", mtitle: "SORRY", navbar: { user: true, projid: req.params.projid,access:req.session.access } });
+        res.render('accessControl', { tasks:tasks,data: data, title: "accessControl", err: true, msg: "Leader Not found", type: "error", mtitle: "SORRY", navbar: { user: true, projid: req.params.projid,access:req.session.access } });
       }
     }).catch((error) => {
-      res.render('accessControl', { data: data, title: "accessControl", err: true, msg: "Something went wrong", type: "error", mtitle: "SORRY", navbar: { user: true, projid: req.params.projid,access:req.session.access } });
+      res.render('accessControl', { tasks:tasks,data: data, title: "accessControl", err: true, msg: "Something went wrong", type: "error", mtitle: "SORRY", navbar: { user: true, projid: req.params.projid,access:req.session.access } });
 
     }); 
   }
   else {
     let data = await utility.getGroupsByids(req.session.proj.group);
-    res.render('accessControl', { data: data, title: "accessControl", err: true, msg: "Something went wrong", type: "error", mtitle: "SORRY", navbar: { user: true, projid: req.params.projid,access:req.session.access } });
+    
+    res.render('accessControl', { tasks:tasks,data: data, title: "accessControl", err: true, msg: "Something went wrong", type: "error", mtitle: "SORRY", navbar: { user: true, projid: req.params.projid,access:req.session.access } });
 
   }
 });
@@ -653,11 +657,12 @@ router.post("/mmeet/:projid",checkuser,async (req,res)=>{
     }
 })
 
-router.post("/addmember/:projid", checkuser, checkproj, async (req, res) => {
+router.post("/addmember/:projid", checkuser, async (req, res) => {
 if(validator.isLength(req.body.member, { min: 5, max: 20 })){
   let users = await utility.getAllusers();
   let data = utility.getGroupsByids(req.session.proj.group);
   let flag = 0;
+  let tasks;
   users.every((ele) => {
     if (ele._id == req.body.member) {
       flag = 1;
@@ -670,6 +675,7 @@ if(validator.isLength(req.body.member, { min: 5, max: 20 })){
 
   if(flag){
         try{
+          tasks=await utility.getTasksBygroup(req.session.groups);
           await utility.addMember(req.body.groupname,req.body.member)
           let cur ;
           for(let ele of req.session.user.projects){
@@ -680,18 +686,18 @@ if(validator.isLength(req.body.member, { min: 5, max: 20 })){
           }
           console.log(cur);
           await utility.pushProject(req.body.member,cur)
-          res.render('accessControl',{data:data,title:"accessControl",err:true,msg:"Member Added to Group ",type:"success",mtitle:"GREAT" ,navbar:{user:true,projid:req.params.projid,access:req.session.access}});
+          res.render('accessControl',{tasks:tasks,data:data,title:"accessControl",err:true,msg:"Member Added to Group ",type:"success",mtitle:"GREAT" ,navbar:{user:true,projid:req.params.projid,access:req.session.access}});
         } catch(err){
             console.log(err);
-            res.render('accessControl',{data:data,title:"accessControl",err:true,msg:"Something Went wrong",type:"error",mtitle:"SORRY" ,navbar:{user:true,projid:req.params.projid,access:req.session.access}});
+            res.render('accessControl',{tasks:tasks,data:data,title:"accessControl",err:true,msg:"Something Went wrong",type:"error",mtitle:"SORRY" ,navbar:{user:true,projid:req.params.projid,access:req.session.access}});
         }    
   }else{
-    res.render('accessControl',{data:data,title:"accessControl",err:true,msg:"Invalid username",type:"error",mtitle:"SORRY" ,navbar:{user:true,projid:req.params.projid,access:req.session.access}});
+    res.render('accessControl',{tasks:tasks,data:data,title:"accessControl",err:true,msg:"Invalid username",type:"error",mtitle:"SORRY" ,navbar:{user:true,projid:req.params.projid,access:req.session.access}});
   }
 }
 else{
   let data = utility.getGroupsByids(req.session.proj.group);
-  res.render('accessControl',{data:data,title:"accessControl",err:true,msg:"Invalid username",type:"error",mtitle:"SORRY" ,navbar:{user:true,projid:req.params.projid,access:req.session.access}});
+  res.render('accessControl',{tasks:tasks,data:data,title:"accessControl",err:true,msg:"Invalid username",type:"error",mtitle:"SORRY" ,navbar:{user:true,projid:req.params.projid,access:req.session.access}});
  
 
 }
