@@ -266,6 +266,10 @@ router.get("/videocall/:room",checkuser, (req, res) => {
 
 
 /*POST*/
+router.post("/assignTask/:projid",(req,res)=>{
+ 
+    console.log(req.body);
+});
 
 router.post("/forgotpassword", (req, res) => {
   if (validator.isEmail(req.body.email)) {

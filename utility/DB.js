@@ -342,6 +342,11 @@ sendInvites: async (projid,datas)=>{
           reject(err);
         })
     });
+  },
+  getSubtaskByID:async (id)=>{
+    await taskModel.findOne({"subTask._id":id}).select({subTask:{$eleMatch:{_id:id}}});
+  //  User.findOne({id: req.body.myId}).select({ Friends: {$elemMatch: {id: req.body.id}}})
   }
+  
 
 }

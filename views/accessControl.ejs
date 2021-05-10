@@ -206,7 +206,7 @@
                 <table class="table" style="width:80%; margin:auto">
                   <tbody>
 
-                    <form action="/" method="POST">
+                    <form action="/assignTask/<%=navbar.projid%>" method="POST">
 
 
                       <tr>
@@ -382,7 +382,7 @@
           }, {
             member: ['k', 'qrf'],
             task: ["task 6", "task 5"],
-            _id: "609628ff21a1a18097914",
+            _id: "609628ff21a1a18097914", 
             groupname: 'backend',
             leader: 'john',
             __v: 0
@@ -433,6 +433,7 @@
                   var opt = document.createElement('input');
                   opt.type = "checkbox";
                   opt.value = element;
+
                   div.appendChild(opt);
 
                   var lab = document.createElement('label');
