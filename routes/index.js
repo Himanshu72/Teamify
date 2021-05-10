@@ -464,7 +464,7 @@ router.post("/changepassword", checkuser, (req, res) => {
     })
   }
   else {
-    res.render('profile', { title: "profile", navbar: { user: true }, data: req.session.user, err: true, msg: "New password and confirm password aren't same..", type: "error" });
+    res.render('profile', { title: "profile", navbar: { user: true }, data: req.session.user, err: true, msg: "New password and confirm password are not same..", type: "error" });
   }
 });
 
